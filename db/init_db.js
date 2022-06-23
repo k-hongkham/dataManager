@@ -1,4 +1,4 @@
-const { client } = require("./");
+const { client, User } = require("./");
 
 async function buildTables() {
   try {
@@ -19,9 +19,9 @@ async function buildTables() {
             password varchar(255) NOT NULL,
             "firstName" varchar(255),
             "lastName" varchar(255),
-            "department" varchar(255),
-            "position" varchar(255),
-            "officeNumber"
+            department varchar(255),
+            position varchar(255),
+            "officeNumber" INTEGER
         )`);
 
     console.log("Finished creating tables");
