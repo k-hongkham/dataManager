@@ -40,8 +40,8 @@ async function createInitialUsers() {
         password: "kevin",
         firstName: "Kevin",
         lastName: "Hongkham",
-        department: "R&D",
-        position: "Chemist",
+        department: "Technology",
+        position: "Software Engineer",
         officeNumber: "(555) 555-5555",
       },
       {
@@ -51,7 +51,7 @@ async function createInitialUsers() {
         lastName: "amy",
         department: "Business",
         position: "Owner",
-        officeNumber: "(555) 555-5555",
+        officeNumber: "(555) 555-5556",
       },
       {
         email: "daniel@daniel.com",
@@ -60,16 +60,16 @@ async function createInitialUsers() {
         lastName: "daniel",
         department: "Sales",
         position: "Manager",
-        officeNumber: "(555) 555-5555",
+        officeNumber: "(555) 555-5557",
       },
       {
         email: "cung@cung.com",
         password: "cung",
         firstName: "cung",
         lastName: "cung",
-        department: "Software",
-        position: "Manager",
-        officeNumber: "(555) 555-5555",
+        department: "Technology",
+        position: "Software Manager",
+        officeNumber: "(555) 555-5558",
       },
     ];
 
