@@ -10,6 +10,7 @@ async function buildTables() {
         DROP TABLE IF EXISTS users
         `);
     console.log("Finished dropping tables.");
+    console.log("Started creating tables.");
 
     //build tables in correct order
     await client.query(`
@@ -21,7 +22,7 @@ async function buildTables() {
             "lastName" varchar(255),
             department varchar(255),
             position varchar(255),
-            "officeNumber" INTEGER
+            "officeNumber" varchar(255)
         )`);
 
     console.log("Finished creating tables");
@@ -50,7 +51,7 @@ async function createInitialUsers() {
         lastName: "amy",
         department: "Business",
         position: "Owner",
-        officeNumber: "(Owner) 555-5555",
+        officeNumber: "(555) 555-5555",
       },
       {
         email: "daniel@daniel.com",
@@ -62,10 +63,10 @@ async function createInitialUsers() {
         officeNumber: "(555) 555-5555",
       },
       {
-        email: "Cung@Cung.com",
-        password: "Cung",
-        firstName: "Cung",
-        lastName: "Cung",
+        email: "cung@cung.com",
+        password: "cung",
+        firstName: "cung",
+        lastName: "cung",
         department: "Software",
         position: "Manager",
         officeNumber: "(555) 555-5555",

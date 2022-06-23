@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const server = express();
 
-//enables corss-origin resource sharing to proxy api requests
+//enables cross-origin resource sharing to proxy api requests
 //from localhost:3000 to localhost:4000 in local dev env
 const cors = require("cors");
 server.use(cors());
@@ -26,6 +26,8 @@ const path = require("path");
 server.use(express.static(path.join(__dirname, "build")));
 
 //here's the API
+server.use("/api", require("/api"));
+
 server.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
