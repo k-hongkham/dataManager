@@ -4,6 +4,7 @@ const SALT = 10;
 
 module.exports = {
   createUser,
+  getUserByEmail
 };
 
 async function createUser({
@@ -33,6 +34,24 @@ async function createUser({
     return user;
   } catch (error) {
     console.error("error in createUser db");
+    throw error;
+  }
+}
+
+async function getUserByEmail(email) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    SELECT *
+    FROM users
+    WHERE email=$1
+    `,
+      [email]
+    );
+    return user;.
+  } catch (error) {
     throw error;
   }
 }

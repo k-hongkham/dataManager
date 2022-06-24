@@ -1,4 +1,5 @@
 const apiRouter = require("express").Router();
+const { getUserByEmail } = require("../db/models/users");
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -13,12 +14,12 @@ apiRouter.use(async (req, res, next) => {
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
     try {
-      const { username } = jwt.verify(token, JWT_SECRET);
-      if (username) {
+      const { email } = jwt.verify(token, JWT_SECRET);
+      if (email) {
         console.log("Good token. Setting user.");
-        user = await getUserByUsername(username);
-        delete user.password;
-        req.user = user;
+        email = await getUserByEmail(email);
+        delete email.password;
+        req.email = email;
         next();
       } else {
         res.status(409);
