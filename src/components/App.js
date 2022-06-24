@@ -4,10 +4,14 @@ import "../style/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthProvider from "./context/AuthContext";
 
+import Navbar from "./NAVBAR/Navbar";
+
 const App = () => {
   return (
     <Router>
-      <AuthProvider></AuthProvider>
+      <AuthProvider>
+        <Navbar />
+      </AuthProvider>
     </Router>
   );
 };
