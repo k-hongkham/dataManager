@@ -1,4 +1,4 @@
-const { client } = require("./");
+const { client, User } = require("./");
 
 async function buildTables() {
   try {
@@ -10,6 +10,7 @@ async function buildTables() {
         DROP TABLE IF EXISTS users
         `);
     console.log("Finished dropping tables.");
+    console.log("Started creating tables.");
 
     //build tables in correct order
     await client.query(`
@@ -19,9 +20,9 @@ async function buildTables() {
             password varchar(255) NOT NULL,
             "firstName" varchar(255),
             "lastName" varchar(255),
-            "department" varchar(255),
-            "position" varchar(255),
-            "officeNumber"
+            department varchar(255),
+            position varchar(255),
+            "officeNumber" varchar(255)
         )`);
 
     console.log("Finished creating tables");
@@ -39,8 +40,8 @@ async function createInitialUsers() {
         password: "kevin",
         firstName: "Kevin",
         lastName: "Hongkham",
-        department: "R&D",
-        position: "Chemist",
+        department: "Technology",
+        position: "Software Engineer",
         officeNumber: "(555) 555-5555",
       },
       {
@@ -50,7 +51,7 @@ async function createInitialUsers() {
         lastName: "amy",
         department: "Business",
         position: "Owner",
-        officeNumber: "(Owner) 555-5555",
+        officeNumber: "(555) 555-5556",
       },
       {
         email: "daniel@daniel.com",
@@ -59,16 +60,16 @@ async function createInitialUsers() {
         lastName: "daniel",
         department: "Sales",
         position: "Manager",
-        officeNumber: "(555) 555-5555",
+        officeNumber: "(555) 555-5557",
       },
       {
-        email: "Cung@Cung.com",
-        password: "Cung",
-        firstName: "Cung",
-        lastName: "Cung",
-        department: "Software",
-        position: "Manager",
-        officeNumber: "(555) 555-5555",
+        email: "cung@cung.com",
+        password: "cung",
+        firstName: "cung",
+        lastName: "cung",
+        department: "Technology",
+        position: "Software Manager",
+        officeNumber: "(555) 555-5558",
       },
     ];
 
