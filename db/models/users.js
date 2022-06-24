@@ -4,7 +4,7 @@ const SALT = 10;
 
 module.exports = {
   createUser,
-  getUserByEmail
+  getUserByEmail,
 };
 
 async function createUser({
@@ -50,7 +50,7 @@ async function getUserByEmail(email) {
     `,
       [email]
     );
-    return user;.
+    return user;
   } catch (error) {
     throw error;
   }

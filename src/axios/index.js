@@ -49,3 +49,17 @@ export async function getUserByEmail(token, email) {
     throw error.response.data;
   }
 }
+
+export async function getAllUsers(token) {
+  try {
+    const { data } = await axios.get(`/api/users/all`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
