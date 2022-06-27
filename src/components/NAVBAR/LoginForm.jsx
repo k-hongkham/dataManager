@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { loginUser } from "../../axios";
 import useAuth from "../hooks/userAuth";
@@ -29,21 +29,64 @@ const LoginForm = () => {
     }
   };
   return (
-    <Modal
-      className="modal-content rounded-5 shadow"
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained--modal-title-vcenter">
-          Please Log In
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>TestTest</h4>
-      </Modal.Body>
-    </Modal>
+    <div>
+      <header className="modal-header p-5 pb-4 border-bottom-0">
+        <h2 className="fw-bold mb-0">Login</h2>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onClick={() => {
+            setLoggedIn(false);
+          }}
+        ></button>
+      </header>
+      <div className="modal-body p-5 pt-0">
+        <form>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="email"
+              id="loginFormUserEmail"
+              name="loginFormUserEmail"
+              placeholder="name@domain.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="loginFormUserEmail">Email: </label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="password"
+              id="loginFormUserPassword"
+              name="loginFormUserPassword"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="password">Password: </label>
+          </div>
+          <button
+            className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+            onClick={(e) => handleLogin(e)}
+          >
+            Submit
+          </button>
+          <hr className="my-4" />
+          <h2 className="fs-5 fw-bold mb-3">
+            Or register using company access code
+          </h2>
+          <button
+            className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

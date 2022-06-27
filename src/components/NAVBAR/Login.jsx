@@ -4,15 +4,17 @@ import { Modal } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 
 const Login = ({ loggedIn, setLoggedIn }) => {
-  const { registered, setRegistered } = useLogin();
   return (
     <Modal
       show={loggedIn}
       onHide={() => {
         setLoggedIn(false);
       }}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
     >
-      <LoginForm />
+      <LoginForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
     </Modal>
   );
 };
