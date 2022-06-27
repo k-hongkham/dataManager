@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import Login from "./Login";
+import LoginBtn from "./LoginBtn";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -70,10 +71,17 @@ const Navbar = () => {
                 Customers
               </Link>
             </li>
+            <li className="nav-item">
+              <LoginBtn setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
+            </li>
           </ul>
           <div>
             {loggedIn && (
-              <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+              <Login
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                user={user}
+              />
             )}
           </div>
         </div>
