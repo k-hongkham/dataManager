@@ -22,6 +22,16 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarsExample04">
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
+            <li className="nav-item">
+              <Link
+                to="/Home"
+                className="nav-link active"
+                aria-current="page"
+                style={{ textDecoration: "none" }}
+              >
+                Home
+              </Link>
+            </li>
             <li className="nav-item dropdown">
               <Link
                 to="/Projects"
@@ -32,6 +42,30 @@ const Navbar = () => {
                 aria-expanded="false"
               >
                 Projects
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                to="/CompanyDirectory"
+                style={{ textDecoration: "none" }}
+                className="nav-link dropdown-toggle"
+                id="dropdown04"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Company Directory
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                to="/Customers"
+                style={{ textDecoration: "none" }}
+                className="nav-link dropdown-toggle"
+                id="dropdown04"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Customers
               </Link>
             </li>
           </ul>
