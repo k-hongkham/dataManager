@@ -1,18 +1,19 @@
 import React, { useState } from "react";
+import useLogin from "../hooks/useLogin";
 import { Modal } from "react-bootstrap";
+import LoginForm from "./LoginForm";
 
 const Login = ({ loggedIn, setLoggedIn }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [registered, setRegistered] = useState(false);
-
+  const { registered, setRegistered } = useLogin();
   return (
     <Modal
       show={loggedIn}
       onHide={() => {
         setLoggedIn(false);
       }}
-    ></Modal>
+    >
+      <LoginForm />
+    </Modal>
   );
 };
 

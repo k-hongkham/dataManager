@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { loginUser } from "../../axios";
+import React, { useState, useEffect } from "react";
 
 export const LoginContext = React.createContext();
 
@@ -9,6 +8,12 @@ const LoginProvider = ({ children }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [registered, setRegistered] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setError(false);
+  }, []);
 
   return (
     <LoginContext.Provider
@@ -23,6 +28,10 @@ const LoginProvider = ({ children }) => {
         setRegistered,
         loggedIn,
         setLoggedIn,
+        error,
+        setError,
+        errorMessage,
+        setErrorMessage,
       }}
     >
       {children}

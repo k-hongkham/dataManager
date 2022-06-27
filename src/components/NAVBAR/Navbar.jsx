@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/userAuth";
+import useLogin from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import Login from "./Login";
 
 const Navbar = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const { user } = useAuth();
+  const { loggedIn, setLoggedIn } = useLogin();
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">

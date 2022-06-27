@@ -13,6 +13,10 @@ const useLogin = () => {
     setRegistered,
     loggedIn,
     setLoggedIn,
+    error,
+    setError,
+    errorMessage,
+    setErrorMessage,
   } = useContext(LoginContext);
 
   return {
@@ -26,6 +30,10 @@ const useLogin = () => {
     setRegistered,
     loggedIn,
     setLoggedIn,
+    error,
+    setError,
+    errorMessage,
+    setErrorMessage,
   };
 };
 
