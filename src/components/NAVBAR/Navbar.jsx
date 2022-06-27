@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/userAuth";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -69,6 +70,11 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <div>
+            {loggedIn && (
+              <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            )}
+          </div>
         </div>
       </div>
     </nav>
