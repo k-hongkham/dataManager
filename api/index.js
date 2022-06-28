@@ -1,4 +1,5 @@
 const apiRouter = require("express").Router();
+const usersRouter = require("./users");
 const { getUserByEmail } = require("../db/models/users");
 
 const jwt = require("jsonwebtoken");
@@ -17,9 +18,10 @@ apiRouter.use(async (req, res, next) => {
       const { email } = jwt.verify(token, JWT_SECRET);
       if (email) {
         console.log("Good token. Setting user.");
-        email = await getUserByEmail(email);
-        delete email.password;
-        req.email = email;
+        user = await getUserByEmail(email);
+        delete user.password;
+        req.user = user;
+        console.log("WHO'S THE USER IN API", user);
         next();
       } else {
         res.status(409);
@@ -48,6 +50,8 @@ apiRouter.get("/health", (req, res, next) => {
     healthy: true,
   });
 });
+
+apiRouter.use("/users", usersRouter);
 
 apiRouter.use((error, req, res, next) => {
   console.log("SENDING ERROR: ", error);

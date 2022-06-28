@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAllUsers, getMe } from "../../axios";
+import { getMe, getAllUsers } from "../../axios";
 
-const AuthContext = ({ children }) => {
+export const AuthContext = React.createContext();
+
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -15,7 +17,9 @@ const AuthContext = ({ children }) => {
     const getUser = async () => {
       if (localStorage.getItem("token")) {
         const user = await getMe(token);
+        console.log("authcontext setting user", user);
         setUser(user);
+        getAllTheUsers();
       } else {
         setUser({});
         setAllUsers([]);
@@ -40,4 +44,4 @@ const AuthContext = ({ children }) => {
   );
 };
 
-export default AuthContext;
+export default AuthProvider;

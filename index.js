@@ -26,7 +26,7 @@ const path = require("path");
 server.use(express.static(path.join(__dirname, "build")));
 
 //here's the API
-server.use("/api", require("/api"));
+server.use("/api", require("./api"));
 
 server.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
