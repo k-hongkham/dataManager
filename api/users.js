@@ -14,7 +14,7 @@ usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email);
-    console.log("USER: ", user);
+    console.log("&&&&&&&&&&&&USER: ", user);
 
     if (user && bcrypt.compareSync(password, user.password)) {
       console.log("LOGIN SUCCESS");

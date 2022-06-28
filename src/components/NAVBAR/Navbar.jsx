@@ -75,15 +75,10 @@ const Navbar = () => {
               <LoginBtn setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
             </li>
           </ul>
-          <div>
-            {loggedIn && (
-              <Login
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                user={user}
-              />
-            )}
-          </div>
+
+          {loggedIn && (
+            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+          )}
         </div>
       </div>
     </nav>

@@ -10,7 +10,7 @@ export async function getAPIHealth() {
   }
 }
 
-export async function getMe(token) {
+export const getMe = async (token) => {
   try {
     const { data } = await axios.get("/api/users/me", {
       headers: {
@@ -18,23 +18,25 @@ export async function getMe(token) {
         Authorization: `Bearer ${token}`,
       },
     });
+
     return data;
   } catch (error) {
     throw error.response.data;
   }
-}
+};
 
-export async function loginUser(email, password) {
+export const loginUser = async (email, password) => {
   try {
     const { data } = await axios.post(`/api/users/login`, {
       email,
       password,
     });
+
     return data;
   } catch (error) {
     throw error.response.data;
   }
-}
+};
 
 export async function getUserByEmail(token, email) {
   try {
@@ -44,6 +46,7 @@ export async function getUserByEmail(token, email) {
         Authorization: `Bearer ${token}`,
       },
     });
+
     return data;
   } catch (error) {
     throw error.response.data;
