@@ -1,5 +1,5 @@
 const usersRouter = require("express").Router();
-const { getUserByEmail } = require("../db/models/users");
+const { getUserByEmail, getAllUsers } = require("../db/models/users");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { requireUser } = require("./utils");
@@ -41,4 +41,17 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
+usersRouter.get("/me", requireUser, (req, res, next) => {
+  res.send(req.user);
+});
+
+usersRouter.get("/all", requireUser, async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+    res.send(users);
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
+  }
+});
 module.exports = usersRouter;

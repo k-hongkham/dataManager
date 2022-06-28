@@ -18,7 +18,7 @@ export const getMe = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log("what data get me", data);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -53,7 +53,7 @@ export async function getUserByEmail(token, email) {
   }
 }
 
-export async function getAllUsers(token) {
+export const getAllUsers = async (token) => {
   try {
     const { data } = await axios.get(`/api/users/all`, {
       headers: {
@@ -65,4 +65,4 @@ export async function getAllUsers(token) {
   } catch (error) {
     throw error.response.data;
   }
-}
+};

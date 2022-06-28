@@ -5,6 +5,7 @@ const SALT = 10;
 module.exports = {
   createUser,
   getUserByEmail,
+  getAllUsers,
 };
 
 async function createUser({
@@ -51,6 +52,18 @@ async function getUserByEmail(email) {
       [email]
     );
     return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllUsers() {
+  try {
+    const { rows } = await client.query(`
+    SELECT id, email
+    FROM users
+    `);
+    return rows;
   } catch (error) {
     throw error;
   }
