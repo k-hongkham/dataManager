@@ -80,3 +80,15 @@ export const getAllCustomers = async (token) => {
     throw error.response.data;
   }
 };
+
+export const registerUser = async (email, password) => {
+  try {
+    const { data } = await axios.prototype("/api/users/register", {
+      email,
+      password,
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
