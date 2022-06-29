@@ -2,6 +2,7 @@ import React from "react";
 import useLogin from "../hooks/useLogin";
 import userAuth from "../hooks/userAuth";
 import { registerUser } from "../../axios";
+import { departments } from "../lists/departments";
 
 const RegistrationForm = ({
   loggedIn,
@@ -20,6 +21,12 @@ const RegistrationForm = ({
     setError,
     errorMessage,
     setErrorMessage,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    department,
+    setDepartment,
   } = useLogin();
   const { setToken } = userAuth();
 
@@ -69,6 +76,102 @@ const RegistrationForm = ({
             />
             <label htmlFor="registrationFormEmail">Email:</label>
           </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="password"
+              id="registrationPassword"
+              name="registrationPassword"
+              placeholder="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+              minLength={8}
+            />
+            <label htmlFor="registrationPassword">Password:</label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="password"
+              id="registrationConfirmPassword"
+              name="registrationConfirmPassword"
+              placeholder="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+              required
+              minLength={8}
+            />
+            <label htmlFor="registrationConfirmPassword">
+              Confirm Password:
+            </label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="text"
+              id="registrationFirstName"
+              name="registrationFirstName"
+              placeholder="firstName"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+              required
+            />
+            <label htmlFor="registrationFirstName">First Name:</label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="text"
+              id="registrationLastName"
+              name="registrationLastName"
+              placeholder="lastName"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+              required
+            />
+            <label htmlFor="registrationLastName">Last Name:</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+              className="form-select"
+              required=""
+              value={department || ""}
+              onChange={(e) => {
+                setDepartment(e.target.value);
+              }}
+            >
+              <option value="">Choose...</option>
+              {departments.map((department) => {
+                return <option key={department.name}>{department.name}</option>;
+              })}
+            </select>
+          </div>
+          <button
+            className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+            onClick={(e) => handleRegistration(e)}
+          >
+            Submit
+          </button>
+          <hr className="my-4" />
+          <h2 className="fs-5 fw-bold mb-3">Already have an account?</h2>
+          <button
+            className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
+            type="submit"
+            onClick={() => {
+              setRegistered(false);
+            }}
+          >
+            Sign In
+          </button>
         </form>
       </div>
     </div>
