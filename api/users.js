@@ -1,5 +1,9 @@
 const usersRouter = require("express").Router();
-const { getUserByEmail, getAllUsers } = require("../db/models/users");
+const {
+  getUserByEmail,
+  getAllUsers,
+  createUser,
+} = require("../db/models/users");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { requireUser } = require("./utils");
@@ -54,4 +58,34 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
     next({ name, message });
   }
 });
+
+usersRouter.post("/register", async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const _user = await getUserByEmail(email);
+    if (_user) {
+      res.status(409);
+      next({
+        name: "UserAlreadyExistsError",
+        message: "Email is already registered",
+      });
+    } else {
+      const user = await createUser({
+        email,
+        password,
+      });
+      console.log("api route for user registration.", user);
+      const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET, {
+        expiresIn: "1w",
+      });
+      res.send({
+        message: `${email} is now registered`,
+        token,
+      });
+    }
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
 module.exports = usersRouter;
