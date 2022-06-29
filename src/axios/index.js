@@ -81,12 +81,22 @@ export const getAllCustomers = async (token) => {
   }
 };
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (
+  email,
+  password,
+  firstName,
+  lastName,
+  department
+) => {
   try {
-    const { data } = await axios.prototype("/api/users/register", {
+    const { data } = await axios.post("/api/users/register", {
       email,
       password,
+      firstName,
+      lastName,
+      department,
     });
+    console.log("attempting to register", data);
     return data;
   } catch (error) {
     throw error.response.data;

@@ -17,6 +17,12 @@ const useLogin = () => {
     setError,
     errorMessage,
     setErrorMessage,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    department,
+    setDepartment,
   } = useContext(LoginContext);
 
   return {
@@ -34,6 +40,12 @@ const useLogin = () => {
     setError,
     errorMessage,
     setErrorMessage,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    department,
+    setDepartment,
   };
 };
 

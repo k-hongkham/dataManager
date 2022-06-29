@@ -1,10 +1,9 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
 import { loginUser } from "../../axios";
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
 
-const LoginForm = () => {
+const LoginForm = ({ setRegistered }) => {
   const { setToken } = useAuth();
   const {
     email,
@@ -17,6 +16,7 @@ const LoginForm = () => {
   } = useLogin();
 
   const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       const response = await loginUser(email, password);
       setError(false);
@@ -80,7 +80,10 @@ const LoginForm = () => {
           </h2>
           <button
             className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
-            type="submit"
+            type="button"
+            onClick={() => {
+              setRegistered(true);
+            }}
           >
             Sign Up
           </button>
