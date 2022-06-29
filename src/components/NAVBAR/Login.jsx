@@ -25,7 +25,12 @@ const Login = ({ loggedIn, setLoggedIn }) => {
           setRegistered={setRegistered}
         />
       ) : (
-        <LoginForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <LoginForm
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          registered={registered}
+          setRegistered={setRegistered}
+        />
       )}
     </Modal>
   );

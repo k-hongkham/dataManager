@@ -41,7 +41,38 @@ const RegistrationForm = ({
       setErrorMessage(error.message);
     }
   };
-  return <div></div>;
+  return (
+    <div>
+      <header className="modal-header p-5 pb-4 border-bottom-0">
+        <h2 className="fw-bold mb-0">Sign Up</h2>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="close"
+          onClick={() => {
+            setLoggedIn(false);
+          }}
+        />
+      </header>
+      <div className="modal-body p-5 pt-0">
+        <form>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="email"
+              id="registrationFormEmail"
+              name="registrationFormEmail"
+              placeholder="name@domain.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="registrationFormEmail">Email:</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default RegistrationForm;

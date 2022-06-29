@@ -3,7 +3,7 @@ import { loginUser } from "../../axios";
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
 
-const LoginForm = () => {
+const LoginForm = ({ setRegistered }) => {
   const { setToken } = useAuth();
   const {
     email,
@@ -80,6 +80,9 @@ const LoginForm = () => {
           <button
             className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
             type="submit"
+            onClick={() => {
+              setRegistered(true);
+            }}
           >
             Sign Up
           </button>
