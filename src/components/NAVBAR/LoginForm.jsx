@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
 import { loginUser } from "../../axios";
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
