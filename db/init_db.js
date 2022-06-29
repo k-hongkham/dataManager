@@ -1,4 +1,4 @@
-const { client, User } = require("./");
+const { client, User, Customer } = require("./");
 
 async function buildTables() {
   try {
@@ -7,6 +7,7 @@ async function buildTables() {
 
     //drop tables in the correct order
     await client.query(`
+        DROP TABLE IF EXISTS customers;
         DROP TABLE IF EXISTS users
         `);
     console.log("Finished dropping tables.");
@@ -23,7 +24,17 @@ async function buildTables() {
             department varchar(255),
             position varchar(255),
             "officeNumber" varchar(255)
-        )`);
+        );
+        CREATE TABLE customers (
+          id SERIAL PRIMARY KEY,
+          "companyName" varchar(255) NOT NULL,
+          "companyRep" varchar(255) NOT NULL,
+          "salesRep" varchar(255) NOT NULL,
+          description varchar(255) NOT NULL,
+          needs varchar(255) NOT NULL,
+          "prospectValue" varchar(255)
+      );
+      `);
 
     console.log("Finished creating tables");
   } catch (error) {
@@ -80,7 +91,56 @@ async function createInitialUsers() {
   }
 }
 
+async function createInitialCustomers() {
+  const lorem =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper eget duis at tellus at urna condimentum. Nisl vel pretium lectus quam.";
+  try {
+    console.log("Starting to create customers...");
+    const customersToCreate = [
+      {
+        companyName: "Magik Coats",
+        companyRep: "Ashe Lee",
+        salesRep: "Gary Gray",
+        description: lorem,
+        needs: lorem,
+        prospectValue: "$1,000,000",
+      },
+      {
+        companyName: "Kooler Boats",
+        companyRep: "Brice Cerr",
+        salesRep: "Gary Gray",
+        description: lorem,
+        needs: lorem,
+        prospectValue: "$500,000",
+      },
+      {
+        companyName: "sMOOth Barns",
+        companyRep: "Betty Loudermilk",
+        salesRep: "April June",
+        description: lorem,
+        needs: lorem,
+        prospectValue: "$755,000",
+      },
+      {
+        companyName: "Plant Products",
+        companyRep: "Stephen with a ph",
+        salesRep: "John Doe",
+        description: lorem,
+        needs: lorem,
+        prospectValue: "$300,000",
+      },
+    ];
+    const customers = await Promise.all(
+      customersToCreate.map(Customer.createCustomer)
+    );
+    console.log("Finished Creating Customers!");
+  } catch (error) {
+    throw error;
+  }
+}
+
 buildTables()
   .then(createInitialUsers)
+  .then(createInitialCustomers)
   .catch(console.error)
   .finally(() => client.end());

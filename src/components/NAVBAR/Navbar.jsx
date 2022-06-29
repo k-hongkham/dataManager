@@ -10,7 +10,7 @@ const Navbar = () => {
   const { loggedIn, setLoggedIn } = useLogin();
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
@@ -35,37 +35,31 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item">
               <Link
                 to="/Projects"
                 style={{ textDecoration: "none" }}
-                className="nav-link dropdown-toggle"
-                id="dropdown04"
-                data-bs-toggle="dropdown"
+                className="nav-link"
                 aria-expanded="false"
               >
                 Projects
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item">
               <Link
                 to="/CompanyDirectory"
                 style={{ textDecoration: "none" }}
-                className="nav-link dropdown-toggle"
-                id="dropdown04"
-                data-bs-toggle="dropdown"
+                className="nav-link"
                 aria-expanded="false"
               >
                 Company Directory
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item">
               <Link
                 to="/Customers"
                 style={{ textDecoration: "none" }}
-                className="nav-link dropdown-toggle"
-                id="dropdown04"
-                data-bs-toggle="dropdown"
+                className="nav-link"
                 aria-expanded="false"
               >
                 Customers

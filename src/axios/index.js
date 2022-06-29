@@ -66,3 +66,29 @@ export const getAllUsers = async (token) => {
     throw error.response.data;
   }
 };
+
+export const getAllCustomers = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/users/customers`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const registerUser = async (email, password) => {
+  try {
+    const { data } = await axios.prototype("/api/users/register", {
+      email,
+      password,
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
