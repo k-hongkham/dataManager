@@ -31,19 +31,29 @@ const RegistrationForm = ({
   const { setToken } = userAuth();
 
   const handleRegistration = async (e) => {
+    console.log("whats happening?");
     e.preventDefault();
+    console.log("registering handled");
     try {
       if (password === confirmPassword && password.length > 0) {
-        const response = await registerUser(email, password);
+        const response = await registerUser(
+          email,
+          password,
+          firstName,
+          lastName,
+          department
+        );
         setError(false);
         localStorage.setItem("token", response.token);
         setToken(response.token);
         setLoggedIn(false);
+        console.log("is the user registered?", response);
       } else {
         setError(true);
         setErrorMessage(true);
       }
     } catch (error) {
+      console.error(error);
       setError(true);
       setErrorMessage(error.message);
     }
@@ -63,7 +73,7 @@ const RegistrationForm = ({
         />
       </header>
       <div className="modal-body p-5 pt-0">
-        <form>
+        <form onSubmit={handleRegistration}>
           <div className="form-floating mb-3">
             <input
               className="form-control rounded-4"
@@ -157,7 +167,7 @@ const RegistrationForm = ({
           </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
-            onClick={(e) => handleRegistration(e)}
+            type="submit"
           >
             Submit
           </button>
@@ -165,7 +175,7 @@ const RegistrationForm = ({
           <h2 className="fs-5 fw-bold mb-3">Already have an account?</h2>
           <button
             className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
-            type="submit"
+            type="button"
             onClick={() => {
               setRegistered(false);
             }}
@@ -173,6 +183,11 @@ const RegistrationForm = ({
             Sign In
           </button>
         </form>
+        {error ? (
+          <div className="errorMessage">
+            <p>{`${errorMessage}`}</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );

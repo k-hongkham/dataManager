@@ -18,7 +18,7 @@ usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email);
-    console.log("&&&&&&&&&&&&USER: ", user);
+    console.log("getting USER by email api: ", user);
 
     if (user && bcrypt.compareSync(password, user.password)) {
       console.log("LOGIN SUCCESS");
@@ -60,7 +60,7 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
 });
 
 usersRouter.post("/register", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName, department } = req.body;
   try {
     const _user = await getUserByEmail(email);
     if (_user) {
@@ -73,11 +73,21 @@ usersRouter.post("/register", async (req, res, next) => {
       const user = await createUser({
         email,
         password,
+        firstName,
+        lastName,
+        department,
       });
       console.log("api route for user registration.", user);
-      const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET, {
-        expiresIn: "1w",
-      });
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1w",
+        }
+      );
       res.send({
         message: `${email} is now registered`,
         token,

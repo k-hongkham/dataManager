@@ -16,6 +16,7 @@ const LoginForm = ({ setRegistered }) => {
   } = useLogin();
 
   const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       const response = await loginUser(email, password);
       setError(false);
@@ -79,7 +80,7 @@ const LoginForm = ({ setRegistered }) => {
           </h2>
           <button
             className="w-100 mb-2 btn btn-md rounder-4 btn-primary"
-            type="submit"
+            type="button"
             onClick={() => {
               setRegistered(true);
             }}
