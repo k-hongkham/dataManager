@@ -11,7 +11,7 @@ const Main = () => {
 
   return (
     <Routes>
-      <Route path="/customers" element={<Customers />} />
+      <Route path="/Customers" element={<Customers />} />
       <Route path="/Home" element={<Home />} />
     </Routes>
   );

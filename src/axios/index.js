@@ -69,12 +69,13 @@ export const getAllUsers = async (token) => {
 
 export const getAllCustomers = async (token) => {
   try {
-    const { data } = await axios.get(`/api/users/customers`, {
+    const { data } = await axios.get(`/api/customers/all`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log("attempting to get all customers from axios", data);
     return data;
   } catch (error) {
     throw error.response.data;
