@@ -34,13 +34,14 @@ const Customers = () => {
               className="d-flex text-muted pt-3"
               key={`allCustomersList: ${idx}`}
             >
+              <div>{customer.id}</div>
               <p className="pb-3 mb-0 small lh-sm border-bottom">
                 <strong className="d-block text-gray-dark">
-                  {customer.companyName}
+                  {customer.CompanyName}
                 </strong>
-                {customer.description}
+                {customer.Description}
               </p>
-              <p>{customer.prospectValue}</p>
+              <p>{customer.ProspectValue}</p>
             </div>
           );
         })}
