@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getMe, getAllUsers } from "../../axios";
+import { getMe, getAllUsers, getAllCustomers } from "../../axios";
 
 export const AuthContext = React.createContext();
 
@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     const getUser = async () => {
       if (localStorage.getItem("token")) {
         const user = await getMe(token);
-        console.log("authcontext setting user", user);
+        console.log("auth context setting user", user);
         setUser(user);
         getAllTheUsers();
       } else {

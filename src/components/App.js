@@ -6,6 +6,7 @@ import AuthProvider from "./context/AuthContext";
 import LoginProvider from "./context/LoginContext";
 
 import Navbar from "./NAVBAR/Navbar";
+import Main from "./MAINPAGE/Main";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <AuthProvider>
         <LoginProvider>
           <Navbar />
+          <Main />
         </LoginProvider>
       </AuthProvider>
     </Router>
