@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
@@ -11,6 +12,11 @@ const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
   const [allCustomers, setAllCustomers] = useState([]);
+  const [accessCustomers, setAccessCustomers] = useState(false);
+
+  const handleClose = () => {
+    setAccessCustomers(false);
+  };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -26,7 +32,13 @@ const Customers = () => {
 
   return (
     <div className="container">
-      <CreateCustomer setAllCustomers={setAllCustomers} />
+      <Button variant="primary" onClick={() => setAccessCustomers(true)}>
+        <CreateCustomer
+          setAllCustomers={setAllCustomers}
+          accessCustomers={accessCustomers}
+          setAccessCustomers={setAccessCustomers}
+        />
+      </Button>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
 

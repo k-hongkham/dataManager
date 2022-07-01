@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
-import useCustomer from "../hooks/useCustomer";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
 
-const CreateCustomer = () => {
+const CreateCustomer = ({
+  setAllCustomers,
+  accessCustomers,
+  setAccessCustomers,
+}) => {
   const navigate = useNavigate();
   const { token, user } = useAuth();
-  const {
-    companyName,
-    setCompanyName,
-    companyRep,
-    setCompanyRep,
-    salesRep,
-    setSalesRep,
-    description,
-    setDescription,
-    needs,
-    setNeeds,
-    prospectValue,
-    setProspectValue,
-  } = useCustomer();
+  const [companyName, setCompanyName] = useState("");
+  const [companyRep, setCompanyRep] = useState("");
+  const [salesRep, setSalesRep] = useState("");
+  const [description, setDescription] = useState("");
+  const [needs, setNeeds] = useState("");
+  const [prospectValue, setProspectValue] = useState(0);
 
-  return <div>CREATE</div>;
+  return (
+    <Modal
+      show={accessCustomers}
+      onHide={() => setAccessCustomers(true)}
+    ></Modal>
+  );
 };
 
 export default CreateCustomer;
