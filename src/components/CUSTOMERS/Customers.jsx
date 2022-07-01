@@ -5,6 +5,8 @@ import useLogin from "../hooks/useLogin";
 
 import { getAllCustomers } from "../../axios";
 
+import CreateCustomer from "./CreateCustomer";
+
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
@@ -24,6 +26,7 @@ const Customers = () => {
 
   return (
     <div className="container">
+      <CreateCustomer setAllCustomers={setAllCustomers} />
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
 

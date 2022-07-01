@@ -5,8 +5,13 @@ import useLogin from "../hooks/useLogin";
 
 import { Link, useNavigate } from "react-router-dom";
 
+import { createCustomer, getAllCustomers } from "../../axios";
+
 const CreateCustomer = () => {
-  return <div></div>;
+  const navigate = useNavigate();
+  const { token, user } = useAuth();
+
+  return <div>CREATE</div>;
 };
 
 export default CreateCustomer;
