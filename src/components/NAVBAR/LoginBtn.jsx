@@ -8,6 +8,7 @@ const LoginBtn = ({ loggedIn, setLoggedIn }) => {
 
   const login = () => {
     setLoggedIn(true);
+    console.log("login btn where we at?", loggedIn);
   };
 
   const logout = () => {

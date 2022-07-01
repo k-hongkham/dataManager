@@ -23,29 +23,30 @@ const CreateCustomer = ({
   const [prospectValue, setProspectValue] = useState(0);
 
   const handleCloseout = () => {
-    setAccessCustomers(false);
+    setAccessCustomers(true);
+    navigate("/Customers");
     console.log("closing out", accessCustomers);
   };
   return (
     <Modal
       show={accessCustomers}
-      onHide={() => setAccessCustomers(false)}
+      onHide={() => {
+        setAccessCustomers(false);
+      }}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <div>
-        <header className="modal-header p-5 pb-4 border-bottom-0">
-          <h2 className="fw-bold mb-0">New Customer Information</h2>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            onClick={handleCloseout}
-          ></button>
-        </header>
-      </div>
+      <header className="modal-header p-5 pb-4 border-bottom-0">
+        <h2 className="fw-bold mb-0">New Customer Information</h2>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onClick={handleCloseout}
+        ></button>
+      </header>
     </Modal>
   );
 };

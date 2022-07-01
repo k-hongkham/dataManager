@@ -10,6 +10,7 @@ const LoginForm = ({ setRegistered }) => {
     setEmail,
     password,
     setPassword,
+    loggedIn,
     setLoggedIn,
     setError,
     setErrorMessage,
@@ -39,6 +40,7 @@ const LoginForm = ({ setRegistered }) => {
           aria-label="Close"
           onClick={() => {
             setLoggedIn(false);
+            console.log("closing out modal login", loggedIn);
           }}
         ></button>
       </header>

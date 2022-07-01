@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
@@ -14,8 +14,9 @@ const Customers = () => {
   const [allCustomers, setAllCustomers] = useState([]);
   const [accessCustomers, setAccessCustomers] = useState(false);
 
-  const handleClose = () => {
-    setAccessCustomers(false);
+  const handleModalOpening = () => {
+    setAccessCustomers(true);
+    console.log("handling the open model", accessCustomers);
   };
 
   useEffect(() => {
@@ -32,15 +33,13 @@ const Customers = () => {
 
   return (
     <div className="container">
-      <Button variant="primary" onClick={() => setAccessCustomers(true)}>
+      <Button variant="primary" onClick={handleModalOpening}>
         New Customer +
-        {accessCustomers ? (
-          <CreateCustomer
-            setAllCustomers={setAllCustomers}
-            accessCustomers={accessCustomers}
-            setAccessCustomers={setAccessCustomers}
-          />
-        ) : null}
+        <CreateCustomer
+          setAllCustomers={setAllCustomers}
+          accessCustomers={accessCustomers}
+          setAccessCustomers={setAccessCustomers}
+        />
       </Button>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
