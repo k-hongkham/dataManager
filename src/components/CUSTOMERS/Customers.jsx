@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
@@ -33,11 +33,14 @@ const Customers = () => {
   return (
     <div className="container">
       <Button variant="primary" onClick={() => setAccessCustomers(true)}>
-        <CreateCustomer
-          setAllCustomers={setAllCustomers}
-          accessCustomers={accessCustomers}
-          setAccessCustomers={setAccessCustomers}
-        />
+        New Customer +
+        {accessCustomers ? (
+          <CreateCustomer
+            setAllCustomers={setAllCustomers}
+            accessCustomers={accessCustomers}
+            setAccessCustomers={setAccessCustomers}
+          />
+        ) : null}
       </Button>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
