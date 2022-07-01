@@ -115,7 +115,7 @@ export const createCustomer = async (
 ) => {
   try {
     const { data } = await axios.post(
-      `api/customers`,
+      `api/customers/newCustomer`,
       {
         companyName,
         companyRep,
