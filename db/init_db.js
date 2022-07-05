@@ -29,7 +29,7 @@ async function buildTables() {
           id SERIAL PRIMARY KEY,
           "companyName" varchar(255) NOT NULL,
           "companyRep" varchar(255) NOT NULL,
-          "salesRep" varchar(255) NOT NULL,
+          "salesRep" varchar(255),
           description varchar(255) NOT NULL,
           needs varchar(255) NOT NULL,
           "prospectValue" varchar(255)

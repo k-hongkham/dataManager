@@ -115,7 +115,7 @@ export const createCustomer = async (
 ) => {
   try {
     const { data } = await axios.post(
-      `api/customers/newCustomer`,
+      `api/customers`,
       {
         companyName,
         companyRep,
@@ -131,6 +131,7 @@ export const createCustomer = async (
         },
       }
     );
+    console.log("is axios adding the new customer?", data);
     return data;
   } catch (error) {
     throw error.response.data;

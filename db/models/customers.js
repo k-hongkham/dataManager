@@ -21,6 +21,7 @@ async function createCustomer({
         `,
       [companyName, companyRep, salesRep, description, needs, prospectValue]
     );
+    console.log("new customer through db", customer);
     return customer;
   } catch (error) {
     throw error;

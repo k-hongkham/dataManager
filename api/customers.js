@@ -18,7 +18,7 @@ customersRouter.get("/all", requireUser, async (req, res, next) => {
   }
 });
 
-customersRouter.post("/newCustomer", requireUser, async (req, res, next) => {
+customersRouter.post("/", requireUser, async (req, res, next) => {
   const {
     companyName,
     companyRep,
@@ -27,16 +27,23 @@ customersRouter.post("/newCustomer", requireUser, async (req, res, next) => {
     needs,
     prospectValue,
   } = req.body;
+  console.log(
+    "trying to make a new customer in the api but it says not null",
+    salesRep
+  );
+
+  const newCustomerInfo = {
+    companyName,
+    companyRep,
+    salesRep,
+    description,
+    needs,
+    prospectValue,
+  };
+  console.log("new customer being added through api route", newCustomerInfo);
 
   try {
-    const customer = await createCustomer(
-      companyName,
-      companyRep,
-      salesRep,
-      description,
-      needs,
-      prospectValue
-    );
+    const customer = await createCustomer(newCustomerInfo);
     res.send(customer);
   } catch ({ name, message }) {
     res.status(409);

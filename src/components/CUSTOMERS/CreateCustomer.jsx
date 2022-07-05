@@ -7,6 +7,7 @@ import useLogin from "../hooks/useLogin";
 import { Link, useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
+import e from "cors";
 
 const CreateCustomer = ({
   setAllCustomers,
@@ -25,13 +26,13 @@ const CreateCustomer = ({
   const handleCloseout = (e) => {
     e.preventDefault();
     setAccessCustomers({ show: false });
-    navigate("/");
+    navigate("/newCustomer");
     console.log("closing out", accessCustomers);
   };
 
   const handleAddingNewCustomer = async (e) => {
-    console.log("adding new customer information");
-
+    e.preventDefault();
+    console.log("adding new customer information", companyName);
     try {
       const response = await createCustomer(
         token,
@@ -42,7 +43,14 @@ const CreateCustomer = ({
         needs,
         prospectValue
       );
-      console.log("is new customer added to db?");
+      console.log("is new customer added to db?", response);
+      const newCustomer = await getAllCustomers(token);
+      setAllCustomers(newCustomer);
+      navigate("/customers");
+      console.log(
+        "what is createcustomers new customer function?",
+        newCustomer
+      );
       return response;
     } catch (error) {
       console.error(error);
@@ -72,7 +80,6 @@ const CreateCustomer = ({
               value={companyName}
               onChange={(e) => {
                 setCompanyName(e.target.value);
-                console.log("what the companys name?", companyName);
               }}
               required
             />
@@ -101,10 +108,11 @@ const CreateCustomer = ({
               type="text"
               id="newCustomerSalesRep"
               name="newCustomerSalesRep"
-              placeholder="Our Sale's Representative"
+              placeholder="OurSalesRepresentative"
               value={salesRep}
               onChange={(e) => {
                 setSalesRep(e.target.value);
+                console.log("sales rep undefined?", salesRep);
               }}
               required
             />

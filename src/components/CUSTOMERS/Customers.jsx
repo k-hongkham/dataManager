@@ -57,7 +57,6 @@ const Customers = () => {
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
 
         {allCustomers.map((customer, idx) => {
-          console.log("what is allCustomers?", allCustomers);
           return (
             <div
               className="d-flex text-muted pt-3"
