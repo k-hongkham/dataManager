@@ -112,7 +112,6 @@ const CreateCustomer = ({
               value={salesRep}
               onChange={(e) => {
                 setSalesRep(e.target.value);
-                console.log("sales rep undefined?", salesRep);
               }}
               required
             />
