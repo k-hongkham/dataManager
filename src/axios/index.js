@@ -108,7 +108,7 @@ export const createCustomer = async (
   token,
   companyName,
   companyRep,
-  saleRep,
+  salesRep,
   description,
   needs,
   prospectValue
@@ -119,7 +119,7 @@ export const createCustomer = async (
       {
         companyName,
         companyRep,
-        saleRep,
+        salesRep,
         description,
         needs,
         prospectValue,

@@ -32,7 +32,7 @@ const CreateCustomer = ({
 
   const handleAddingNewCustomer = async (e) => {
     e.preventDefault();
-    console.log("adding new customer information", companyName);
+    console.log("adding new customer information - salesRep", salesRep);
     try {
       const response = await createCustomer(
         token,

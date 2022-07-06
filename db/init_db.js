@@ -69,7 +69,7 @@ async function createInitialUsers() {
         password: "daniel",
         firstName: "daniel",
         lastName: "daniel",
-        department: "Sales",
+        department: "",
         position: "Manager",
         officeNumber: "(555) 555-5557",
       },
