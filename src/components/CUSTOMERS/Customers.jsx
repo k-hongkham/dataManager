@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
 
 import { getAllCustomers } from "../../axios";
 
+import CreateCustomer from "./CreateCustomer";
+
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
   const [allCustomers, setAllCustomers] = useState([]);
+  const [accessCustomers, setAccessCustomers] = useState(false);
+  const navigate = useNavigate();
+
+  const handleModalOpening = () => {
+    setAccessCustomers(true);
+    console.log("handling the open model", accessCustomers);
+  };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -24,11 +35,28 @@ const Customers = () => {
 
   return (
     <div className="container">
+      <Button variant="primary" onClick={handleModalOpening}>
+        New Customer +
+      </Button>
+      <Modal
+        show={accessCustomers}
+        onHide={() => {
+          setAccessCustomers(false);
+        }}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <CreateCustomer
+          setAllCustomers={setAllCustomers}
+          accessCustomers={accessCustomers}
+          setAccessCustomers={setAccessCustomers}
+        />
+      </Modal>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
 
         {allCustomers.map((customer, idx) => {
-          console.log("what is allCustomers?", allCustomers);
           return (
             <div
               className="d-flex text-muted pt-3"

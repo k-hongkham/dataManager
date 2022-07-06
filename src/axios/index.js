@@ -103,3 +103,37 @@ export const registerUser = async (
     throw error.response.data;
   }
 };
+
+export const createCustomer = async (
+  token,
+  companyName,
+  companyRep,
+  salesRep,
+  description,
+  needs,
+  prospectValue
+) => {
+  try {
+    const { data } = await axios.post(
+      `api/customers`,
+      {
+        companyName,
+        companyRep,
+        salesRep,
+        description,
+        needs,
+        prospectValue,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("is axios adding the new customer?", data);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
