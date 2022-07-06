@@ -137,3 +137,38 @@ export const createCustomer = async (
     throw error.response.data;
   }
 };
+
+export const updateCustomer = async (
+  token,
+  customerId,
+  companyName,
+  companyRep,
+  salesRep,
+  description,
+  needs,
+  prospectValue
+) => {
+  try {
+    const { data } = await axios.patch(
+      `
+    api/customers/${customerId}`,
+      {
+        companyName,
+        companyRep,
+        salesRep,
+        description,
+        needs,
+        prospectValue,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
