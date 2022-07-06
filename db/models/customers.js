@@ -47,3 +47,45 @@ async function getAllCustomers() {
     throw error;
   }
 }
+
+async function updateCustomer({
+  customerId,
+  companyName,
+  companyRep,
+  salesRep,
+  description,
+  needs,
+  prospectValue,
+}) {
+  try {
+    const {
+      rows: [customer],
+    } = await client.query(
+      `
+    UPDATE customers
+    SET
+      "companyName" = COALESCE($2, customers."companyName"),
+      "companyRep" = COALESCE($3, customers."companyRep"),
+      "salesRep" = COALESCE($4, customers."salesRep"),
+      description = COALESCE($5, customers.description),
+      needs = COALESCE($6, customers.needs),
+      "prospectValue" = COALESCE($7, customers."prospectValue")
+    WHERE
+      customers.id = $1
+    RETURNING *;
+      `,
+      [
+        customerId,
+        companyName,
+        companyRep,
+        salesRep,
+        description,
+        needs,
+        prospectValue,
+      ]
+    );
+    return customer;
+  } catch (error) {
+    throw error;
+  }
+}
