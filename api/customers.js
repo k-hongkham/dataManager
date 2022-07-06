@@ -1,5 +1,9 @@
 const customersRouter = require("express").Router();
-const { getAllCustomers, createCustomer } = require("../db/models/customers");
+const {
+  getAllCustomers,
+  createCustomer,
+  updateCustomer,
+} = require("../db/models/customers");
 
 const { requireUser } = require("./utils");
 
@@ -45,6 +49,34 @@ customersRouter.post("/", requireUser, async (req, res, next) => {
   try {
     const customer = await createCustomer(newCustomerInfo);
     res.send(customer);
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
+  }
+});
+
+customersRouter.patch("/:customerId", requireUser, async (req, res, next) => {
+  const { customerId } = req.params;
+  const {
+    companyName,
+    companyRep,
+    salesRep,
+    description,
+    needs,
+    prospectValue,
+  } = req.body;
+
+  try {
+    const editCustomer = await updateCustomer({
+      id: customerId,
+      companyName,
+      companyRep,
+      salesRep,
+      description,
+      needs,
+      prospectValue,
+    });
+    res.send(editCustomer);
   } catch ({ name, message }) {
     res.status(409);
     next({ name, message });
