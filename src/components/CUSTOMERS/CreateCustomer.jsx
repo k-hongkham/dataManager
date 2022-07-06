@@ -3,11 +3,11 @@ import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
+import useCustomer from "../hooks/useCustomer";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
-import e from "cors";
 
 const CreateCustomer = ({
   setAllCustomers,
@@ -16,12 +16,20 @@ const CreateCustomer = ({
 }) => {
   const navigate = useNavigate();
   const { token, user } = useAuth();
-  const [companyName, setCompanyName] = useState("");
-  const [companyRep, setCompanyRep] = useState("");
-  const [salesRep, setSalesRep] = useState("");
-  const [description, setDescription] = useState("");
-  const [needs, setNeeds] = useState("");
-  const [prospectValue, setProspectValue] = useState(0);
+  const {
+    setCompanyName,
+    companyName,
+    setCompanyRep,
+    companyRep,
+    setSalesRep,
+    salesRep,
+    setDescription,
+    description,
+    needs,
+    setNeeds,
+    prospectValue,
+    setProspectValue,
+  } = useCustomer();
 
   const handleCloseout = (e) => {
     e.preventDefault();

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
+import useCustomer from "../hooks/useCustomer";
 
 import { getAllCustomers } from "../../axios";
 
@@ -12,8 +13,8 @@ import CreateCustomer from "./CreateCustomer";
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
-  const [allCustomers, setAllCustomers] = useState([]);
-  const [accessCustomers, setAccessCustomers] = useState(false);
+  const { allCustomers, setAllCustomers, accessCustomers, setAccessCustomers } =
+    useCustomer();
   const navigate = useNavigate();
 
   const handleModalOpening = () => {
