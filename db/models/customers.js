@@ -84,6 +84,7 @@ async function updateCustomer({
         prospectValue,
       ]
     );
+    console.log("DB - updateCustomer", customer);
     return customer;
   } catch (error) {
     throw error;

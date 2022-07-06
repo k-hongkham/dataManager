@@ -167,6 +167,7 @@ export const updateCustomer = async (
         },
       }
     );
+    console.log("axios - updateCustomer", data);
     return data;
   } catch (error) {
     throw error.response.data;
