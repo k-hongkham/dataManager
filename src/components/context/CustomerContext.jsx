@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export const CustomerContext = React.createContext();
 
 const CustomerProvider = ({ children }) => {
+  const [customer, setCustomer] = useState({});
   const [companyName, setCompanyName] = useState("");
   const [companyRep, setCompanyRep] = useState("");
   const [salesRep, setSalesRep] = useState("");
@@ -30,6 +31,8 @@ const CustomerProvider = ({ children }) => {
         setAllCustomers,
         accessCustomers,
         setAccessCustomers,
+        customer,
+        setCustomer,
       }}
     >
       {children}

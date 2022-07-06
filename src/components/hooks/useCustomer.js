@@ -18,6 +18,8 @@ const useCustomer = () => {
     setAllCustomers,
     accessCustomers,
     setAccessCustomers,
+    customer,
+    setCustomer,
   } = useContext(CustomerContext);
 
   return {
@@ -37,6 +39,8 @@ const useCustomer = () => {
     setAllCustomers,
     accessCustomers,
     setAccessCustomers,
+    customer,
+    setCustomer,
   };
 };
 
