@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
-import useCustomer from "../hooks/userCustomer";
+import useCustomer from "../hooks/useCustomer";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const UpdateCustomer = () => {
+const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
   const navigate = useNavigate();
   const { token } = useAuth();
   const {
@@ -57,7 +57,7 @@ const UpdateCustomer = () => {
   return (
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
-        <h2 className="fw-bold mb-0">New Customer Information</h2>
+        <h2 className="fw-bold mb-0">Update Customer Information</h2>
         <button
           type="button"
           className="btn-close"
@@ -178,7 +178,7 @@ const UpdateCustomer = () => {
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
             type="submit"
           >
-            Add New Customer Information
+            Update
           </button>
         </form>
       </div>

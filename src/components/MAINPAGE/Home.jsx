@@ -20,7 +20,7 @@ const Home = () => {
           detailed information
         </p>
       </div>
-      <div className="row g-5">
+      <div className="row g-2 justify-content-between">
         <div className="col-lg-6" style={{ border: "3px solid black" }}>
           <h3>We'll also have a list of shortcuts</h3>
           <p>for ease of navigation to correct forms</p>
@@ -37,7 +37,12 @@ const Home = () => {
             </dl>
           </div>
         </div>
-        <div className="col-lg-6" style={{ border: "3px solid black" }}>
+        <div
+          className="col-lg-6"
+          style={{
+            border: "3px solid black",
+          }}
+        >
           <h3>Maybe a progress list for most recent projects</h3>
           <p>selectable specific projects</p>
           <div className="bd-code-snippet highlight">

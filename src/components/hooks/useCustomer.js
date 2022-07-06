@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CustomerContext } from "../context/CustomerContext";
+
 const useCustomer = () => {
   const {
     companyName,

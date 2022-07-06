@@ -4,6 +4,7 @@ import "../style/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthProvider from "./context/AuthContext";
 import LoginProvider from "./context/LoginContext";
+import CustomerProvider from "./context/CustomerContext";
 
 import Navbar from "./NAVBAR/Navbar";
 import Main from "./MAINPAGE/Main";
@@ -13,8 +14,10 @@ const App = () => {
     <Router>
       <AuthProvider>
         <LoginProvider>
-          <Navbar />
-          <Main />
+          <CustomerProvider>
+            <Navbar />
+            <Main />
+          </CustomerProvider>
         </LoginProvider>
       </AuthProvider>
     </Router>
