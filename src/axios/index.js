@@ -208,3 +208,18 @@ export const deleteCustomer = async (token, customerId) => {
     throw error;
   }
 };
+
+export const getAllContacts = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/contacts/all`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("axios - getAllContacts", data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
