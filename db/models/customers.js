@@ -5,6 +5,7 @@ module.exports = {
   getAllCustomers,
   updateCustomer,
   getCustomerById,
+  deleteCustomer,
 };
 
 async function createCustomer({
@@ -91,6 +92,24 @@ async function getCustomerById(id) {
   WHERE customers.id =$1;
   `,
       [id]
+    );
+    return customer;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteCustomer({ customerId }) {
+  try {
+    const {
+      rows: [customer],
+    } = await client.query(
+      `
+    DELETE
+    FROM customers
+    WHERE id=$1;
+    `,
+      [customerId]
     );
     return customer;
   } catch (error) {
