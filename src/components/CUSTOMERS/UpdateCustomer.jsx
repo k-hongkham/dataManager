@@ -5,7 +5,13 @@ import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
+const UpdateCustomer = ({
+  editCustomer,
+  setEditCustomer,
+  customer,
+  setAllCustomers,
+  allCustomers,
+}) => {
   const navigate = useNavigate();
   const { token } = useAuth();
   const {
@@ -21,7 +27,6 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
     setNeeds,
     prospectValue,
     setProspectValue,
-    setAllCustomers,
     accessCustomers,
     setAccessCustomers,
     setCustomer,
@@ -55,7 +60,8 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
   };
 
   return (
-    // <Modal
+    <div>
+      {/* // <Modal
     //   show={editCustomer}
     //   onHide={() => {
     //     setEditCustomer(false);
@@ -63,8 +69,7 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
     //   size="lg"
     //   aria-labelledby="contained-modal-title-vcenter"
     //   centered
-    // >
-    <div>
+    // > */}
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
           Update Customer Information{customer.id}
@@ -142,18 +147,7 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
               }}
               required
             ></textarea>
-            {/* <input
-          className="form-control rounded-4 "
-          type="text"
-          id="newCustomerDescription"
-          name="newCustomerDescription"
-          // placeholder="Description of the customer's company"
-          value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-          required
-        /> */}
+
             <label htmlFor="updateCustomerDescription">
               Company Description:
             </label>

@@ -18,7 +18,22 @@ export const getMe = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("what data get me", data);
+    console.log("axios - getMe", data);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const getCustomer = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/customers/current`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("axios - getCustomer", data);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -152,7 +167,7 @@ export const updateCustomer = async (
   prospectValue
 ) => {
   try {
-    const response = await axios.patch(
+    const { data } = await axios.patch(
       `
     api/customers/${customerId}`,
       {
@@ -170,10 +185,9 @@ export const updateCustomer = async (
         },
       }
     );
-    console.log("axios - updateCustomer - response", response);
-    console.log("axios - updateCustomer - response.data", response.data);
+    console.log("axios - updateCustomer - response", data);
 
-    return response.data;
+    return data;
   } catch (error) {
     throw error.response.data;
   }

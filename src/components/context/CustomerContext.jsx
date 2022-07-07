@@ -7,7 +7,7 @@ export const CustomerContext = React.createContext();
 const CustomerProvider = ({ children }) => {
   const { user, token } = useAuth();
 
-  const [customer, setCustomer] = useState([]);
+  const [customer, setCustomer] = useState({});
   const [companyName, setCompanyName] = useState("");
   const [companyRep, setCompanyRep] = useState("");
   const [salesRep, setSalesRep] = useState("");

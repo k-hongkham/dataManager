@@ -25,6 +25,7 @@ const Customers = () => {
   };
   const handleUpdateOpening = () => {
     setEditCustomer(true);
+
     console.log("handling the open model", editCustomer);
   };
 
@@ -86,8 +87,10 @@ const Customers = () => {
 
               <UpdateCustomer
                 customer={customer}
+                setAllCustomers={setAllCustomers}
                 editCustomer={editCustomer}
                 setEditCustomer={setEditCustomer}
+                allCustomers={allCustomers}
               />
             </div>
           );
