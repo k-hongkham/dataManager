@@ -81,12 +81,12 @@ const Customers = () => {
                 {customer.Description}
               </div>
               <p style={{ marginRight: "10px" }}>{customer.ProspectValue}</p>
-              <div>
-                <Button variant="info" onClick={handleUpdateOpening}>
-                  Update Information
-                </Button>
 
-                {/* <Modal
+              <Button variant="info" onClick={handleUpdateOpening}>
+                Update Information
+              </Button>
+
+              {/* <Modal
                 customer={customer}
                 show={editCustomer}
                 onHide={() => {
@@ -97,21 +97,20 @@ const Customers = () => {
                 centered
               > */}
 
-                {editCustomer ? (
-                  <UpdateCustomer
-                    customer={customer}
-                    setAllCustomers={setAllCustomers}
-                    editCustomer={editCustomer}
-                    setEditCustomer={setEditCustomer}
-                    allCustomers={allCustomers}
-                  />
-                ) : null}
-                {/* </Modal> */}
-                <DeleteCustomer
+              {editCustomer ? (
+                <UpdateCustomer
                   customer={customer}
                   setAllCustomers={setAllCustomers}
+                  editCustomer={editCustomer}
+                  setEditCustomer={setEditCustomer}
+                  allCustomers={allCustomers}
                 />
-              </div>
+              ) : null}
+              {/* </Modal> */}
+              <DeleteCustomer
+                customer={customer}
+                setAllCustomers={setAllCustomers}
+              />
             </div>
           );
         })}
