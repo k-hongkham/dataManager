@@ -3,6 +3,7 @@ const {
   getAllCustomers,
   createCustomer,
   updateCustomer,
+  deleteCustomer,
 } = require("../db/models/customers");
 
 const { requireUser } = require("./utils");
@@ -80,6 +81,19 @@ customersRouter.patch("/:customerId", requireUser, async (req, res, next) => {
     res.send({ editCustomer });
   } catch ({ name, message }) {
     res.status(409);
+    next({ name, message });
+  }
+});
+
+customersRouter.delete("/:customerId", requireUser, async (req, res, next) => {
+  console.log("REQUEST TO DELETE CUSTOMER", req.params);
+  const { customerId } = req.params;
+
+  try {
+    const deletedCustomer = await deleteCustomer(customerId);
+    console.log("api - delete customer", customerId);
+    res.send(deletedCustomer);
+  } catch ({ name, message }) {
     next({ name, message });
   }
 });

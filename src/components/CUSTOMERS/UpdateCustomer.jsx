@@ -11,6 +11,7 @@ const UpdateCustomer = ({
   customer,
   setAllCustomers,
   allCustomers,
+  setAccessCustomers,
 }) => {
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -27,17 +28,8 @@ const UpdateCustomer = ({
     setNeeds,
     prospectValue,
     setProspectValue,
-    accessCustomers,
-    setAccessCustomers,
     setCustomer,
   } = useCustomer();
-
-  const handleCloseout = (e) => {
-    e.preventDefault();
-    setAccessCustomers({ show: false });
-    navigate("/newCustomer");
-    console.log("closing out", accessCustomers);
-  };
 
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
@@ -61,15 +53,6 @@ const UpdateCustomer = ({
 
   return (
     <div>
-      {/* // <Modal
-    //   show={editCustomer}
-    //   onHide={() => {
-    //     setEditCustomer(false);
-    //   }}
-    //   size="lg"
-    //   aria-labelledby="contained-modal-title-vcenter"
-    //   centered
-    // > */}
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
           Update Customer Information{customer.id}
@@ -79,7 +62,9 @@ const UpdateCustomer = ({
           className="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
-          onClick={handleCloseout}
+          onClick={() => {
+            setEditCustomer(false);
+          }}
         ></button>
       </header>
       <div className="modal-body p-5 pt-0">
@@ -191,7 +176,6 @@ const UpdateCustomer = ({
           </button>
         </form>
       </div>
-      {/* </Modal> */}
     </div>
   );
 };

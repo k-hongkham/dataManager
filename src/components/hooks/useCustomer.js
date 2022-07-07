@@ -17,8 +17,6 @@ const useCustomer = () => {
     setProspectValue,
     allCustomers,
     setAllCustomers,
-    accessCustomers,
-    setAccessCustomers,
     customer,
     setCustomer,
   } = useContext(CustomerContext);
@@ -38,8 +36,6 @@ const useCustomer = () => {
     setProspectValue,
     allCustomers,
     setAllCustomers,
-    accessCustomers,
-    setAccessCustomers,
     customer,
     setCustomer,
   };
