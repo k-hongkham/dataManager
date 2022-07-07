@@ -192,3 +192,18 @@ export const updateCustomer = async (
     throw error.response.data;
   }
 };
+
+export const deleteCustomer = async (token, customerId) => {
+  try {
+    const { data } = await axios.delete(`api/customers/${customerId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("axios - delete Customer", data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
