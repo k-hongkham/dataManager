@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
+const UpdateCustomer = ({ editCustomer, setEditCustomer, customer }) => {
   const navigate = useNavigate();
   const { token } = useAuth();
   const {
@@ -20,11 +21,9 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
     setNeeds,
     prospectValue,
     setProspectValue,
-    allCustomers,
     setAllCustomers,
     accessCustomers,
     setAccessCustomers,
-    customer,
     setCustomer,
   } = useCustomer();
 
@@ -37,17 +36,18 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
 
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
+
     const updatedCustomerInfo = await updateCustomer(
       token,
       customer.id,
       companyName,
-      setCompanyName,
-      setCompanyRep,
-      setSalesRep,
-      setDescription,
-      setNeeds,
-      setProspectValue
+      companyRep,
+      salesRep,
+      description,
+      needs,
+      prospectValue
     );
+    console.log("handle update customer", customer.id);
     setCustomer(updatedCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
@@ -55,9 +55,20 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
   };
 
   return (
+    // <Modal
+    //   show={editCustomer}
+    //   onHide={() => {
+    //     setEditCustomer(false);
+    //   }}
+    //   size="lg"
+    //   aria-labelledby="contained-modal-title-vcenter"
+    //   centered
+    // >
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
-        <h2 className="fw-bold mb-0">Update Customer Information</h2>
+        <h2 className="fw-bold mb-0">
+          Update Customer Information{customer.id}
+        </h2>
         <button
           type="button"
           className="btn-close"
@@ -72,8 +83,8 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
             <input
               className="form-control rounded-4"
               type="text"
-              id="newCustomerFormName"
-              name="newCustomerFormName"
+              id="updateCustomerFormName"
+              name="updateCustomerFormName"
               placeholder="Customer'sCompanyName"
               value={companyName}
               onChange={(e) => {
@@ -81,14 +92,14 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
               }}
               required
             />
-            <label htmlFor="newCustomerFormName">Company Name: </label>
+            <label htmlFor="updateCustomerFormName">Company Name: </label>
           </div>
           <div className="form-floating mb-3">
             <input
               className="form-control rounded-4"
               type="text"
-              id="newCustomerFormRepName"
-              name="newCustomerFormRepName"
+              id="updateCustomerFormRepName"
+              name="updateCustomerFormRepName"
               placeholder="Customer's Representative"
               value={companyRep}
               onChange={(e) => {
@@ -96,7 +107,7 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
               }}
               required
             />
-            <label htmlFor="newCustomerFormRepName">
+            <label htmlFor="updateCustomerFormRepName">
               Company Representative:
             </label>
           </div>
@@ -104,8 +115,8 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
             <input
               className="form-control rounded-4"
               type="text"
-              id="newCustomerSalesRep"
-              name="newCustomerSalesRep"
+              id="updateCustomerSalesRep"
+              name="updateCustomerSalesRep"
               placeholder="OurSalesRepresentative"
               value={salesRep}
               onChange={(e) => {
@@ -113,13 +124,15 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
               }}
               required
             />
-            <label htmlFor="newCustomerSalesRep">Sales Representative: </label>
+            <label htmlFor="updateCustomerSalesRep">
+              Sales Representative:{" "}
+            </label>
           </div>
           <div className="form-group form-floating mb-3 ">
             <textarea
               className="form-control rounded-4  "
-              id="newCustomerDescription"
-              name="newCustomerDescription"
+              id="updateCustomerDescription"
+              name="updateCustomerDescription"
               placeholder="What does this company do?"
               rows={10}
               style={{ height: "100px", overflowY: "hidden" }}
@@ -141,13 +154,15 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
           }}
           required
         /> */}
-            <label htmlFor="newCustomerDescription">Company Description:</label>
+            <label htmlFor="updateCustomerDescription">
+              Company Description:
+            </label>
           </div>
           <div className="form-group form-floating mb-3 ">
             <textarea
               className="form-control rounded-4  "
-              id="newCustomerNeeds"
-              name="newCustomerNeeds"
+              id="updateCustomerNeeds"
+              name="updateCustomerNeeds"
               placeholder="What does this company need?"
               rows={10}
               style={{ height: "100px", overflowY: "hidden" }}
@@ -157,14 +172,14 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
               }}
               required
             ></textarea>
-            <label htmlFor="newCustomerNeeds">Company Needs:</label>
+            <label htmlFor="updateCustomerNeeds">Company Needs:</label>
           </div>
           <div className="form-group form-floating mb-3 ">
             <input
               className="form-control rounded-4"
               type="text"
-              id="newCustomerProspectValue"
-              name="newCustomerProspectValue"
+              id="updateCustomerProspectValue"
+              name="updateCustomerProspectValue"
               placeholder="Our Sale's Representative"
               value={prospectValue}
               onChange={(e) => {
@@ -172,7 +187,7 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
               }}
               required
             />
-            <label htmlFor="newCustomerProspectValue">Prospect Value:</label>
+            <label htmlFor="updateCustomerProspectValue">Prospect Value:</label>
           </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
@@ -182,6 +197,7 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
           </button>
         </form>
       </div>
+      {/* </Modal> */}
     </div>
   );
 };

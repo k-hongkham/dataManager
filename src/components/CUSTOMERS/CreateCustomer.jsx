@@ -56,7 +56,7 @@ const CreateCustomer = ({
       setAllCustomers(newCustomer);
       navigate("/customers");
       console.log(
-        "what is createcustomers new customer function?",
+        "what is createcustomers new customer function? createCustomer component",
         newCustomer
       );
       return response;

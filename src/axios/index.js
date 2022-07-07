@@ -114,7 +114,7 @@ export const createCustomer = async (
   prospectValue
 ) => {
   try {
-    const { data } = await axios.post(
+    const response = await axios.post(
       `api/customers`,
       {
         companyName,
@@ -131,8 +131,11 @@ export const createCustomer = async (
         },
       }
     );
-    console.log("is axios adding the new customer?", data);
-    return data;
+    console.log(
+      "is axios adding the new customer? -createCustomer",
+      response.data
+    );
+    return response.data;
   } catch (error) {
     throw error.response.data;
   }
@@ -149,7 +152,7 @@ export const updateCustomer = async (
   prospectValue
 ) => {
   try {
-    const { data } = await axios.patch(
+    const response = await axios.patch(
       `
     api/customers/${customerId}`,
       {
@@ -167,8 +170,10 @@ export const updateCustomer = async (
         },
       }
     );
-    console.log("axios - updateCustomer", data);
-    return data;
+    console.log("axios - updateCustomer - response", response);
+    console.log("axios - updateCustomer - response.data", response.data);
+
+    return response.data;
   } catch (error) {
     throw error.response.data;
   }

@@ -79,23 +79,16 @@ const Customers = () => {
                 {customer.Description}
               </p>
               <p>{customer.ProspectValue}</p>
-              <Button variant="info" onClick={handleUpdateOpening}>
-                Update Information
-              </Button>
-              <Modal
-                show={editCustomer}
-                onHide={() => {
-                  setEditCustomer(false);
-                }}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-              >
-                <UpdateCustomer
-                  editCustomer={editCustomer}
-                  setEditCustomer={setEditCustomer}
-                />
-              </Modal>
+
+              {/* <Button variant="info" onClick={handleUpdateOpening}>
+                Update Information {customer.id}
+              </Button> */}
+
+              <UpdateCustomer
+                customer={customer}
+                editCustomer={editCustomer}
+                setEditCustomer={setEditCustomer}
+              />
             </div>
           );
         })}

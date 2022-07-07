@@ -1,6 +1,6 @@
 const client = require("../client");
 
-module.exports = { createCustomer, getAllCustomers };
+module.exports = { createCustomer, getAllCustomers, updateCustomer };
 
 async function createCustomer({
   companyName,
@@ -21,7 +21,7 @@ async function createCustomer({
         `,
       [companyName, companyRep, salesRep, description, needs, prospectValue]
     );
-    console.log("new customer through db", customer);
+    console.log("new customer through db - createCustomer", customer);
     return customer;
   } catch (error) {
     throw error;
@@ -48,43 +48,70 @@ async function getAllCustomers() {
   }
 }
 
-async function updateCustomer({
-  customerId,
-  companyName,
-  companyRep,
-  salesRep,
-  description,
-  needs,
-  prospectValue,
-}) {
+// async function updateCustomer({
+//   customerId,
+//   companyName,
+//   companyRep,
+//   salesRep,
+//   description,
+//   needs,
+//   prospectValue,
+// }) {
+//   try {
+//     const {
+//       rows: [customer],
+//     } = await client.query(
+//       `
+//     UPDATE customers
+//     SET
+//       "companyName" = COALESCE($2, customers."companyName"),
+//       "companyRep" = COALESCE($3, customers."companyRep"),
+//       "salesRep" = COALESCE($4, customers."salesRep"),
+//       description = COALESCE($5, customers.description),
+//       needs = COALESCE($6, customers.needs),
+//       "prospectValue" = COALESCE($7, customers."prospectValue")
+//     WHERE
+//       customers.id = $1
+//     RETURNING *;
+//       `,
+//       [
+//         customerId,
+//         companyName,
+//         companyRep,
+//         salesRep,
+//         description,
+//         needs,
+//         prospectValue,
+//       ]
+//     );
+//     console.log("DB - updateCustomer", customer);
+//     return customer;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+async function updateCustomer(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
   try {
     const {
       rows: [customer],
     } = await client.query(
       `
     UPDATE customers
-    SET
-      "companyName" = COALESCE($2, customers."companyName"),
-      "companyRep" = COALESCE($3, customers."companyRep"),
-      "salesRep" = COALESCE($4, customers."salesRep"),
-      description = COALESCE($5, customers.description),
-      needs = COALESCE($6, customers.needs),
-      "prospectValue" = COALESCE($7, customers."prospectValue")
-    WHERE
-      customers.id = $1
-    RETURNING *;
-      `,
-      [
-        customerId,
-        companyName,
-        companyRep,
-        salesRep,
-        description,
-        needs,
-        prospectValue,
-      ]
+    SET ${setString}
+    WHERE id =${fields.id}
+    RETURNING*;
+    `,
+      Object.values(fields)
     );
-    console.log("DB - updateCustomer", customer);
+    console.log("DB- customer - update customer", customer);
     return customer;
   } catch (error) {
     throw error;
