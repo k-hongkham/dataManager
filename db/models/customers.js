@@ -1,6 +1,11 @@
 const client = require("../client");
 
-module.exports = { createCustomer, getAllCustomers };
+module.exports = {
+  createCustomer,
+  getAllCustomers,
+  updateCustomer,
+  getCustomerById,
+};
 
 async function createCustomer({
   companyName,
@@ -21,7 +26,7 @@ async function createCustomer({
         `,
       [companyName, companyRep, salesRep, description, needs, prospectValue]
     );
-    console.log("new customer through db", customer);
+    console.log("new customer through db - createCustomer", customer);
     return customer;
   } catch (error) {
     throw error;
@@ -43,6 +48,51 @@ async function getAllCustomers() {
     ORDER BY  customers.id desc
     `);
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateCustomer(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [customer],
+    } = await client.query(
+      `
+    UPDATE customers
+    SET ${setString}
+    WHERE id =${fields.id}
+    RETURNING*;
+    `,
+      Object.values(fields)
+    );
+    console.log("DB- customer - update customer", customer);
+    return customer;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getCustomerById(id) {
+  try {
+    const {
+      rows: [customer],
+    } = await client.query(
+      `
+  SELECT *
+  FROM customers
+  WHERE customers.id =$1;
+  `,
+      [id]
+    );
+    return customer;
   } catch (error) {
     throw error;
   }

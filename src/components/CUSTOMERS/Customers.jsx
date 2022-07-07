@@ -4,21 +4,29 @@ import { useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
+import useCustomer from "../hooks/useCustomer";
 
 import { getAllCustomers } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer";
+import UpdateCustomer from "./UpdateCustomer";
 
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
-  const [allCustomers, setAllCustomers] = useState([]);
-  const [accessCustomers, setAccessCustomers] = useState(false);
+  const { allCustomers, setAllCustomers, accessCustomers, setAccessCustomers } =
+    useCustomer();
+  const [editCustomer, setEditCustomer] = useState(false);
   const navigate = useNavigate();
 
   const handleModalOpening = () => {
     setAccessCustomers(true);
     console.log("handling the open model", accessCustomers);
+  };
+  const handleUpdateOpening = () => {
+    setEditCustomer(true);
+
+    console.log("handling the open model", editCustomer);
   };
 
   useEffect(() => {
@@ -62,7 +70,9 @@ const Customers = () => {
               className="d-flex text-muted pt-3"
               key={`allCustomersList: ${idx}`}
             >
-              <div>{customer.id}</div>
+              <div>
+                <span>{customer.id}</span>
+              </div>
               <p className="pb-3 mb-0 small lh-sm border-bottom">
                 <strong className="d-block text-gray-dark">
                   {customer.CompanyName}
@@ -70,6 +80,18 @@ const Customers = () => {
                 {customer.Description}
               </p>
               <p>{customer.ProspectValue}</p>
+
+              {/* <Button variant="info" onClick={handleUpdateOpening}>
+                Update Information {customer.id}
+              </Button> */}
+
+              <UpdateCustomer
+                customer={customer}
+                setAllCustomers={setAllCustomers}
+                editCustomer={editCustomer}
+                setEditCustomer={setEditCustomer}
+                allCustomers={allCustomers}
+              />
             </div>
           );
         })}

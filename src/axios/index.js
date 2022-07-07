@@ -18,7 +18,22 @@ export const getMe = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("what data get me", data);
+    console.log("axios - getMe", data);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const getCustomer = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/customers/current`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("axios - getCustomer", data);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -114,7 +129,7 @@ export const createCustomer = async (
   prospectValue
 ) => {
   try {
-    const { data } = await axios.post(
+    const response = await axios.post(
       `api/customers`,
       {
         companyName,
@@ -131,7 +146,47 @@ export const createCustomer = async (
         },
       }
     );
-    console.log("is axios adding the new customer?", data);
+    console.log(
+      "is axios adding the new customer? -createCustomer",
+      response.data
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const updateCustomer = async (
+  token,
+  customerId,
+  companyName,
+  companyRep,
+  salesRep,
+  description,
+  needs,
+  prospectValue
+) => {
+  try {
+    const { data } = await axios.patch(
+      `
+    api/customers/${customerId}`,
+      {
+        companyName,
+        companyRep,
+        salesRep,
+        description,
+        needs,
+        prospectValue,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("axios - updateCustomer - response", data);
+
     return data;
   } catch (error) {
     throw error.response.data;
