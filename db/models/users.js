@@ -60,8 +60,9 @@ async function getUserByEmail(email) {
 async function getAllUsers() {
   try {
     const { rows } = await client.query(`
-    SELECT id, email
+    SELECT*    
     FROM users
+    ORDER BY "lastName" ASC
     `);
     return rows;
   } catch (error) {
