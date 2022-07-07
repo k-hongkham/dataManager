@@ -9,11 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
 
-const CreateCustomer = ({
-  setAllCustomers,
-  accessCustomers,
-  setAccessCustomers,
-}) => {
+const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
   const navigate = useNavigate();
   const { token, user } = useAuth();
   const {
@@ -31,13 +27,6 @@ const CreateCustomer = ({
     setProspectValue,
   } = useCustomer();
 
-  const handleCloseout = (e) => {
-    e.preventDefault();
-    setAccessCustomers({ show: false });
-    navigate("/newCustomer");
-    console.log("closing out", accessCustomers);
-  };
-
   const handleAddingNewCustomer = async (e) => {
     e.preventDefault();
     console.log("adding new customer information - salesRep", salesRep);
@@ -54,7 +43,7 @@ const CreateCustomer = ({
       console.log("is new customer added to db?", response);
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
-      navigate("/customers");
+      navigate("/Customers");
       console.log(
         "what is createcustomers new customer function?",
         newCustomer
@@ -73,7 +62,9 @@ const CreateCustomer = ({
           className="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
-          onClick={handleCloseout}
+          onClick={() => {
+            setAccessCustomers(false);
+          }}
         ></button>
       </header>
       <div className="modal-body p-5 pt-0">

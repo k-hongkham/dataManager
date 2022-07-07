@@ -13,10 +13,8 @@ const CustomerProvider = ({ children }) => {
   const [salesRep, setSalesRep] = useState("");
   const [description, setDescription] = useState("");
   const [needs, setNeeds] = useState("");
-  const [prospectValue, setProspectValue] = useState(0);
+  const [prospectValue, setProspectValue] = useState("$0");
   const [allCustomers, setAllCustomers] = useState([]);
-  const [accessCustomers, setAccessCustomers] = useState(false);
-
   useEffect(() => {
     if (user) {
       const displayCustomers = async () => {
@@ -45,8 +43,7 @@ const CustomerProvider = ({ children }) => {
         setProspectValue,
         allCustomers,
         setAllCustomers,
-        accessCustomers,
-        setAccessCustomers,
+
         customer,
         setCustomer,
       }}

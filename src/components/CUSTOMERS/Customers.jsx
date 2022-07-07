@@ -15,8 +15,8 @@ import DeleteCustomer from "./DeleteCustomer";
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
   const { token, user } = useAuth();
-  const { allCustomers, setAllCustomers, accessCustomers, setAccessCustomers } =
-    useCustomer();
+  const { allCustomers, setAllCustomers } = useCustomer();
+  const [accessCustomers, setAccessCustomers] = useState(false);
   const [editCustomer, setEditCustomer] = useState(false);
   const navigate = useNavigate();
 
@@ -68,37 +68,50 @@ const Customers = () => {
         {allCustomers.map((customer, idx) => {
           return (
             <div
-              className="d-flex text-muted pt-3"
+              className="d-flex text-muted pt-3 customerId"
               key={`allCustomersList: ${idx}`}
             >
-              <div>
-                <span>{customer.id}</span>
-              </div>
-              <p className="pb-3 mb-0 small lh-sm border-bottom">
-                <strong className="d-block text-gray-dark">
-                  {customer.CompanyName}
-                </strong>
+              <div style={{ marginRight: "10px" }}>{customer.id}</div>
+              <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div className="d-flex justify-content-between">
+                  <strong className="d-block text-gray-dark">
+                    {customer.CompanyName}
+                  </strong>
+                </div>
                 {customer.Description}
-              </p>
-              <p>{customer.ProspectValue}</p>
+              </div>
+              <p style={{ marginRight: "10px" }}>{customer.ProspectValue}</p>
+              <div>
+                <Button variant="info" onClick={handleUpdateOpening}>
+                  Update Information
+                </Button>
 
-              <Button variant="info" onClick={handleUpdateOpening}>
-                Update Information {customer.id}
-              </Button>
+                {/* <Modal
+                customer={customer}
+                show={editCustomer}
+                onHide={() => {
+                  setEditCustomer(false);
+                }}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              > */}
 
-              {editCustomer ? (
-                <UpdateCustomer
+                {editCustomer ? (
+                  <UpdateCustomer
+                    customer={customer}
+                    setAllCustomers={setAllCustomers}
+                    editCustomer={editCustomer}
+                    setEditCustomer={setEditCustomer}
+                    allCustomers={allCustomers}
+                  />
+                ) : null}
+                {/* </Modal> */}
+                <DeleteCustomer
                   customer={customer}
                   setAllCustomers={setAllCustomers}
-                  editCustomer={editCustomer}
-                  setEditCustomer={setEditCustomer}
-                  allCustomers={allCustomers}
                 />
-              ) : null}
-              <DeleteCustomer
-                customer={customer}
-                setAllCustomers={setAllCustomers}
-              />
+              </div>
             </div>
           );
         })}
