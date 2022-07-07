@@ -91,6 +91,7 @@ customersRouter.delete("/:customerId", requireUser, async (req, res, next) => {
 
   try {
     const deletedCustomer = await deleteCustomer(customerId);
+    console.log("api - delete customer", customerId);
     res.send(deletedCustomer);
   } catch ({ name, message }) {
     next({ name, message });

@@ -10,6 +10,7 @@ import { getAllCustomers } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer";
 import UpdateCustomer from "./UpdateCustomer";
+import DeleteCustomer from "./DeleteCustomer";
 
 const Customers = () => {
   const { error, setError, errorMessage, setErrorMessage } = useLogin();
@@ -81,16 +82,22 @@ const Customers = () => {
               </p>
               <p>{customer.ProspectValue}</p>
 
-              {/* <Button variant="info" onClick={handleUpdateOpening}>
+              <Button variant="info" onClick={handleUpdateOpening}>
                 Update Information {customer.id}
-              </Button> */}
+              </Button>
 
-              <UpdateCustomer
+              {editCustomer ? (
+                <UpdateCustomer
+                  customer={customer}
+                  setAllCustomers={setAllCustomers}
+                  editCustomer={editCustomer}
+                  setEditCustomer={setEditCustomer}
+                  allCustomers={allCustomers}
+                />
+              ) : null}
+              <DeleteCustomer
                 customer={customer}
                 setAllCustomers={setAllCustomers}
-                editCustomer={editCustomer}
-                setEditCustomer={setEditCustomer}
-                allCustomers={allCustomers}
               />
             </div>
           );

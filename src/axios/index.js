@@ -202,6 +202,7 @@ export const deleteCustomer = async (token, customerId) => {
       },
     });
     console.log("axios - delete Customer", data);
+    console.log("axios - delete Customer - customerId", customerId);
     return data;
   } catch (error) {
     throw error;

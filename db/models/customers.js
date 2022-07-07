@@ -99,7 +99,7 @@ async function getCustomerById(id) {
   }
 }
 
-async function deleteCustomer({ customerId }) {
+async function deleteCustomer(customerId) {
   try {
     const {
       rows: [customer],
@@ -107,10 +107,12 @@ async function deleteCustomer({ customerId }) {
       `
     DELETE
     FROM customers
-    WHERE id=$1;
+    WHERE customers.id=$1;
     `,
       [customerId]
     );
+    console.log("db - deleteCueestomer- csutomerID", customerId);
+    console.log("db - deleteCueestomer - customer", customer);
     return customer;
   } catch (error) {
     throw error;
