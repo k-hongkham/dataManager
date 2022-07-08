@@ -23,15 +23,15 @@ async function buildTables() {
             "lastName" varchar(255),
             department varchar(255),
             position varchar(255),
-            "officeNumber" varchar(255)
-        );
+            "officeNumber" varchar(255),
+            );
         CREATE TABLE customers (
           id SERIAL PRIMARY KEY,
           "companyName" varchar(255) NOT NULL,
           "companyRep" varchar(255) NOT NULL,
           "salesRep" varchar(255),
-          description varchar(255) NOT NULL,
-          needs varchar(255) NOT NULL,
+          description text NOT NULL,
+          needs text NOT NULL,
           "prospectValue" varchar(255)
       );
       `);

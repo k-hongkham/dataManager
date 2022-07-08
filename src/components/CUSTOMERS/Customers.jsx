@@ -94,7 +94,6 @@ const Customers = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               > */}
-
               {editCustomer ? (
                 <UpdateCustomer
                   customer={customer}
