@@ -6,6 +6,7 @@ module.exports = {
   createUser,
   getUserByEmail,
   getAllUsers,
+  updateUser,
 };
 
 async function createUser({
@@ -60,10 +61,38 @@ async function getUserByEmail(email) {
 async function getAllUsers() {
   try {
     const { rows } = await client.query(`
-    SELECT id, email
+    SELECT*    
     FROM users
+    ORDER BY "lastName" ASC
     `);
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateUser(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    UPDATE users
+    SET ${setString}
+    WHERE id =${fields.id}
+    RETURNING*;
+    `,
+      Object.values(fields)
+    );
+    console.log("DB- user - update customer", user);
+    return user;
   } catch (error) {
     throw error;
   }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
@@ -18,7 +17,6 @@ const Customers = () => {
   const { allCustomers, setAllCustomers } = useCustomer();
   const [accessCustomers, setAccessCustomers] = useState(false);
   const [editCustomer, setEditCustomer] = useState(false);
-  const navigate = useNavigate();
 
   const handleModalOpening = () => {
     setAccessCustomers(true);
@@ -96,7 +94,6 @@ const Customers = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               > */}
-
               {editCustomer ? (
                 <UpdateCustomer
                   customer={customer}
