@@ -3,6 +3,7 @@ const {
   getUserByEmail,
   getAllUsers,
   createUser,
+  updateUser,
 } = require("../db/models/users");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -94,6 +95,29 @@ usersRouter.post("/register", async (req, res, next) => {
       });
     }
   } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
+  const { userId } = req.params;
+  const { email, firstName, lastName, department, position, officeNumber } =
+    req.body;
+  console.log("api- userId", userId);
+  try {
+    const editUser = await updateUser({
+      id: +userId,
+      email,
+      firstName,
+      lastName,
+      department,
+      position,
+      officeNumber,
+    });
+    console.log("api - user patch", editUser);
+    res.send({ editUser });
+  } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });

@@ -6,6 +6,7 @@ module.exports = {
   createUser,
   getUserByEmail,
   getAllUsers,
+  updateUser,
 };
 
 async function createUser({

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/userAuth";
 import { getAllUsers } from "../../axios";
 import ContactCard from "./ContactCard";
+import UpdateContact from "./UpdateContact";
 
 const Directory = () => {
   const { token } = useAuth();
   const [contactsList, setContactsList] = useState([]);
+  const [userEditModal, setUserEditModal] = useState(false);
 
   useEffect(() => {
     const getContacts = async () => {
@@ -27,6 +29,11 @@ const Directory = () => {
               style={{ border: "1px solid black" }}
             >
               <ContactCard contact={contact} />
+              <UpdateContact
+                contact={contact}
+                userEditModal={userEditModal}
+                setUserEditModal={setUserEditModal}
+              />
             </div>
           );
         })}
