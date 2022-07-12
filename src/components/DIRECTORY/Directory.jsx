@@ -30,7 +30,10 @@ const Directory = () => {
             >
               <ContactCard contact={contact} />
               <UpdateContact
+<<<<<<< HEAD
                 contact={contact}
+=======
+>>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
                 userEditModal={userEditModal}
                 setUserEditModal={setUserEditModal}
               />
