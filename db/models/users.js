@@ -69,3 +69,30 @@ async function getAllUsers() {
     throw error;
   }
 }
+
+async function updateUser(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    UPDATE users
+    SET ${setString}
+    WHERE id =${fields.id}
+    RETURNING*;
+    `,
+      Object.values(fields)
+    );
+    console.log("DB- user - update customer", user);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
