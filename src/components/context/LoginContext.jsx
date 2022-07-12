@@ -14,6 +14,8 @@ const LoginProvider = ({ children }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [department, setDepartment] = useState(user.department);
+  const [position, setPosition] = useState("");
+  const [officeNumber, setOfficeNumber] = useState("");
 
   useEffect(() => {
     setError(false);
@@ -42,6 +44,10 @@ const LoginProvider = ({ children }) => {
         setLastName,
         department,
         setDepartment,
+        position,
+        setPosition,
+        officeNumber,
+        setOfficeNumber,
       }}
     >
       {children}

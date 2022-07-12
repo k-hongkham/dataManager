@@ -34,7 +34,7 @@ const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
       position,
       officeNumber
     );
-    console.log("handle update customer", user.id);
+    console.log("handle update customer", updateUserInfo);
     setUser(updatedUserInfo);
 
     const updatedUserListing = await getAllUsers(token);
@@ -119,14 +119,13 @@ const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
 
             <label htmlFor="updateUserDepartment">Department:</label>
           </div>
-          <div className="form-group form-floating mb-3 ">
+          <div className="form-floating mb-3 ">
             <input
               className="form-control rounded-4  "
+              type="text"
               id="updateUserPosition"
               name="updateUserPosition"
               placeholder="What does this company need?"
-              rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
               value={position}
               onChange={(e) => {
                 setPosition(e.target.value);

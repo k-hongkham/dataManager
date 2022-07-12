@@ -23,6 +23,10 @@ const useLogin = () => {
     setLastName,
     department,
     setDepartment,
+    position,
+    setPosition,
+    officeNumber,
+    setOfficeNumber,
   } = useContext(LoginContext);
 
   return {
@@ -46,6 +50,10 @@ const useLogin = () => {
     setLastName,
     department,
     setDepartment,
+    position,
+    setPosition,
+    officeNumber,
+    setOfficeNumber,
   };
 };
 
