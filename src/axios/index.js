@@ -208,3 +208,40 @@ export const deleteCustomer = async (token, customerId) => {
     throw error;
   }
 };
+
+export const updateUserInfo = async (
+  token,
+  userId,
+  email,
+  firstName,
+  lastName,
+  department,
+  position,
+  officeNumber
+) => {
+  try {
+    const { data } = await axios.patch(
+      `
+  api/users/${userId}
+  `,
+      {
+        email,
+        firstName,
+        lastName,
+        department,
+        position,
+        officeNumber,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("axios -updateUser", data);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};

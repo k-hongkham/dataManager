@@ -16,7 +16,7 @@ const Directory = () => {
     getContacts();
   }, [token]);
   return (
-    <div className={"bg-gray-100"}>
+    <div className="container">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
       <div className="row">
         {contactsList.map((contact, idx) => {
