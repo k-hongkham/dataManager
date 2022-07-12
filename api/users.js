@@ -3,11 +3,13 @@ const {
   getUserByEmail,
   getAllUsers,
   createUser,
+  updateUser,
 } = require("../db/models/users");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { requireUser } = require("./utils");
 const bcrypt = require("bcrypt");
+const { updateUserInfo } = require("../src/axios");
 
 usersRouter.use("/", (req, res, next) => {
   console.log("Request to /users is being made.");
@@ -94,6 +96,29 @@ usersRouter.post("/register", async (req, res, next) => {
       });
     }
   } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
+  const { userId } = req.params;
+  const { email, firstName, lastName, department, position, officeNumber } =
+    req.body;
+  console.log("api - userId - patch", userId);
+  try {
+    const editUser = await updateUser({
+      id: +userId,
+      email,
+      firstName,
+      lastName,
+      department,
+      position,
+      officeNumber,
+    });
+    console.log("api - patching user", editUser);
+    res.send({ editUser });
+  } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
