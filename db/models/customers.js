@@ -38,7 +38,7 @@ async function getAllCustomers() {
   try {
     const { rows } = await client.query(`
     SELECT 
-    to_char(customers.id, '000000') AS id, 
+    customers.id AS id, 
     customers."companyName" AS "CompanyName",
     customers."companyRep" AS "CompanyRep",
     customers."salesRep" AS "SalesRep",

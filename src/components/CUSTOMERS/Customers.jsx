@@ -15,6 +15,7 @@ import FullCustomerDescription from "./FullCustomerDescription.jsx";
 
 const Customers = () => {
   const navigate = useNavigate();
+
   const { token, user } = useAuth();
   const {
     allCustomers,

@@ -18,16 +18,7 @@ const Main = () => {
       <Route path="/Customers" element={<Customers />} />
       <Route path="/CompanyDirectory" element={<Directory />} />
       <Route path="/" element={<Home />} />
-
-      {customers
-        ? customers.map((customer) => (
-            <Route
-              key={`SingleCustomerLink ${customer.id}`}
-              path={`/ViewCustomer/${customer.id}`}
-              element={<FullCustomerDescription customer={customer} />}
-            />
-          ))
-        : null}
+      <Route path={`/ViewCustomer/:id`} element={<FullCustomerDescription />} />
     </Routes>
   );
 };
