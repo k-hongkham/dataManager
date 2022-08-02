@@ -24,7 +24,7 @@ const CustomerProvider = ({ children }) => {
       };
       displayCustomers();
     }
-  }, [user]);
+  }, []);
 
   return (
     <CustomerContext.Provider

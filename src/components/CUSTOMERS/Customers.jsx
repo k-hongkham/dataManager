@@ -5,7 +5,7 @@ import useAuth from "../hooks/userAuth.js";
 import useLogin from "../hooks/useLogin.js";
 import useCustomer from "../hooks/useCustomer.js";
 
-import { getAllCustomers } from "../../axios/index.js";
+import { getAllCustomers, updateCustomer } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
 import UpdateCustomer from "./UpdateCustomer.jsx";
@@ -13,18 +13,61 @@ import DeleteCustomer from "./DeleteCustomer.jsx";
 
 const Customers = () => {
   const { token, user } = useAuth();
-  const { allCustomers, setAllCustomers } = useCustomer();
+  const {
+    allCustomers,
+    setAllCustomers,
+    companyName,
+    setCompanyName,
+    companyRep,
+    setCompanyRep,
+    salesRep,
+    setSalesRep,
+    description,
+    setDescription,
+    needs,
+    setNeeds,
+    prospectValue,
+    setProspectValue,
+    setCustomer,
+    customer,
+  } = useCustomer();
+
   const [accessCustomers, setAccessCustomers] = useState(false);
   const [editCustomer, setEditCustomer] = useState(false);
+  const [modalInfo, setModalInfo] = useState([]);
+  const rowEvents = {
+    onClick: (row) => {
+      console.log(row);
+      console.log("modalInfo", modalInfo);
+      setModalInfo(row);
+    },
+  };
 
   const handleModalOpening = () => {
     setAccessCustomers(true);
+
     console.log("handling the open model", accessCustomers);
   };
-  const handleUpdateOpening = () => {
-    setEditCustomer(true);
 
-    console.log("handling the open model", editCustomer);
+  const handleUpdateCustomerInfo = async () => {
+    setEditCustomer(true);
+    const currentCustomer = customer.id;
+    const updatedCustomerInfo = await updateCustomer(
+      token,
+      customer.id,
+      companyName,
+      companyRep,
+      salesRep,
+      description,
+      needs,
+      prospectValue
+    );
+    console.log("handle update customer", customer.id);
+    console.log("handle update currentCustomer", currentCustomer);
+    setCustomer(updatedCustomerInfo);
+
+    const updatedCustomerListing = await getAllCustomers(token);
+    setAllCustomers(updatedCustomerListing);
   };
 
   useEffect(() => {
@@ -32,8 +75,6 @@ const Customers = () => {
       if (localStorage.getItem("token")) {
         const theCustomers = await getAllCustomers(token);
         setAllCustomers(theCustomers);
-      } else {
-        setAllCustomers([]);
       }
     };
     getCustomers();
@@ -81,30 +122,24 @@ const Customers = () => {
                     {customer.ProspectValue}
                   </p>
 
-                  <Button variant="info" onClick={handleUpdateOpening}>
+                  <Button
+                    variant="info"
+                    rowEvents={rowEvents}
+                    onClick={handleUpdateCustomerInfo}
+                  >
                     Update Information
                   </Button>
 
-                  <Modal
-                    customer={customer}
-                    show={editCustomer}
-                    onHide={() => {
-                      setEditCustomer(false);
-                    }}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                  >
-                    {editCustomer ? (
-                      <UpdateCustomer
-                        customer={customer}
-                        setAllCustomers={setAllCustomers}
-                        editCustomer={editCustomer}
-                        setEditCustomer={setEditCustomer}
-                        allCustomers={allCustomers}
-                      />
-                    ) : null}
-                  </Modal>
+                  {editCustomer ? (
+                    <UpdateCustomer
+                      setAllCustomers={setAllCustomers}
+                      editCustomer={editCustomer}
+                      setEditCustomer={setEditCustomer}
+                      allCustomers={allCustomers}
+                      customer={customer}
+                    />
+                  ) : null}
+
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}

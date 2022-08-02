@@ -8,6 +8,7 @@ import UpdateContact from "./UpdateContact";
 const Directory = () => {
   const { token } = useAuth();
   const [contactsList, setContactsList] = useState([]);
+
   const [userEditModal, setUserEditModal] = useState(false);
 
   useEffect(() => {

@@ -25,15 +25,15 @@ export const getMe = async (token) => {
   }
 };
 
-export const getCustomer = async (token) => {
+export const getCustomerById = async (token, customerId) => {
   try {
-    const { data } = await axios.get(`/api/customers/current`, {
+    const { data } = await axios.get(`/api/customers/${customerId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("axios - getCustomer", data);
+    console.log("axios - getCustomerById", data);
     return data;
   } catch (error) {
     throw error.response.data;

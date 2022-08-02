@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
@@ -12,6 +12,7 @@ const UpdateCustomer = ({
   setAllCustomers,
   allCustomers,
   setAccessCustomers,
+  updateCustomerInfo,
 }) => {
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -52,6 +53,16 @@ const UpdateCustomer = ({
   };
 
   return (
+    // <Modal
+    //   show={editCustomer}
+    //   onHide={() => {
+    //     setEditCustomer(false);
+    //   }}
+    //   size="lg"
+    //   aria-labelledby="contained-modal-title-vcenter"
+    //   centered
+    //   customer={customer}
+    // >
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
@@ -177,6 +188,7 @@ const UpdateCustomer = ({
         </form>
       </div>
     </div>
+    /* </Modal> */
   );
 };
 

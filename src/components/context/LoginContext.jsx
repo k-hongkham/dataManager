@@ -17,9 +17,9 @@ const LoginProvider = ({ children }) => {
   const [position, setPosition] = useState("");
   const [officeNumber, setOfficeNumber] = useState("");
 
-  useEffect(() => {
-    setError(false);
-  }, []);
+  // useEffect(() => {
+  //   setError(false);
+  // }, []);
 
   return (
     <LoginContext.Provider
