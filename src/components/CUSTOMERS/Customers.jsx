@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth.js";
 import useLogin from "../hooks/useLogin.js";
@@ -10,8 +11,10 @@ import { getAllCustomers, updateCustomer } from "../../axios";
 import CreateCustomer from "./CreateCustomer.jsx";
 import UpdateCustomer from "./UpdateCustomer.jsx";
 import DeleteCustomer from "./DeleteCustomer.jsx";
+import FullCustomerDescription from "./FullCustomerDescription.jsx";
 
 const Customers = () => {
+  const navigate = useNavigate();
   const { token, user } = useAuth();
   const {
     allCustomers,
@@ -34,6 +37,7 @@ const Customers = () => {
 
   const [accessCustomers, setAccessCustomers] = useState(false);
   const [editCustomer, setEditCustomer] = useState(false);
+  const [currentCustomer, setCurrentCustomer] = useState({});
   const [modalInfo, setModalInfo] = useState([]);
   const rowEvents = {
     onClick: (row) => {
@@ -49,9 +53,14 @@ const Customers = () => {
     console.log("handling the open model", accessCustomers);
   };
 
-  const handleUpdateCustomerInfo = async () => {
+  const handleCustomerSelect = (id) => {
+    navigate(`/ViewCustomer/${id}`);
+  };
+
+  const handleUpdateCustomerInfo = async (modalCustomer) => {
     setEditCustomer(true);
-    const currentCustomer = customer.id;
+    setCurrentCustomer(modalCustomer);
+
     const updatedCustomerInfo = await updateCustomer(
       token,
       customer.id,
@@ -109,7 +118,15 @@ const Customers = () => {
                   className="d-flex text-muted pt-3 customerId"
                   key={`allCustomersList: ${idx}`}
                 >
-                  <div style={{ marginRight: "10px" }}>{customer.id}</div>
+                  {" "}
+                  <Link
+                    to={`/ViewCustomer/${customer.id}`}
+                    onClick={() => {
+                      handleCustomerSelect(customer.id);
+                    }}
+                  >
+                    <div style={{ marginRight: "10px" }}>{customer.id}</div>
+                  </Link>
                   <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div className="d-flex justify-content-between">
                       <strong className="d-block text-gray-dark">
@@ -121,15 +138,15 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-
                   <Button
                     variant="info"
                     rowEvents={rowEvents}
-                    onClick={handleUpdateCustomerInfo}
+                    onClick={() => {
+                      handleUpdateCustomerInfo(customer);
+                    }}
                   >
-                    Update Information
+                    Update Customer {customer.id}
                   </Button>
-
                   {editCustomer ? (
                     <UpdateCustomer
                       setAllCustomers={setAllCustomers}
@@ -137,9 +154,9 @@ const Customers = () => {
                       setEditCustomer={setEditCustomer}
                       allCustomers={allCustomers}
                       customer={customer}
+                      currentCustomer={currentCustomer}
                     />
                   ) : null}
-
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}

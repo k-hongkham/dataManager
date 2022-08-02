@@ -23,6 +23,17 @@ customersRouter.get("/all", requireUser, async (req, res, next) => {
   }
 });
 
+// customersRouter.get("/viewCustomer/:customerId", async (req, res, next) => {
+//   const { customerId } = req.params;
+//   try {
+//     const viewCustomer = await getCustomerById(customerId);
+//     console.log("attempting to view single customer info from api");
+//     res.send(viewCustomer);
+//   } catch ({ name, message }) {
+//     next({ name, message });
+//   }
+// });
+
 customersRouter.post("/", requireUser, async (req, res, next) => {
   const {
     companyName,

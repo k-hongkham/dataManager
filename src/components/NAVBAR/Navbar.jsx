@@ -65,6 +65,7 @@ const Navbar = () => {
                 Customers
               </Link>
             </li>
+
             <li className="nav-item">
               <LoginBtn setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
             </li>

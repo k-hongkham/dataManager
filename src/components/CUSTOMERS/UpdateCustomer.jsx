@@ -10,6 +10,7 @@ const UpdateCustomer = ({
   setEditCustomer,
   customer,
   setAllCustomers,
+  currentCustomer,
   allCustomers,
   setAccessCustomers,
   updateCustomerInfo,
@@ -53,20 +54,18 @@ const UpdateCustomer = ({
   };
 
   return (
-    // <Modal
-    //   show={editCustomer}
-    //   onHide={() => {
-    //     setEditCustomer(false);
-    //   }}
-    //   size="lg"
-    //   aria-labelledby="contained-modal-title-vcenter"
-    //   centered
-    //   customer={customer}
-    // >
-    <div>
+    <Modal
+      show={editCustomer}
+      onHide={() => {
+        setEditCustomer(false);
+      }}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
-          Update Customer Information{customer.id}
+          Update Customer Information{currentCustomer.id}
         </h2>
         <button
           type="button"
@@ -187,8 +186,7 @@ const UpdateCustomer = ({
           </button>
         </form>
       </div>
-    </div>
-    /* </Modal> */
+    </Modal>
   );
 };
 
