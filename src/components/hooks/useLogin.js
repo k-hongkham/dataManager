@@ -27,6 +27,8 @@ const useLogin = () => {
     setPosition,
     officeNumber,
     setOfficeNumber,
+    currentDirectoryContact,
+    setCurrentDirectoryContact,
   } = useContext(LoginContext);
 
   return {
@@ -54,6 +56,8 @@ const useLogin = () => {
     setPosition,
     officeNumber,
     setOfficeNumber,
+    currentDirectoryContact,
+    setCurrentDirectoryContact,
   };
 };
 

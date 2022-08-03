@@ -79,7 +79,7 @@ customersRouter.patch("/:customerId", requireUser, async (req, res, next) => {
     needs,
     prospectValue,
   } = req.body;
-  console.log("api -id", customerId);
+  console.log("api -customerId", customerId);
   try {
     const editCustomer = await updateCustomer({
       id: +customerId,

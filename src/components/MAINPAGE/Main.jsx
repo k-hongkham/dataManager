@@ -16,7 +16,7 @@ const Main = () => {
   return (
     <Routes>
       <Route path="/Customers" element={<Customers />} />
-      <Route path="/CompanyDirectory" element={<Directory />} />
+      <Route path="/Users" element={<Directory />} />
       <Route path="/" element={<Home />} />
       <Route path={`/ViewCustomer/:id`} element={<FullCustomerDescription />} />
     </Routes>

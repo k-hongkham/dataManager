@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getAllUsers } from "../../axios";
 import useAuth from "../hooks/userAuth";
 export const LoginContext = React.createContext();
 
@@ -16,10 +17,7 @@ const LoginProvider = ({ children }) => {
   const [department, setDepartment] = useState(user.department);
   const [position, setPosition] = useState("");
   const [officeNumber, setOfficeNumber] = useState("");
-
-  // useEffect(() => {
-  //   setError(false);
-  // }, []);
+  const [currentDirectoryContact, setCurrentDirectoryContact] = useState({});
 
   return (
     <LoginContext.Provider
@@ -48,6 +46,8 @@ const LoginProvider = ({ children }) => {
         setPosition,
         officeNumber,
         setOfficeNumber,
+        currentDirectoryContact,
+        setCurrentDirectoryContact,
       }}
     >
       {children}

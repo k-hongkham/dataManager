@@ -62,23 +62,6 @@ const Customers = () => {
   const handleUpdateCustomerInfo = async (modalCustomer) => {
     setEditCustomer(true);
     setCurrentCustomer(modalCustomer);
-
-    const updatedCustomerInfo = await updateCustomer(
-      token,
-      customer.id,
-      companyName,
-      companyRep,
-      salesRep,
-      description,
-      needs,
-      prospectValue
-    );
-    console.log("handle update customer", customer.id);
-    console.log("handle update currentCustomer", currentCustomer);
-    setCustomer(updatedCustomerInfo);
-
-    const updatedCustomerListing = await getAllCustomers(token);
-    setAllCustomers(updatedCustomerListing);
   };
 
   useEffect(() => {

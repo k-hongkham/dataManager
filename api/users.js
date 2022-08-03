@@ -114,7 +114,7 @@ usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
       position,
       officeNumber,
     });
-    console.log("api - user patch", editUser);
+    console.log("**********api - user patch**********", +editUser);
     res.send({ editUser });
   } catch ({ name, message }) {
     res.status(409);

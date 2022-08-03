@@ -1,10 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin.js";
+
 import { getAllUsers, updateUserInfo } from "../../axios";
 
-const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
+const UpdateContact = ({
+  userEditModal,
+  setUserEditModal,
+  contact,
+  currentDirectoryContact,
+}) => {
   const {
     email,
     firstName,
@@ -26,7 +33,7 @@ const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
 
     const updatedUserInfo = await updateUserInfo(
       token,
-      contact.id,
+      currentDirectoryContact.id,
       email,
       firstName,
       lastName,
@@ -34,17 +41,28 @@ const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
       position,
       officeNumber
     );
-    console.log("handle update customer", updateUserInfo);
+    console.log("handle update user contacts", updatedUserInfo);
     setUser(updatedUserInfo);
 
     const updatedUserListing = await getAllUsers(token);
     setAllUsers(updatedUserListing);
+    setUserEditModal(false);
   };
 
   return (
-    <div>
+    <Modal
+      show={userEditModal}
+      onHide={() => {
+        setUserEditModal(false);
+      }}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <header className="modal-header p-5 pb-4 border-bottom-0">
-        <h2 className="fw-bold mb-0">Update User Information{contact.id}</h2>
+        <h2 className="fw-bold mb-0">
+          Update User Information{currentDirectoryContact.id}
+        </h2>
         <button
           type="button"
           className="btn-close"
@@ -157,7 +175,7 @@ const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
           </button>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 };
 

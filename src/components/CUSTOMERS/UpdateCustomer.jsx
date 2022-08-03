@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
@@ -38,7 +38,7 @@ const UpdateCustomer = ({
 
     const updatedCustomerInfo = await updateCustomer(
       token,
-      customer.id,
+      currentCustomer.id,
       companyName,
       companyRep,
       salesRep,
@@ -46,11 +46,12 @@ const UpdateCustomer = ({
       needs,
       prospectValue
     );
-    console.log("handle update customer", customer.id);
+    console.log("handle update customer", currentCustomer.id);
     setCustomer(updatedCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
     setAllCustomers(updatedCustomerListing);
+    setEditCustomer(false);
   };
 
   return (

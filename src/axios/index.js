@@ -242,7 +242,7 @@ export const updateUserInfo = async (
         },
       }
     );
-    console.log("axios -updateUser", data);
+    console.log("**************axios -updateUser", data);
     return data;
   } catch (error) {
     throw error.response.data;

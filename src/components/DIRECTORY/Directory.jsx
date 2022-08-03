@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-
+import { Modal, Button } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
+import useLogin from "../hooks/useLogin";
 import { getAllUsers } from "../../axios";
 import ContactCard from "./ContactCard";
 import UpdateContact from "./UpdateContact";
 
 const Directory = () => {
-  const { token } = useAuth();
-  const [contactsList, setContactsList] = useState([]);
+  const { token, allUsers } = useAuth();
+  const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
+  const [contactsList, setContactsList] = useState([]);
   const [userEditModal, setUserEditModal] = useState(false);
+
+  const handleUpdateModalOpen = async (modalContact) => {
+    setUserEditModal(true);
+    setCurrentDirectoryContact(modalContact);
+  };
 
   useEffect(() => {
     const getContacts = async () => {
@@ -17,7 +24,8 @@ const Directory = () => {
       setContactsList(contacts);
     };
     getContacts();
-  }, [token]);
+  }, [allUsers]);
+
   return (
     <div className="container">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
@@ -30,11 +38,22 @@ const Directory = () => {
               style={{ border: "1px solid black" }}
             >
               <ContactCard contact={contact} />
-              <UpdateContact
-                contact={contact}
-                userEditModal={userEditModal}
-                setUserEditModal={setUserEditModal}
-              />
+              <Button
+                variant="info"
+                onClick={() => {
+                  handleUpdateModalOpen(contact);
+                }}
+              >
+                Update Contact {contact.id}
+              </Button>
+              {userEditModal ? (
+                <UpdateContact
+                  contact={contact}
+                  userEditModal={userEditModal}
+                  setUserEditModal={setUserEditModal}
+                  currentDirectoryContact={currentDirectoryContact}
+                />
+              ) : null}
             </div>
           );
         })}

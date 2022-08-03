@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/CompanyDirectory"
+                to="/Users"
                 style={{ textDecoration: "none" }}
                 className="nav-link"
                 aria-expanded="false"

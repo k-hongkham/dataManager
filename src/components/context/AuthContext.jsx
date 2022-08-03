@@ -8,10 +8,10 @@ const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const getAllTheUsers = async () => {
-    const users = await getAllUsers(token);
-    setAllUsers(users);
-  };
+  // const getAllTheUsers = async () => {
+  //   const users = await getAllUsers(token);
+  //   setAllUsers(users);
+  // };
 
   useEffect(() => {
     const getUser = async () => {
@@ -19,10 +19,10 @@ const AuthProvider = ({ children }) => {
         const user = await getMe(token);
         console.log("auth context setting user", user);
         setUser(user);
-        getAllTheUsers();
+        // getAllTheUsers();
       } else {
         setUser({});
-        setAllUsers([]);
+        // setAllUsers([]);
       }
     };
     getUser();
