@@ -27,12 +27,15 @@ export const getMe = async (token) => {
 
 export const getCustomerById = async (token, customerId) => {
   try {
-    const { data } = await axios.get(`/api/customers/${customerId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axios.get(
+      `/api/customers/ViewCustomer/${customerId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log("axios - getCustomerById", data);
     return data;
   } catch (error) {

@@ -11,7 +11,6 @@ import { getAllCustomers, updateCustomer } from "../../axios";
 import CreateCustomer from "./CreateCustomer.jsx";
 import UpdateCustomer from "./UpdateCustomer.jsx";
 import DeleteCustomer from "./DeleteCustomer.jsx";
-import FullCustomerDescription from "./FullCustomerDescription.jsx";
 
 const Customers = () => {
   const navigate = useNavigate();
@@ -34,11 +33,13 @@ const Customers = () => {
     setProspectValue,
     setCustomer,
     customer,
+    currentCustomer,
+    setCurrentCustomer,
   } = useCustomer();
 
   const [accessCustomers, setAccessCustomers] = useState(false);
   const [editCustomer, setEditCustomer] = useState(false);
-  const [currentCustomer, setCurrentCustomer] = useState({});
+
   const [modalInfo, setModalInfo] = useState([]);
   const rowEvents = {
     onClick: (row) => {

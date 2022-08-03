@@ -4,6 +4,7 @@ const {
   createCustomer,
   updateCustomer,
   deleteCustomer,
+  getCustomerById,
 } = require("../db/models/customers");
 
 const { requireUser } = require("./utils");
@@ -23,16 +24,17 @@ customersRouter.get("/all", requireUser, async (req, res, next) => {
   }
 });
 
-// customersRouter.get("/viewCustomer/:customerId", async (req, res, next) => {
-//   const { customerId } = req.params;
-//   try {
-//     const viewCustomer = await getCustomerById(customerId);
-//     console.log("attempting to view single customer info from api");
-//     res.send(viewCustomer);
-//   } catch ({ name, message }) {
-//     next({ name, message });
-//   }
-// });
+customersRouter.get("/ViewCustomer/:customerId", async (req, res, next) => {
+  const id = req.params.customerId;
+
+  try {
+    const viewCustomer = await getCustomerById(id);
+    console.log("attempting to view single customer info from api", id);
+    res.send(viewCustomer);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
 customersRouter.post("/", requireUser, async (req, res, next) => {
   const {
