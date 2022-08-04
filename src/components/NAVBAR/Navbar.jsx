@@ -10,8 +10,8 @@ const Navbar = () => {
   const { loggedIn, setLoggedIn } = useLogin();
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-0">
+      <div id="expandedNavbar" className="container-fluid">
         <button
           className="navbar-toggler"
           type="button"
