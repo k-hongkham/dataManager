@@ -40,8 +40,6 @@
 .sideBarContainer {
   border-left: 1px solid black;
   box-shadow: -10px 0px 10px 1px #aaaaaa;
-  margin-top: 0 !important;
-  border-top: 0 !important;
 }
 
 .btn-toggle {
