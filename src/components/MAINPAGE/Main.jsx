@@ -38,8 +38,10 @@ const Main = () => {
           path="/Users"
           element={
             <Directory
-              currentPage={currentUsers}
+              contactsList={currentUsers}
               listItemsPerPage={listItemsPerPage}
+              totalUsers={contactsList.length}
+              setCurrentPage={setCurrentPage}
             />
           }
         />

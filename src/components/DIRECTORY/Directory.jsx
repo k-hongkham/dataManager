@@ -8,7 +8,12 @@ import ContactCard from "./ContactCard";
 import UpdateContact from "./UpdateContact";
 import Pagination from "../Pagination";
 
-const Directory = ({ contactsList, currentUsers }) => {
+const Directory = ({
+  contactsList,
+  listItemsPerPage,
+  totalUsers,
+  setCurrentPage,
+}) => {
   const { token, allUsers } = useAuth();
   const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
@@ -16,13 +21,12 @@ const Directory = ({ contactsList, currentUsers }) => {
   const [userEditModal, setUserEditModal] = useState(false);
   // const [currentPage, setCurrentPage] = useState(1);
   // const [listItemsPerPage, setListItemsPerPage] = useState(12);
-  const totalUsers = allUsers;
 
   const handleUpdateModalOpen = async (e, modalContact) => {
     e.preventDefault();
     setUserEditModal(true);
     setCurrentDirectoryContact(modalContact);
-    console.log("totalUsers:", currentUsers);
+    console.log("totalUsers:", totalUsers);
     console.log("contactsList:", contactsList);
   };
 
@@ -41,7 +45,11 @@ const Directory = ({ contactsList, currentUsers }) => {
   return (
     <div className="container">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
-      <Pagination totalUsers={totalUsers} />
+      <Pagination
+        listItemsPerPage={listItemsPerPage}
+        totalUsers={totalUsers}
+        setCurrentPage={setCurrentPage}
+      />
       <div className="row">
         {contactsList.map((contact, idx) => {
           return (
