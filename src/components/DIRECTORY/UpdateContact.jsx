@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
@@ -9,7 +9,6 @@ import { getAllUsers, updateUserInfo } from "../../axios";
 const UpdateContact = ({
   userEditModal,
   setUserEditModal,
-  contact,
   currentDirectoryContact,
 }) => {
   const {
@@ -26,7 +25,7 @@ const UpdateContact = ({
     setPosition,
     setOfficeNumber,
   } = useLogin();
-  const { user, token, allUsers, setAllUsers, setUser } = useAuth();
+  const { token, setAllUsers, setUser } = useAuth();
 
   const handleUpdateUserInfo = async (e) => {
     e.preventDefault();
@@ -49,6 +48,15 @@ const UpdateContact = ({
     setUserEditModal(false);
   };
 
+  useEffect(() => {
+    setEmail(currentDirectoryContact.email);
+    setFirstName(currentDirectoryContact.firstName);
+    setLastName(currentDirectoryContact.lastName);
+    setDepartment(currentDirectoryContact.department);
+    setOfficeNumber(currentDirectoryContact.officeNumber);
+    setPosition(currentDirectoryContact.position);
+  }, [currentDirectoryContact]);
+
   return (
     <Modal
       show={userEditModal}
@@ -61,7 +69,7 @@ const UpdateContact = ({
     >
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
-          Update User Information{currentDirectoryContact.id}
+          {currentDirectoryContact.firstName} {currentDirectoryContact.lastName}
         </h2>
         <button
           type="button"
@@ -96,8 +104,8 @@ const UpdateContact = ({
               type="text"
               id="updateUserFirstName"
               name="updateUserFirstName"
-              placeholder="Customer's Representative"
-              value={firstName}
+              placeholder=""
+              value={firstName || ""}
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
@@ -126,8 +134,8 @@ const UpdateContact = ({
               id="updateUserDepartment"
               name="updateUserDepartment"
               placeholder="What does this company do?"
-              rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              // rows={10}
+              // style={{ height: "100px", overflowY: "hidden" }}
               value={department}
               onChange={(e) => {
                 setDepartment(e.target.value);

@@ -14,42 +14,20 @@ const Directory = ({
   totalUsers,
   setCurrentPage,
 }) => {
-  const { token, allUsers } = useAuth();
   const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
-  // const [contactsList, setContactsList] = useState([]);
   const [userEditModal, setUserEditModal] = useState(false);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [listItemsPerPage, setListItemsPerPage] = useState(12);
 
   const handleUpdateModalOpen = async (e, modalContact) => {
     e.preventDefault();
     setUserEditModal(true);
     setCurrentDirectoryContact(modalContact);
-    console.log("totalUsers:", totalUsers);
-    console.log("contactsList:", contactsList);
   };
-
-  // useEffect(() => {
-  //   const getContacts = async () => {
-  //     const contacts = await getAllUsers(token);
-  //     setContactsList(contacts);
-  //   };
-  //   getContacts();
-  // }, [allUsers]);
-
-  // const indexOfLastUser = currentPage * listItemsPerPage;
-  // const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
-  // const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className="container">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
-      <Pagination
-        listItemsPerPage={listItemsPerPage}
-        totalUsers={totalUsers}
-        setCurrentPage={setCurrentPage}
-      />
+
       <div className="row">
         {contactsList.map((contact, idx) => {
           return (
@@ -65,7 +43,7 @@ const Directory = ({
                   handleUpdateModalOpen(e, contact);
                 }}
               >
-                Update Contact {contact.id}
+                Update
               </Button>
               {userEditModal ? (
                 <UpdateContact
@@ -79,6 +57,11 @@ const Directory = ({
           );
         })}
       </div>
+      <Pagination
+        listItemsPerPage={listItemsPerPage}
+        totalUsers={totalUsers}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

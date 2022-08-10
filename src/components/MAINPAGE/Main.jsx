@@ -14,15 +14,13 @@ const Main = () => {
   const { customers } = useCustomer();
   const [contactsList, setContactsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [listItemsPerPage, setListItemsPerPage] = useState(16);
+  const [listItemsPerPage] = useState(16);
 
   useEffect(() => {
     const getContacts = async () => {
       const contacts = await getAllUsers(token);
-
       setContactsList(contacts);
     };
-
     getContacts();
   }, []);
 
