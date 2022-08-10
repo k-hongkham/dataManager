@@ -19,14 +19,6 @@ const LoginProvider = ({ children }) => {
   const [officeNumber, setOfficeNumber] = useState("");
   const [currentDirectoryContact, setCurrentDirectoryContact] = useState({});
 
-  useEffect(() => {
-    setFirstName(user.firstName);
-    setLastName(user.lastName);
-    setDepartment(user.department);
-    setOfficeNumber(user.officeNumber);
-    setPosition(user.position);
-  }, [user]);
-
   return (
     <LoginContext.Provider
       value={{

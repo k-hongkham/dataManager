@@ -14,7 +14,7 @@ const Main = () => {
   const { customers } = useCustomer();
   const [contactsList, setContactsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [listItemsPerPage] = useState(16);
+  const [listItemsPerPage] = useState(15);
 
   useEffect(() => {
     const getContacts = async () => {

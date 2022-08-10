@@ -25,15 +25,15 @@ const Directory = ({
   };
 
   return (
-    <div className="container">
+    <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
 
-      <div className="row">
+      <div className="row justify-content-center mx-auto pb-3 mb-3 mb-md-5 mt-4">
         {contactsList.map((contact, idx) => {
           return (
             <div
               key={`allContacts: ${idx}`}
-              className="col-sm-6 col-md-4 col-xl-3 mb-3"
+              className="col-sm-6 col-md-4 col-xl-3 mb-3 me-md-3  "
               style={{ border: "1px solid black" }}
             >
               <ContactCard contact={contact} />

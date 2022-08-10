@@ -9,7 +9,7 @@ import useCustomer from "../hooks/useCustomer.js";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
-import UpdateCustomer from "./UpdateCustomer.jsx";
+// import UpdateCustomer from "./UpdateCustomer.jsx";
 import DeleteCustomer from "./DeleteCustomer.jsx";
 
 const Customers = () => {
@@ -75,7 +75,7 @@ const Customers = () => {
   }, [token]);
 
   return (
-    <div className="container">
+    <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <Button variant="primary" onClick={handleModalOpening}>
         New Customer +
       </Button>
@@ -123,7 +123,7 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-                  <Button
+                  {/* <Button
                     variant="info"
                     rowEvents={rowEvents}
                     onClick={() => {
@@ -131,8 +131,8 @@ const Customers = () => {
                     }}
                   >
                     Update Customer {customer.id}
-                  </Button>
-                  {editCustomer ? (
+                  </Button> */}
+                  {/* {editCustomer ? (
                     <UpdateCustomer
                       setAllCustomers={setAllCustomers}
                       editCustomer={editCustomer}
@@ -141,7 +141,7 @@ const Customers = () => {
                       customer={customer}
                       currentCustomer={currentCustomer}
                     />
-                  ) : null}
+                  ) : null} */}
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}
