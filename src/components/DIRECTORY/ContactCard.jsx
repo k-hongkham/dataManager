@@ -9,7 +9,11 @@ const ContactCard = ({ contact }) => {
         </p>
         <p className="text-gray-500">
           <span className="font-medium">Department: </span>
-          {contact.department} - {contact.position}
+          {contact.department}
+        </p>
+        <p className="text-gray-500">
+          <span className="font-medium">Position: </span>
+          {contact.position}
         </p>
         <p className="text-gray-500">
           <span className="font-medium">Email: </span>
