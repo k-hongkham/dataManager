@@ -40,6 +40,7 @@ const Main = () => {
               listItemsPerPage={listItemsPerPage}
               totalUsers={contactsList.length}
               setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
             />
           }
         />

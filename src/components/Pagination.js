@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const Pagination = ({ listItemsPerPage, totalUsers, setCurrentPage }) => {
+const Pagination = ({
+  listItemsPerPage,
+  totalUsers,
+  setCurrentPage,
+  currentPage,
+}) => {
   const pageNumbers = [];
 
   const [pageNumberLimit, setPageNumberLimit] = useState(5);
@@ -12,12 +17,37 @@ const Pagination = ({ listItemsPerPage, totalUsers, setCurrentPage }) => {
     setCurrentPage(pageNumber);
   };
 
+  const handlePrev = (e) => {
+    e.preventDefault();
+    setCurrentPage(currentPage - 1);
+
+    if ((currentPage - 1) % pageNumberLimit == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+  };
+
   for (let i = 1; i <= Math.ceil(totalUsers / listItemsPerPage); i++) {
     pageNumbers.push(i);
   }
   return (
     <nav>
       <ul className="pagination">
+        <li className="page-item">
+          <button className="page-link" onClick={(e) => handlePrev(e)}>
+            Prev
+          </button>
+        </li>
         {pageNumbers.map((number) => {
           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
             return (
@@ -35,6 +65,11 @@ const Pagination = ({ listItemsPerPage, totalUsers, setCurrentPage }) => {
             return null;
           }
         })}
+        <li className="page-item">
+          <button className="page-link" onClick={(e) => handleNext(e)}>
+            Next
+          </button>
+        </li>
       </ul>
     </nav>
   );

@@ -13,6 +13,7 @@ const Directory = ({
   listItemsPerPage,
   totalUsers,
   setCurrentPage,
+  currentPage,
 }) => {
   const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
@@ -61,6 +62,7 @@ const Directory = ({
         listItemsPerPage={listItemsPerPage}
         totalUsers={totalUsers}
         setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
     </div>
   );
