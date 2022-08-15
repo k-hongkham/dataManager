@@ -44,6 +44,7 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
       navigate("/Customers");
+
       console.log(
         "what is createcustomers new customer function?",
         newCustomer

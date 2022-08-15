@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 import { getCustomerById } from "../../axios";
@@ -9,7 +9,7 @@ import { getAllCustomers, updateCustomer } from "../../axios";
 
 const FullCustomerDescription = () => {
   let params = useParams();
-
+  const navigate = useNavigate();
   const { token } = useAuth();
   const {
     allCustomers,
@@ -52,6 +52,7 @@ const FullCustomerDescription = () => {
 
     const updatedCustomerListing = await getAllCustomers(token);
     setAllCustomers(updatedCustomerListing);
+    navigate("/Customers");
   };
 
   useEffect(() => {
