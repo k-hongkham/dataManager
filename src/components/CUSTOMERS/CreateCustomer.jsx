@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
@@ -53,6 +53,16 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    setCompanyName("");
+    setCompanyRep("");
+    setSalesRep("");
+    setDescription("");
+    setNeeds("");
+    setProspectValue("");
+  }, []);
+
   return (
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
