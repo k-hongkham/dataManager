@@ -14,6 +14,7 @@ const Directory = ({
   totalUsers,
   setCurrentPage,
   currentPage,
+  setContactsList,
 }) => {
   const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
@@ -24,6 +25,8 @@ const Directory = ({
     setUserEditModal(true);
     setCurrentDirectoryContact(modalContact);
   };
+
+  useEffect(() => {});
 
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
@@ -44,7 +47,7 @@ const Directory = ({
                   handleUpdateModalOpen(e, contact);
                 }}
               >
-                Update
+                Update {contact.id}
               </Button>
               {userEditModal ? (
                 <UpdateContact
@@ -52,6 +55,8 @@ const Directory = ({
                   userEditModal={userEditModal}
                   setUserEditModal={setUserEditModal}
                   currentDirectoryContact={currentDirectoryContact}
+                  contactsList={contactsList}
+                  setContactsList={setContactsList}
                 />
               ) : null}
             </div>

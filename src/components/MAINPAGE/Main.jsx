@@ -41,6 +41,7 @@ const Main = () => {
               totalUsers={contactsList.length}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
+              setContactsList={setContactsList}
             />
           }
         />

@@ -10,6 +10,9 @@ const UpdateContact = ({
   userEditModal,
   setUserEditModal,
   currentDirectoryContact,
+  contact,
+  contactsList,
+  setContactsList,
 }) => {
   const {
     email,
@@ -25,27 +28,30 @@ const UpdateContact = ({
     setPosition,
     setOfficeNumber,
   } = useLogin();
-  const { token, setAllUsers, setUser } = useAuth();
+  const { token, allUsers, setAllUsers } = useAuth();
 
-  const handleUpdateUserInfo = async (e) => {
+  const handleUpdateUserInfo = (e) => {
     e.preventDefault();
+    console.log("currentDirectoryContact.id", currentDirectoryContact.id);
+    const updatedUserInfo = async (e) => {
+      await updateUserInfo(
+        token,
+        currentDirectoryContact.id,
+        email,
+        firstName,
+        lastName,
+        department,
+        position,
+        officeNumber
+      );
 
-    const updatedUserInfo = await updateUserInfo(
-      token,
-      currentDirectoryContact.id,
-      email,
-      firstName,
-      lastName,
-      department,
-      position,
-      officeNumber
-    );
-    console.log("handle update user contacts", updatedUserInfo);
-    setUser(updatedUserInfo);
-
-    const updatedUserListing = await getAllUsers(token);
-    setAllUsers(updatedUserListing);
-    setUserEditModal(false);
+      const updatedUserListing = await getAllUsers(token);
+      setAllUsers(updatedUserListing);
+      setContactsList(updatedUserListing);
+      console.log("checking updated listing.", updatedUserListing);
+      setUserEditModal(false);
+    };
+    updatedUserInfo();
   };
 
   useEffect(() => {
@@ -70,6 +76,7 @@ const UpdateContact = ({
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
           {currentDirectoryContact.firstName} {currentDirectoryContact.lastName}
+          {currentDirectoryContact.id}
         </h2>
         <button
           type="button"

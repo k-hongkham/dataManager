@@ -7,7 +7,7 @@ import { getCustomerById } from "../../axios";
 
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const FullCustomerDescription = ({ setEditCustomer }) => {
+const FullCustomerDescription = () => {
   let params = useParams();
 
   const { token } = useAuth();
@@ -30,6 +30,8 @@ const FullCustomerDescription = ({ setEditCustomer }) => {
     customer,
     currentCustomer,
     setCurrentCustomer,
+    editCustomer,
+    setEditCustomer,
   } = useCustomer();
 
   const handleUpdateCustomerInfo = async (e) => {
@@ -50,7 +52,6 @@ const FullCustomerDescription = ({ setEditCustomer }) => {
 
     const updatedCustomerListing = await getAllCustomers(token);
     setAllCustomers(updatedCustomerListing);
-    setEditCustomer(false);
   };
 
   useEffect(() => {

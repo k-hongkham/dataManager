@@ -35,10 +35,11 @@ const Customers = () => {
     customer,
     currentCustomer,
     setCurrentCustomer,
+    editCustomer,
+    setEditCustomer,
   } = useCustomer();
 
   const [accessCustomers, setAccessCustomers] = useState(false);
-  const [editCustomer, setEditCustomer] = useState(false);
 
   const [modalInfo, setModalInfo] = useState([]);
   const rowEvents = {
@@ -59,10 +60,10 @@ const Customers = () => {
     navigate(`/ViewCustomer/${id}`);
   };
 
-  const handleUpdateCustomerInfo = async (modalCustomer) => {
-    setEditCustomer(true);
-    setCurrentCustomer(modalCustomer);
-  };
+  // const handleUpdateCustomerInfo = async (modalCustomer) => {
+  //   setEditCustomer(true);
+  //   setCurrentCustomer(modalCustomer);
+  // };
 
   useEffect(() => {
     const getCustomers = async () => {
