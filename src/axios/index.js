@@ -172,7 +172,7 @@ export const updateCustomer = async (
   try {
     const { data } = await axios.patch(
       `
-    api/customers/${customerId}`,
+    api/customers/ViewCustomer/${customerId}`,
       {
         companyName,
         companyRep,
@@ -189,6 +189,7 @@ export const updateCustomer = async (
       }
     );
     console.log("axios - updateCustomer - response", data);
+    console.log("axios - updateCustomer - customerId", customerId);
 
     return data;
   } catch (error) {
@@ -243,6 +244,7 @@ export const updateUserInfo = async (
       }
     );
     console.log("**************axios -updateUser", data);
+    console.log("**************axios -UserId", userId);
     return data;
   } catch (error) {
     throw error.response.data;

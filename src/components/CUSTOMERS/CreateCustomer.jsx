@@ -44,11 +44,8 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
       navigate("/Customers");
+      setAccessCustomers(false);
 
-      console.log(
-        "what is createcustomers new customer function?",
-        newCustomer
-      );
       return response;
     } catch (error) {
       console.error(error);

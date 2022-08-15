@@ -9,36 +9,16 @@ import useCustomer from "../hooks/useCustomer.js";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
-// import UpdateCustomer from "./UpdateCustomer.jsx";
+import UpdateCustomer from "./UpdateCustomer.jsx";
 import DeleteCustomer from "./DeleteCustomer.jsx";
 
 const Customers = () => {
   const navigate = useNavigate();
 
   const { token, user } = useAuth();
-  const {
-    allCustomers,
-    setAllCustomers,
-    companyName,
-    setCompanyName,
-    companyRep,
-    setCompanyRep,
-    salesRep,
-    setSalesRep,
-    description,
-    setDescription,
-    needs,
-    setNeeds,
-    prospectValue,
-    setProspectValue,
-    setCustomer,
-    customer,
-    currentCustomer,
-    setCurrentCustomer,
-    editCustomer,
-    setEditCustomer,
-  } = useCustomer();
-
+  const { allCustomers, setAllCustomers, currentCustomer, setCurrentCustomer } =
+    useCustomer();
+  const [editCustomer, setEditCustomer] = useState(false);
   const [accessCustomers, setAccessCustomers] = useState(false);
 
   const [modalInfo, setModalInfo] = useState([]);
@@ -60,10 +40,10 @@ const Customers = () => {
     navigate(`/ViewCustomer/${id}`);
   };
 
-  // const handleUpdateCustomerInfo = async (modalCustomer) => {
-  //   setEditCustomer(true);
-  //   setCurrentCustomer(modalCustomer);
-  // };
+  const handleUpdateCustomerInfo = async (modalCustomer) => {
+    setEditCustomer(true);
+    setCurrentCustomer(modalCustomer);
+  };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -124,7 +104,7 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-                  {/* <Button
+                  <Button
                     variant="info"
                     rowEvents={rowEvents}
                     onClick={() => {
@@ -132,8 +112,8 @@ const Customers = () => {
                     }}
                   >
                     Update Customer {customer.id}
-                  </Button> */}
-                  {/* {editCustomer ? (
+                  </Button>
+                  {editCustomer ? (
                     <UpdateCustomer
                       setAllCustomers={setAllCustomers}
                       editCustomer={editCustomer}
@@ -142,7 +122,7 @@ const Customers = () => {
                       customer={customer}
                       currentCustomer={currentCustomer}
                     />
-                  ) : null} */}
+                  ) : null}
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}

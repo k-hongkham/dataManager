@@ -69,34 +69,38 @@ customersRouter.post("/", requireUser, async (req, res, next) => {
   }
 });
 
-customersRouter.patch("/:customerId", requireUser, async (req, res, next) => {
-  const { customerId } = req.params;
-  const {
-    companyName,
-    companyRep,
-    salesRep,
-    description,
-    needs,
-    prospectValue,
-  } = req.body;
-  console.log("api -customerId", customerId);
-  try {
-    const editCustomer = await updateCustomer({
-      id: +customerId,
+customersRouter.patch(
+  "/ViewCustomer/:customerId",
+  requireUser,
+  async (req, res, next) => {
+    const { customerId } = req.params;
+    const {
       companyName,
       companyRep,
       salesRep,
       description,
       needs,
       prospectValue,
-    });
-    console.log("api - customer patch - customerID", +customerId);
-    res.send({ editCustomer });
-  } catch ({ name, message }) {
-    res.status(409);
-    next({ name, message });
+    } = req.body;
+    console.log("api -customerId", customerId);
+    try {
+      const editCustomer = await updateCustomer({
+        id: +customerId,
+        companyName,
+        companyRep,
+        salesRep,
+        description,
+        needs,
+        prospectValue,
+      });
+      console.log("api - customer patch - customerID", +customerId);
+      res.send({ editCustomer });
+    } catch ({ name, message }) {
+      res.status(409);
+      next({ name, message });
+    }
   }
-});
+);
 
 customersRouter.delete("/:customerId", requireUser, async (req, res, next) => {
   console.log("REQUEST TO DELETE CUSTOMER", req.params);

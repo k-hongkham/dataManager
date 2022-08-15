@@ -18,6 +18,7 @@ const LoginProvider = ({ children }) => {
   const [position, setPosition] = useState("");
   const [officeNumber, setOfficeNumber] = useState("");
   const [currentDirectoryContact, setCurrentDirectoryContact] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
 
   return (
     <LoginContext.Provider
@@ -48,6 +49,8 @@ const LoginProvider = ({ children }) => {
         setOfficeNumber,
         currentDirectoryContact,
         setCurrentDirectoryContact,
+        allUsers,
+        setAllUsers,
       }}
     >
       {children}

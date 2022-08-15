@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
-import { getCustomerById } from "../../axios";
 
-import { getAllCustomers, updateCustomer } from "../../axios";
+import { getAllCustomers, updateCustomer, getCustomerById } from "../../axios";
 
 const FullCustomerDescription = () => {
   let params = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const {
     allCustomers,
     setAllCustomers,
@@ -37,9 +36,11 @@ const FullCustomerDescription = () => {
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
 
-    const updatedCustomerInfo = await updateCustomer(
+    const customerId = currentCustomer.id;
+    console.log("customerId?:", customerId);
+    const updatingCustomerInfo = await updateCustomer(
       token,
-      currentCustomer.id,
+      customerId,
       companyName,
       companyRep,
       salesRep,
@@ -47,11 +48,14 @@ const FullCustomerDescription = () => {
       needs,
       prospectValue
     );
-    console.log("handle update customer", currentCustomer);
-    setCustomer(updatedCustomerInfo);
+    setCustomer(updatingCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
     setAllCustomers(updatedCustomerListing);
+    console.log("updated customer function customer ID: ", customer);
+
+    console.log("handle update customer", updatedCustomerListing);
+    console.log("updated all customers", allCustomers);
     navigate("/Customers");
   };
 

@@ -16,7 +16,6 @@ const CustomerProvider = ({ children }) => {
   const [prospectValue, setProspectValue] = useState("$0");
   const [allCustomers, setAllCustomers] = useState([]);
   const [currentCustomer, setCurrentCustomer] = useState({});
-  const [editCustomer, setEditCustomer] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -27,7 +26,7 @@ const CustomerProvider = ({ children }) => {
       };
       displayCustomers();
     }
-  }, []);
+  }, [allCustomers]);
 
   return (
     <CustomerContext.Provider
@@ -50,8 +49,6 @@ const CustomerProvider = ({ children }) => {
         setCurrentCustomer,
         customer,
         setCustomer,
-        editCustomer,
-        setEditCustomer,
       }}
     >
       {children}
