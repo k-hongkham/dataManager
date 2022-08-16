@@ -11,7 +11,7 @@ import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
 
 const Main = () => {
   const { user, allUsers, token } = useAuth();
-  const { customers } = useCustomer();
+
   const [contactsList, setContactsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [listItemsPerPage] = useState(15);
@@ -46,7 +46,7 @@ const Main = () => {
           }
         />
         <Route path="/" element={<Home />} />
-        <Route path={`/Customers/:id`} element={<FullCustomerDescription />} />
+        <Route path={`/customers/:id`} element={<FullCustomerDescription />} />
       </Routes>
     </div>
   );

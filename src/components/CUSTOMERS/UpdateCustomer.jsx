@@ -47,15 +47,6 @@ const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
     setEditCustomer(false);
   };
 
-  useEffect(() => {
-    setCompanyName(currentCustomer.companyName);
-    setCompanyRep(currentCustomer.companyRep);
-    setSalesRep(currentCustomer.salesRep);
-    setDescription(currentCustomer.description);
-    setNeeds(currentCustomer.needs);
-    setProspectValue(currentCustomer.prospectValue);
-  }, [currentCustomer]);
-
   return (
     // <Modal
     //   show={editCustomer}

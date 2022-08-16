@@ -6,7 +6,7 @@ import useAuth from "../hooks/userAuth.js";
 import useLogin from "../hooks/useLogin.js";
 import useCustomer from "../hooks/useCustomer.js";
 
-import { getAllCustomers, updateCustomer } from "../../axios";
+import { getAllCustomers, updateCustomer, getCustomerById } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
 import UpdateCustomer from "./UpdateCustomer.jsx";
@@ -16,7 +16,8 @@ const Customers = () => {
   const navigate = useNavigate();
 
   const { token, user } = useAuth();
-  const { allCustomers, setAllCustomers, setCurrentCustomer } = useCustomer();
+  const { allCustomers, setAllCustomers, setCurrentCustomer, setCustomer } =
+    useCustomer();
   const [editCustomer, setEditCustomer] = useState(false);
   const [accessCustomers, setAccessCustomers] = useState(false);
 
@@ -36,7 +37,15 @@ const Customers = () => {
   };
 
   const handleCustomerSelect = (id) => {
-    navigate(`/Customers/${id}`);
+    const getCustomer = async () => {
+      const fetchedCustomer = await getCustomerById(token, id);
+      console.log("defining customer for getById", fetchedCustomer);
+
+      setCustomer(fetchedCustomer);
+      setCurrentCustomer(fetchedCustomer);
+      navigate(`/customers/${id}`);
+    };
+    getCustomer();
   };
 
   const handleUpdateCustomerInfo = async (modalCustomer) => {
@@ -125,7 +134,6 @@ const Customers = () => {
                       <UpdateCustomer
                         editCustomer={editCustomer}
                         setEditCustomer={setEditCustomer}
-                        customer={customer}
                       />{" "}
                     </Modal>
                   ) : null}

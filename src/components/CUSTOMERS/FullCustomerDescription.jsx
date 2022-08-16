@@ -11,7 +11,6 @@ const FullCustomerDescription = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
   const {
-    setAllCustomers,
     companyName,
     setCompanyName,
     companyRep,
@@ -25,11 +24,9 @@ const FullCustomerDescription = () => {
     prospectValue,
     setProspectValue,
     setCustomer,
-    customer,
+    setAllCustomers,
     currentCustomer,
-    setCurrentCustomer,
   } = useCustomer();
-
   // const handleUpdateCustomerInfo = async (e) => {
   //   e.preventDefault();
 
@@ -59,19 +56,11 @@ const FullCustomerDescription = () => {
 
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
-    console.log("BEFORE checking customer", customer);
-    console.log("BEFORE checking curreutcustomer", currentCustomer);
-    console.log("BEFORE customer.id: ", customer.id);
-    console.log("BEFORE companyName: ", companyName);
-    console.log("BEFORE companyRep: ", companyRep);
-    console.log("BEFORE salesRep: ", salesRep);
-    console.log("BEFORE description: ", description);
-    console.log("BEFORE needs: ", needs);
-    console.log("BEFORE prospectValue: ", prospectValue);
 
+    console.log("BEFORE checking curreutcustomer", currentCustomer);
     const updatedCustomerInfo = await updateCustomer(
       token,
-      +customer.id,
+      currentCustomer.id,
       companyName,
       companyRep,
       salesRep,
@@ -80,23 +69,13 @@ const FullCustomerDescription = () => {
       prospectValue
     );
     setCustomer(updatedCustomerInfo);
-    console.log("checking customer", customer);
-
-    console.log("updateCompanyInfo", updatedCustomerInfo);
-    console.log("currentCustomer.id: ", currentCustomer.id);
-    console.log("companyName: ", companyName);
-    console.log("companyRep: ", companyRep);
-    console.log("salesRep: ", salesRep);
-    console.log("description: ", description);
-    console.log("needs: ", needs);
-    console.log("prospectValue: ", prospectValue);
-    setCurrentCustomer(updatedCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
     console.log("getting all customers", updatedCustomerListing);
     setAllCustomers(updatedCustomerListing);
     navigate("/Customers");
   };
+
   useEffect(() => {
     setCompanyName(currentCustomer.companyName);
     setCompanyRep(currentCustomer.companyRep);
@@ -107,18 +86,18 @@ const FullCustomerDescription = () => {
     console.log("useEffect: currentCustomer", currentCustomer);
   }, [currentCustomer]);
 
-  useEffect(() => {
-    console.log("getting Customer by ID.", params.id);
-    const getCustomer = async () => {
-      const fetchedCustomer = await getCustomerById(token, params.id);
-      console.log("defining customer for getById", fetchedCustomer);
-      setCurrentCustomer(fetchedCustomer);
-      setCustomer(fetchedCustomer);
+  // useEffect(() => {
+  //   console.log("getting Customer by ID.", params.id);
+  //   const getCustomer = async () => {
+  //     const fetchedCustomer = await getCustomerById(token, params.id);
+  //     console.log("defining customer for getById", fetchedCustomer);
 
-      console.log("useEffect Customer:", fetchedCustomer);
-    };
-    getCustomer();
-  }, []);
+  //     setCustomer(fetchedCustomer);
+
+  //     console.log("useEffect Customer:", fetchedCustomer);
+  //   };
+  //   getCustomer();
+  // }, []);
 
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">

@@ -169,7 +169,7 @@ export const updateCustomer = async (
   try {
     const { data } = await axios.patch(
       `
-    api/Customers/${customerId}`,
+    api/customers/${customerId}`,
       {
         companyName,
         companyRep,

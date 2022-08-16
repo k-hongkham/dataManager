@@ -48,6 +48,13 @@ const Pagination = ({
             Prev
           </button>
         </li>
+        {pageNumbers.length > maxPageNumberLimit ? (
+          <li className="page-item">
+            <button className="page-link" onClick={(e) => handlePrev(e)}>
+              &hellip;
+            </button>
+          </li>
+        ) : null}
         {pageNumbers.map((number) => {
           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
             return (
@@ -65,6 +72,13 @@ const Pagination = ({
             return null;
           }
         })}
+        {pageNumbers.length > maxPageNumberLimit ? (
+          <li className="page-item" onClick={handleNext}>
+            <button className="page-link" onClick={(e) => handleNext(e)}>
+              &hellip;
+            </button>
+          </li>
+        ) : null}
         <li className="page-item">
           <button className="page-link" onClick={(e) => handleNext(e)}>
             Next
