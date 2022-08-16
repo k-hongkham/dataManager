@@ -60,6 +60,7 @@ const FullCustomerDescription = () => {
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
     console.log("BEFORE checking customer", customer);
+    console.log("BEFORE checking curreutcustomer", currentCustomer);
     console.log("BEFORE customer.id: ", customer.id);
     console.log("BEFORE companyName: ", companyName);
     console.log("BEFORE companyRep: ", companyRep);
@@ -70,7 +71,7 @@ const FullCustomerDescription = () => {
 
     const updatedCustomerInfo = await updateCustomer(
       token,
-      customer.id,
+      +customer.id,
       companyName,
       companyRep,
       salesRep,
