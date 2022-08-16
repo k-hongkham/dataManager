@@ -21,7 +21,6 @@ const CustomerProvider = ({ children }) => {
     if (user) {
       const displayCustomers = async () => {
         const data = await getAllCustomers(token);
-        console.log("customerContext", data);
         setCustomer(data);
       };
       displayCustomers();

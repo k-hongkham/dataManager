@@ -27,15 +27,12 @@ export const getMe = async (token) => {
 
 export const getCustomerById = async (token, customerId) => {
   try {
-    const { data } = await axios.get(
-      `/api/customers/ViewCustomer/${customerId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const { data } = await axios.get(`/api/customers/${customerId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log("axios - getCustomerById", data);
     return data;
   } catch (error) {
@@ -93,7 +90,7 @@ export const getAllCustomers = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("attempting to get all customers from axios", data);
+
     return data;
   } catch (error) {
     throw error.response.data;
@@ -172,7 +169,7 @@ export const updateCustomer = async (
   try {
     const { data } = await axios.patch(
       `
-    api/customers/ViewCustomer/${customerId}`,
+    api/Customers/${customerId}`,
       {
         companyName,
         companyRep,

@@ -1,21 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const UpdateCustomer = ({
-  editCustomer,
-  setEditCustomer,
-  customer,
-  setAllCustomers,
-  currentCustomer,
-  allCustomers,
-  setAccessCustomers,
-  updateCustomerInfo,
-}) => {
-  const navigate = useNavigate();
+const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
   const { token } = useAuth();
   const {
     companyName,
@@ -31,6 +21,8 @@ const UpdateCustomer = ({
     prospectValue,
     setProspectValue,
     setCustomer,
+    setAllCustomers,
+    currentCustomer,
   } = useCustomer();
 
   const handleUpdateCustomerInfo = async (e) => {
@@ -46,24 +38,35 @@ const UpdateCustomer = ({
       needs,
       prospectValue
     );
-    console.log("handle update customer", currentCustomer.id);
+    console.log("handle update customer", updatedCustomerInfo);
     setCustomer(updatedCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
+    console.log("getting all customers from modal", updatedCustomerListing);
     setAllCustomers(updatedCustomerListing);
     setEditCustomer(false);
   };
 
+  useEffect(() => {
+    setCompanyName(currentCustomer.companyName);
+    setCompanyRep(currentCustomer.companyRep);
+    setSalesRep(currentCustomer.salesRep);
+    setDescription(currentCustomer.description);
+    setNeeds(currentCustomer.needs);
+    setProspectValue(currentCustomer.prospectValue);
+  }, [currentCustomer]);
+
   return (
-    <Modal
-      show={editCustomer}
-      onHide={() => {
-        setEditCustomer(false);
-      }}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    // <Modal
+    //   show={editCustomer}
+    //   onHide={() => {
+    //     setEditCustomer(false);
+    //   }}
+    //   size="lg"
+    //   aria-labelledby="contained-modal-title-vcenter"
+    //   centered
+    // >
+    <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
           Update Customer Information{currentCustomer.id}
@@ -136,7 +139,7 @@ const UpdateCustomer = ({
               name="updateCustomerDescription"
               placeholder="What does this company do?"
               rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              style={{ height: "100%", overflowY: "hidden" }}
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
@@ -187,7 +190,8 @@ const UpdateCustomer = ({
           </button>
         </form>
       </div>
-    </Modal>
+    </div>
+    // </Modal>
   );
 };
 

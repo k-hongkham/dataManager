@@ -16,8 +16,7 @@ const Customers = () => {
   const navigate = useNavigate();
 
   const { token, user } = useAuth();
-  const { allCustomers, setAllCustomers, currentCustomer, setCurrentCustomer } =
-    useCustomer();
+  const { allCustomers, setAllCustomers, setCurrentCustomer } = useCustomer();
   const [editCustomer, setEditCustomer] = useState(false);
   const [accessCustomers, setAccessCustomers] = useState(false);
 
@@ -37,7 +36,7 @@ const Customers = () => {
   };
 
   const handleCustomerSelect = (id) => {
-    navigate(`/ViewCustomer/${id}`);
+    navigate(`/Customers/${id}`);
   };
 
   const handleUpdateCustomerInfo = async (modalCustomer) => {
@@ -86,7 +85,7 @@ const Customers = () => {
                 >
                   {" "}
                   <Link
-                    to={`/ViewCustomer/${customer.id}`}
+                    to={`/Customers/${customer.id}`}
                     onClick={() => {
                       handleCustomerSelect(customer.id);
                     }}
@@ -114,14 +113,21 @@ const Customers = () => {
                     Update Customer {customer.id}
                   </Button>
                   {editCustomer ? (
-                    <UpdateCustomer
-                      setAllCustomers={setAllCustomers}
-                      editCustomer={editCustomer}
-                      setEditCustomer={setEditCustomer}
-                      allCustomers={allCustomers}
-                      customer={customer}
-                      currentCustomer={currentCustomer}
-                    />
+                    <Modal
+                      show={editCustomer}
+                      onHide={() => {
+                        setEditCustomer(false);
+                      }}
+                      size="lg"
+                      aria-labelledby="contained-modal-title-vcenter"
+                      centered
+                    >
+                      <UpdateCustomer
+                        editCustomer={editCustomer}
+                        setEditCustomer={setEditCustomer}
+                        customer={customer}
+                      />{" "}
+                    </Modal>
                   ) : null}
                   <DeleteCustomer
                     customer={customer}

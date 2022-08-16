@@ -131,7 +131,7 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
               name="newCustomerDescription"
               placeholder="What does this company do?"
               rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              style={{ height: "100%", overflowY: "hidden" }}
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
