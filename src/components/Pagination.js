@@ -5,6 +5,7 @@ const Pagination = ({
   totalUsers,
   setCurrentPage,
   currentPage,
+  setListItemsPerPage,
 }) => {
   const pageNumbers = [];
 
@@ -37,6 +38,12 @@ const Pagination = ({
     }
   };
 
+  const handleLoadMoreContacts = () => {
+    const increasedItemsPerPage = listItemsPerPage + 3;
+    console.log("listItems#: ", increasedItemsPerPage);
+    setListItemsPerPage(increasedItemsPerPage);
+  };
+
   for (let i = 1; i <= Math.ceil(totalUsers / listItemsPerPage); i++) {
     pageNumbers.push(i);
   }
@@ -44,13 +51,21 @@ const Pagination = ({
     <nav>
       <ul className="pagination">
         <li className="page-item">
-          <button className="page-link" onClick={(e) => handlePrev(e)}>
+          <button
+            className="page-link"
+            onClick={(e) => handlePrev(e)}
+            disabled={currentPage === pageNumbers[0] ? true : false}
+          >
             Prev
           </button>
         </li>
-        {pageNumbers.length > maxPageNumberLimit ? (
+        {minPageNumberLimit >= 1 ? (
           <li className="page-item">
-            <button className="page-link" onClick={(e) => handlePrev(e)}>
+            <button
+              className="page-link"
+              onClick={(e) => handlePrev(e)}
+              disabled={currentPage === pageNumbers[0] ? true : false}
+            >
               &hellip;
             </button>
           </li>
@@ -58,7 +73,12 @@ const Pagination = ({
         {pageNumbers.map((number) => {
           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
             return (
-              <li key={number} className="page-item">
+              <li
+                key={number}
+                className={`${
+                  currentPage === number ? "active" : null
+                } page-item`}
+              >
                 <a
                   onClick={(e) => paginate(e, number)}
                   href="!#"
@@ -73,18 +93,35 @@ const Pagination = ({
           }
         })}
         {pageNumbers.length > maxPageNumberLimit ? (
-          <li className="page-item" onClick={handleNext}>
-            <button className="page-link" onClick={(e) => handleNext(e)}>
+          <li className="page-item " onClick={handleNext}>
+            <button
+              className="page-link"
+              disabled={
+                currentPage === pageNumbers[pageNumbers.length - 1]
+                  ? true
+                  : false
+              }
+              onClick={(e) => handleNext(e)}
+            >
               &hellip;
             </button>
           </li>
         ) : null}
         <li className="page-item">
-          <button className="page-link" onClick={(e) => handleNext(e)}>
+          <button
+            className="page-link"
+            disabled={
+              currentPage === pageNumbers[pageNumbers.length - 1] ? true : false
+            }
+            onClick={(e) => handleNext(e)}
+          >
             Next
           </button>
         </li>
       </ul>
+      <button className="page-link" onClick={handleLoadMoreContacts}>
+        Load More Contacts
+      </button>
     </nav>
   );
 };

@@ -14,7 +14,7 @@ const Main = () => {
 
   const [contactsList, setContactsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [listItemsPerPage] = useState(15);
+  const [listItemsPerPage, setListItemsPerPage] = useState(15);
 
   useEffect(() => {
     const getContacts = async () => {
@@ -42,6 +42,7 @@ const Main = () => {
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
               setContactsList={setContactsList}
+              setListItemsPerPage={setListItemsPerPage}
             />
           }
         />
