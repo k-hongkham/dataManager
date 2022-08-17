@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
-import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
-import useLogin from "../hooks/useLogin";
+
 import useCustomer from "../hooks/useCustomer";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
 
 const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
   const navigate = useNavigate();
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const {
     setCompanyName,
     companyName,
@@ -59,6 +58,7 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
     setDescription("");
     setNeeds("");
     setProspectValue("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth.js";
-import useLogin from "../hooks/useLogin.js";
+
 import useCustomer from "../hooks/useCustomer.js";
 
 import { getAllCustomers, updateCustomer, getCustomerById } from "../../axios";
@@ -15,7 +15,7 @@ import DeleteCustomer from "./DeleteCustomer.jsx";
 const Customers = () => {
   const navigate = useNavigate();
 
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const { allCustomers, setAllCustomers, setCurrentCustomer, setCustomer } =
     useCustomer();
   const [editCustomer, setEditCustomer] = useState(false);
@@ -39,8 +39,6 @@ const Customers = () => {
   const handleCustomerSelect = (id) => {
     const getCustomer = async () => {
       const fetchedCustomer = await getCustomerById(token, id);
-      console.log("defining customer for getById", fetchedCustomer);
-
       setCustomer(fetchedCustomer);
       setCurrentCustomer(fetchedCustomer);
       navigate(`/customers/${id}`);
@@ -61,6 +59,7 @@ const Customers = () => {
       }
     };
     getCustomers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (

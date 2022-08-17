@@ -27,6 +27,7 @@ const FullCustomerDescription = () => {
     setAllCustomers,
     currentCustomer,
   } = useCustomer();
+
   // const handleUpdateCustomerInfo = async (e) => {
   //   e.preventDefault();
 
@@ -57,7 +58,8 @@ const FullCustomerDescription = () => {
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
 
-    console.log("BEFORE checking curreutcustomer", currentCustomer);
+    console.log(" checking currentCustomer", currentCustomer);
+    console.log("companyName UPDATE: ", companyName);
     const updatedCustomerInfo = await updateCustomer(
       token,
       currentCustomer.id,
@@ -68,8 +70,8 @@ const FullCustomerDescription = () => {
       needs,
       prospectValue
     );
-    setCustomer(updatedCustomerInfo);
 
+    setCustomer(updatedCustomerInfo);
     const updatedCustomerListing = await getAllCustomers(token);
     console.log("getting all customers", updatedCustomerListing);
     setAllCustomers(updatedCustomerListing);
@@ -83,21 +85,17 @@ const FullCustomerDescription = () => {
     setDescription(currentCustomer.description);
     setNeeds(currentCustomer.needs);
     setProspectValue(currentCustomer.prospectValue);
-    console.log("useEffect: currentCustomer", currentCustomer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCustomer]);
 
-  // useEffect(() => {
-  //   console.log("getting Customer by ID.", params.id);
-  //   const getCustomer = async () => {
-  //     const fetchedCustomer = await getCustomerById(token, params.id);
-  //     console.log("defining customer for getById", fetchedCustomer);
-
-  //     setCustomer(fetchedCustomer);
-
-  //     console.log("useEffect Customer:", fetchedCustomer);
-  //   };
-  //   getCustomer();
-  // }, []);
+  useEffect(() => {
+    const getCustomer = async () => {
+      const fetchedCustomer = await getCustomerById(token, params.id);
+      setCustomer(fetchedCustomer);
+    };
+    getCustomer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">

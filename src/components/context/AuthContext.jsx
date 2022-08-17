@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     const getUser = async () => {
       if (localStorage.getItem("token")) {
         const user = await getMe(token);
-        console.log("auth context setting user", user);
+
         setUser(user);
         // getAllTheUsers();
       } else {

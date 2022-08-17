@@ -18,7 +18,7 @@ export const getMe = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("axios - getMe", data);
+
     return data;
   } catch (error) {
     throw error.response.data;
@@ -33,7 +33,6 @@ export const getCustomerById = async (token, customerId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("axios - getCustomerById", data);
     return data;
   } catch (error) {
     throw error.response.data;

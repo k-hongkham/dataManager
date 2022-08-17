@@ -86,7 +86,7 @@ usersRouter.post("/register", async (req, res, next) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "1w",
+          expiresIn: "3w",
         }
       );
       res.send({

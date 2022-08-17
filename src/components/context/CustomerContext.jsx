@@ -25,6 +25,7 @@ const CustomerProvider = ({ children }) => {
       };
       displayCustomers();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCustomers]);
 
   return (

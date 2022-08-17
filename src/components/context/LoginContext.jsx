@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { getAllUsers } from "../../axios";
+import React, { useState } from "react";
+
 import useAuth from "../hooks/userAuth";
 export const LoginContext = React.createContext();
 
 const LoginProvider = ({ children }) => {
-  const { user, token } = useAuth();
+  const { user } = useAuth();
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
