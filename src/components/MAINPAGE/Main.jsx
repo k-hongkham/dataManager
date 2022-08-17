@@ -1,21 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
-
+import useCustomer from "../hooks/useCustomer";
+import { getAllUsers } from "../../axios";
 import Home from "./Home";
 import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
+import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
 
 const Main = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
+
+  const [contactsList, setContactsList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [listItemsPerPage, setListItemsPerPage] = useState(15);
+
+  useEffect(() => {
+    const getContacts = async () => {
+      const contacts = await getAllUsers(token);
+      setContactsList(contacts);
+    };
+    getContacts();
+  }, []);
+
+  const indexOfLastUser = currentPage * listItemsPerPage;
+  const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
+  const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
-    <Routes>
-      <Route path="/Customers" element={<Customers />} />
-      <Route path="/CompanyDirectory" element={<Directory />} />
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <div className="main">
+      <Routes>
+        <Route path="/Customers" element={<Customers />} />
+        <Route
+          path="/Users"
+          element={
+            <Directory
+              contactsList={currentUsers}
+              totalUsers={contactsList.length}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              setContactsList={setContactsList}
+              setListItemsPerPage={setListItemsPerPage}
+              listItemsPerPage={listItemsPerPage}
+            />
+          }
+        />
+        <Route path="/" element={<Home />} />
+        <Route path={`/customers/:id`} element={<FullCustomerDescription />} />
+      </Routes>
+    </div>
   );
 };
 

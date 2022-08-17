@@ -1,16 +1,19 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Modal } from "react-bootstrap";
+
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin.js";
-<<<<<<< HEAD
+
 import { getAllUsers, updateUserInfo } from "../../axios";
 
-const UpdateContact = ({ userEditModal, setUserEditModal, contact }) => {
-=======
-import { getAllUsers, updateUser } from "../../axios";
-
-const UpdateContact = ({ userEditModal, setUserEditModal }) => {
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
+const UpdateContact = ({
+  userEditModal,
+  setUserEditModal,
+  currentDirectoryContact,
+  contact,
+  contactsList,
+  setContactsList,
+}) => {
   const {
     email,
     firstName,
@@ -25,46 +28,56 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
     setPosition,
     setOfficeNumber,
   } = useLogin();
-  const { user, token, allUsers, setAllUsers, setUser } = useAuth();
+  const { token, allUsers, setAllUsers } = useAuth();
 
-  const handleUpdateUserInfo = async (e) => {
+  const handleUpdateUserInfo = (e) => {
     e.preventDefault();
+    console.log("currentDirectoryContact.id", currentDirectoryContact.id);
+    const updatedUserInfo = async (e) => {
+      await updateUserInfo(
+        token,
+        currentDirectoryContact.id,
+        email,
+        firstName,
+        lastName,
+        department,
+        position,
+        officeNumber
+      );
 
-<<<<<<< HEAD
-    const updatedUserInfo = await updateUserInfo(
-      token,
-      contact.id,
-=======
-    const updatedUserInfo = await updateUser(
-      token,
-      user.id,
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
-      email,
-      firstName,
-      lastName,
-      department,
-      position,
-      officeNumber
-    );
-<<<<<<< HEAD
-    console.log("handle update customer", updateUserInfo);
-=======
-    console.log("handle update customer", user.id);
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
-    setUser(updatedUserInfo);
-
-    const updatedUserListing = await getAllUsers(token);
-    setAllUsers(updatedUserListing);
+      const updatedUserListing = await getAllUsers(token);
+      setAllUsers(updatedUserListing);
+      setContactsList(updatedUserListing);
+      console.log("checking updated listing.", updatedUserListing);
+      setUserEditModal(false);
+    };
+    updatedUserInfo();
   };
 
+  useEffect(() => {
+    setEmail(currentDirectoryContact.email);
+    setFirstName(currentDirectoryContact.firstName);
+    setLastName(currentDirectoryContact.lastName);
+    setDepartment(currentDirectoryContact.department);
+    setOfficeNumber(currentDirectoryContact.officeNumber);
+    setPosition(currentDirectoryContact.position);
+  }, [currentDirectoryContact]);
+
   return (
-    <div>
+    <Modal
+      show={userEditModal}
+      onHide={() => {
+        setUserEditModal(false);
+      }}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <header className="modal-header p-5 pb-4 border-bottom-0">
-<<<<<<< HEAD
-        <h2 className="fw-bold mb-0">Update User Information{contact.id}</h2>
-=======
-        <h2 className="fw-bold mb-0">Update User Information{user.id}</h2>
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
+        <h2 className="fw-bold mb-0">
+          {currentDirectoryContact.firstName} {currentDirectoryContact.lastName}
+          {currentDirectoryContact.id}
+        </h2>
         <button
           type="button"
           className="btn-close"
@@ -90,11 +103,7 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
               }}
               required
             />
-<<<<<<< HEAD
             <label htmlFor="updateUserEmail">Email:</label>
-=======
-            <label htmlFor="updateUserEmail">First Name:</label>
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
           </div>
           <div className="form-floating mb-3">
             <input
@@ -102,8 +111,8 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
               type="text"
               id="updateUserFirstName"
               name="updateUserFirstName"
-              placeholder="Customer's Representative"
-              value={firstName}
+              placeholder=""
+              value={firstName || ""}
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
@@ -132,8 +141,8 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
               id="updateUserDepartment"
               name="updateUserDepartment"
               placeholder="What does this company do?"
-              rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              // rows={10}
+              // style={{ height: "100px", overflowY: "hidden" }}
               value={department}
               onChange={(e) => {
                 setDepartment(e.target.value);
@@ -143,7 +152,6 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
 
             <label htmlFor="updateUserDepartment">Department:</label>
           </div>
-<<<<<<< HEAD
           <div className="form-floating mb-3 ">
             <input
               className="form-control rounded-4  "
@@ -151,16 +159,6 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
               id="updateUserPosition"
               name="updateUserPosition"
               placeholder="What does this company need?"
-=======
-          <div className="form-group form-floating mb-3 ">
-            <input
-              className="form-control rounded-4  "
-              id="updateUserPosition"
-              name="updateUserPosition"
-              placeholder="What does this company need?"
-              rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
               value={position}
               onChange={(e) => {
                 setPosition(e.target.value);
@@ -192,7 +190,7 @@ const UpdateContact = ({ userEditModal, setUserEditModal }) => {
           </button>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 };
 

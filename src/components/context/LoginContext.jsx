@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import useAuth from "../hooks/userAuth";
 export const LoginContext = React.createContext();
 
 const LoginProvider = ({ children }) => {
-  const { user, token } = useAuth();
+  const { user } = useAuth();
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,10 +17,8 @@ const LoginProvider = ({ children }) => {
   const [department, setDepartment] = useState(user.department);
   const [position, setPosition] = useState("");
   const [officeNumber, setOfficeNumber] = useState("");
-
-  useEffect(() => {
-    setError(false);
-  }, []);
+  const [currentDirectoryContact, setCurrentDirectoryContact] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
 
   return (
     <LoginContext.Provider
@@ -48,6 +47,10 @@ const LoginProvider = ({ children }) => {
         setPosition,
         officeNumber,
         setOfficeNumber,
+        currentDirectoryContact,
+        setCurrentDirectoryContact,
+        allUsers,
+        setAllUsers,
       }}
     >
       {children}

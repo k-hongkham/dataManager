@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import React, { useEffect } from "react";
 
 import useAuth from "../hooks/userAuth";
-import useLogin from "../hooks/useLogin";
+
 import useCustomer from "../hooks/useCustomer";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { createCustomer, getAllCustomers } from "../../axios";
 
 const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
   const navigate = useNavigate();
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const {
     setCompanyName,
     companyName,
@@ -44,15 +43,24 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
       navigate("/Customers");
-      console.log(
-        "what is createcustomers new customer function?",
-        newCustomer
-      );
+      setAccessCustomers(false);
+
       return response;
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    setCompanyName("");
+    setCompanyRep("");
+    setSalesRep("");
+    setDescription("");
+    setNeeds("");
+    setProspectValue("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
@@ -123,7 +131,7 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
               name="newCustomerDescription"
               placeholder="What does this company do?"
               rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              style={{ height: "100%", overflowY: "hidden" }}
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);

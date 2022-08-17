@@ -1,19 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 import { getAllCustomers, updateCustomer } from "../../axios";
 
-const UpdateCustomer = ({
-  editCustomer,
-  setEditCustomer,
-  customer,
-  setAllCustomers,
-  allCustomers,
-  setAccessCustomers,
-}) => {
-  const navigate = useNavigate();
+const UpdateCustomer = ({ editCustomer, setEditCustomer }) => {
   const { token } = useAuth();
   const {
     companyName,
@@ -29,6 +21,8 @@ const UpdateCustomer = ({
     prospectValue,
     setProspectValue,
     setCustomer,
+    setAllCustomers,
+    currentCustomer,
   } = useCustomer();
 
   const handleUpdateCustomerInfo = async (e) => {
@@ -36,7 +30,7 @@ const UpdateCustomer = ({
 
     const updatedCustomerInfo = await updateCustomer(
       token,
-      customer.id,
+      currentCustomer.id,
       companyName,
       companyRep,
       salesRep,
@@ -44,18 +38,29 @@ const UpdateCustomer = ({
       needs,
       prospectValue
     );
-    console.log("handle update customer", customer.id);
+    console.log("handle update customer", updatedCustomerInfo);
     setCustomer(updatedCustomerInfo);
 
     const updatedCustomerListing = await getAllCustomers(token);
+    console.log("getting all customers from modal", updatedCustomerListing);
     setAllCustomers(updatedCustomerListing);
+    setEditCustomer(false);
   };
 
   return (
+    // <Modal
+    //   show={editCustomer}
+    //   onHide={() => {
+    //     setEditCustomer(false);
+    //   }}
+    //   size="lg"
+    //   aria-labelledby="contained-modal-title-vcenter"
+    //   centered
+    // >
     <div>
       <header className="modal-header p-5 pb-4 border-bottom-0">
         <h2 className="fw-bold mb-0">
-          Update Customer Information{customer.id}
+          Update Customer Information{currentCustomer.id}
         </h2>
         <button
           type="button"
@@ -125,7 +130,7 @@ const UpdateCustomer = ({
               name="updateCustomerDescription"
               placeholder="What does this company do?"
               rows={10}
-              style={{ height: "100px", overflowY: "hidden" }}
+              style={{ height: "100%", overflowY: "hidden" }}
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
@@ -177,6 +182,7 @@ const UpdateCustomer = ({
         </form>
       </div>
     </div>
+    // </Modal>
   );
 };
 

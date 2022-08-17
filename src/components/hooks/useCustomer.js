@@ -19,6 +19,8 @@ const useCustomer = () => {
     setAllCustomers,
     customer,
     setCustomer,
+    currentCustomer,
+    setCurrentCustomer,
   } = useContext(CustomerContext);
 
   return {
@@ -38,6 +40,8 @@ const useCustomer = () => {
     setAllCustomers,
     customer,
     setCustomer,
+    currentCustomer,
+    setCurrentCustomer,
   };
 };
 

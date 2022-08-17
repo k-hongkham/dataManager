@@ -1,46 +1,75 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
-import useAuth from "../hooks/userAuth";
-import { getAllUsers } from "../../axios";
+import useLogin from "../hooks/useLogin";
+
 import ContactCard from "./ContactCard";
 import UpdateContact from "./UpdateContact";
+import Pagination from "../Pagination";
 
-const Directory = () => {
-  const { token } = useAuth();
-  const [contactsList, setContactsList] = useState([]);
+const Directory = ({
+  contactsList,
+  listItemsPerPage,
+  totalUsers,
+  setCurrentPage,
+  currentPage,
+  setContactsList,
+  setListItemsPerPage,
+}) => {
+  const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
+
   const [userEditModal, setUserEditModal] = useState(false);
 
-  useEffect(() => {
-    const getContacts = async () => {
-      const contacts = await getAllUsers(token);
-      setContactsList(contacts);
-    };
-    getContacts();
-  }, [token]);
+  const handleUpdateModalOpen = async (e, modalContact) => {
+    e.preventDefault();
+    setUserEditModal(true);
+    setCurrentDirectoryContact(modalContact);
+  };
+
+  useEffect(() => {});
+
   return (
-    <div className="container">
+    <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
-      <div className="row">
+
+      <div className="row justify-content-center mx-auto pb-3 mb-3 mb-md-5 mt-4">
         {contactsList.map((contact, idx) => {
           return (
             <div
               key={`allContacts: ${idx}`}
-              className="col-sm-6 col-md-4 col-xl-3 mb-3"
+              className="col-sm-6 col-md-4 col-xl-3 mb-3 me-md-3  "
               style={{ border: "1px solid black" }}
             >
               <ContactCard contact={contact} />
-              <UpdateContact
-<<<<<<< HEAD
-                contact={contact}
-=======
->>>>>>> 43a0d6ac7a7ae42129708783c906937ac63fce10
-                userEditModal={userEditModal}
-                setUserEditModal={setUserEditModal}
-              />
+              <Button
+                variant="info"
+                onClick={(e) => {
+                  handleUpdateModalOpen(e, contact);
+                }}
+              >
+                Update {contact.id}
+              </Button>
+              {userEditModal ? (
+                <UpdateContact
+                  contact={contact}
+                  userEditModal={userEditModal}
+                  setUserEditModal={setUserEditModal}
+                  currentDirectoryContact={currentDirectoryContact}
+                  contactsList={contactsList}
+                  setContactsList={setContactsList}
+                />
+              ) : null}
             </div>
           );
         })}
       </div>
+      <Pagination
+        listItemsPerPage={listItemsPerPage}
+        totalUsers={totalUsers}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        setListItemsPerPage={setListItemsPerPage}
+      />
     </div>
   );
 };

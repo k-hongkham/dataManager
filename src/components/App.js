@@ -8,6 +8,7 @@ import CustomerProvider from "./context/CustomerContext";
 
 import Navbar from "./NAVBAR/Navbar";
 import Main from "./MAINPAGE/Main";
+import Sidebar from "./SIDEBAR/Sidebar";
 
 const App = () => {
   return (
@@ -15,8 +16,13 @@ const App = () => {
       <AuthProvider>
         <LoginProvider>
           <CustomerProvider>
-            <Navbar />
-            <Main />
+            <main>
+              <Navbar />
+              <div className="content d-flex justify-content-around">
+                <Sidebar />
+                <Main />
+              </div>
+            </main>
           </CustomerProvider>
         </LoginProvider>
       </AuthProvider>

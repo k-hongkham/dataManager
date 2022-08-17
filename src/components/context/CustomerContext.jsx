@@ -15,16 +15,18 @@ const CustomerProvider = ({ children }) => {
   const [needs, setNeeds] = useState("");
   const [prospectValue, setProspectValue] = useState("$0");
   const [allCustomers, setAllCustomers] = useState([]);
+  const [currentCustomer, setCurrentCustomer] = useState({});
+
   useEffect(() => {
     if (user) {
       const displayCustomers = async () => {
         const data = await getAllCustomers(token);
-        console.log("customerContext", data);
         setCustomer(data);
       };
       displayCustomers();
     }
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allCustomers]);
 
   return (
     <CustomerContext.Provider
@@ -43,7 +45,8 @@ const CustomerProvider = ({ children }) => {
         setProspectValue,
         allCustomers,
         setAllCustomers,
-
+        currentCustomer,
+        setCurrentCustomer,
         customer,
         setCustomer,
       }}
