@@ -27,7 +27,7 @@ export const getMe = async (token) => {
 
 export const getCustomerById = async (token, customerId) => {
   try {
-    const { data } = await axios.get(`/api/customers/${customerId}`, {
+    const { data } = await axios.get(`/api/customers/byId/${customerId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

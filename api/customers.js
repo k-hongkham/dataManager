@@ -24,7 +24,7 @@ customersRouter.get("/all", requireUser, async (req, res, next) => {
   }
 });
 
-customersRouter.get("/:customerId", async (req, res, next) => {
+customersRouter.get("/byId/:customerId", async (req, res, next) => {
   const id = req.params.customerId;
 
   try {

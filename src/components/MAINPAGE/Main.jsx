@@ -47,7 +47,7 @@ const Main = () => {
           }
         />
         <Route path="/" element={<Home />} />
-        <Route path={`/customers/:id`} element={<FullCustomerDescription />} />
+        <Route path={`/Customers/:id`} element={<FullCustomerDescription />} />
       </Routes>
     </div>
   );

@@ -23,7 +23,7 @@ apiRouter.use(async (req, res, next) => {
         let user = await getUserByEmail(email);
         delete user.password;
         req.user = user;
-        console.log("WHO'S THE USER IN API", user);
+
         next();
       } else {
         res.status(409);

@@ -36,14 +36,9 @@ const Customers = () => {
     console.log("handling the open model", accessCustomers);
   };
 
-  const handleCustomerSelect = (id) => {
-    const getCustomer = async () => {
-      const fetchedCustomer = await getCustomerById(token, id);
-      setCustomer(fetchedCustomer);
-      setCurrentCustomer(fetchedCustomer);
-      navigate(`/customers/${id}`);
-    };
-    getCustomer();
+  const handleCustomerSelect = (fetchCustomer, id) => {
+    setCurrentCustomer(fetchCustomer);
+    navigate(`/customers/${id}`);
   };
 
   const handleUpdateCustomerInfo = async (modalCustomer) => {
@@ -93,9 +88,9 @@ const Customers = () => {
                 >
                   {" "}
                   <Link
-                    to={`/Customers/${customer.id}`}
+                    to={`/customers/${customer.id}`}
                     onClick={() => {
-                      handleCustomerSelect(customer.id);
+                      handleCustomerSelect(customer, customer.id);
                     }}
                   >
                     <div style={{ marginRight: "10px" }}>{customer.id}</div>
