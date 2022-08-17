@@ -85,6 +85,7 @@ const Customers = () => {
                 <div
                   className="d-flex text-muted pt-3 customerId"
                   key={`allCustomersList: ${idx}`}
+                  rowEvents={rowEvents}
                 >
                   {" "}
                   <Link
@@ -108,7 +109,7 @@ const Customers = () => {
                   </p>
                   <Button
                     variant="info"
-                    rowEvents={rowEvents}
+                    // rowEvents={rowEvents}
                     onClick={() => {
                       handleUpdateCustomerInfo(customer);
                     }}
