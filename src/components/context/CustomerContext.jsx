@@ -22,11 +22,15 @@ const CustomerProvider = ({ children }) => {
       const displayCustomers = async () => {
         const data = await getAllCustomers(token);
         setCustomer(data);
+        console.log("customerAuth - data: ", data);
+        console.log("useEffect customerAuth - customer", customer);
+        setAllCustomers([data]);
+        console.log("useEffect allCustomers", allCustomers);
       };
       displayCustomers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allCustomers]);
+  }, []);
 
   return (
     <CustomerContext.Provider

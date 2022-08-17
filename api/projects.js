@@ -9,11 +9,14 @@ projectsRouter.use("/", (req, res, next) => {
   next();
 });
 
-// projectsRouter.get("/all", requireUser, async (req, res, next) => {
-//   try {
-//     const allProjects = await getAllProjects()
-//     console.log('attempting to get all Projects - API connection')
-//     res.send(project)
-// });
+projectsRouter.get("/all", requireUser, async (req, res, next) => {
+  try {
+    const allProjects = await getAllProjects();
+    console.log("attempting to get all Projects - API connection");
+    res.send(allProjects);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
 module.exports = projectsRouter;

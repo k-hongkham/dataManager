@@ -246,3 +246,18 @@ export const updateUserInfo = async (
     throw error.response.data;
   }
 };
+
+export const getAllProjects = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/projects/all`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};

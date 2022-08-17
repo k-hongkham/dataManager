@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthProvider from "./context/AuthContext";
 import LoginProvider from "./context/LoginContext";
 import CustomerProvider from "./context/CustomerContext";
+import ProjectProvider from "./context/ProjectContext";
 
 import Navbar from "./NAVBAR/Navbar";
 import Main from "./MAINPAGE/Main";
@@ -16,13 +17,15 @@ const App = () => {
       <AuthProvider>
         <LoginProvider>
           <CustomerProvider>
-            <main>
-              <Navbar />
-              <div className="content d-flex justify-content-around">
-                <Sidebar />
-                <Main />
-              </div>
-            </main>
+            <ProjectProvider>
+              <main>
+                <Navbar />
+                <div className="content d-flex justify-content-around">
+                  <Sidebar />
+                  <Main />
+                </div>
+              </main>
+            </ProjectProvider>
           </CustomerProvider>
         </LoginProvider>
       </AuthProvider>
