@@ -9,7 +9,7 @@ import { getAllCustomers, getCustomerById, updateCustomer } from "../../axios";
 const FullCustomerDescription = () => {
   let params = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const {
     companyName,
     setCompanyName,
@@ -31,7 +31,7 @@ const FullCustomerDescription = () => {
 
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
-    console.log("who current customer", currentCustomer);
+
     console.log("companyName UPDATE: ", companyName);
     const updatedCustomerInfo = await updateCustomer(
       token,
@@ -69,8 +69,8 @@ const FullCustomerDescription = () => {
       setCustomer(fetchedCustomer);
     };
     getCustomer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">

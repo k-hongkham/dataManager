@@ -23,9 +23,8 @@ const CustomerProvider = ({ children }) => {
         const data = await getAllCustomers(token);
         setCustomer(data);
         console.log("customerAuth - data: ", data);
-        console.log("useEffect customerAuth - customer", customer);
-        setAllCustomers([data]);
-        console.log("useEffect allCustomers", allCustomers);
+
+        setAllCustomers(data);
       };
       displayCustomers();
     }

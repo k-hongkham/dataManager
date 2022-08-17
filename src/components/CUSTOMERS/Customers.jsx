@@ -36,9 +36,8 @@ const Customers = () => {
     console.log("handling the open model", accessCustomers);
   };
 
-  const handleCustomerSelect = (fetchCustomer, id) => {
-    setCurrentCustomer(fetchCustomer);
-    navigate(`/customers/${id}`);
+  const handleCustomerSelect = (customer) => {
+    navigate(`/${customer.id}`);
   };
 
   const handleUpdateCustomerInfo = async (modalCustomer) => {
@@ -78,7 +77,7 @@ const Customers = () => {
         />
       </Modal>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
+        <h6 className="border-bottom pb-2 mb-0">Customers</h6>
         {Array.isArray(allCustomers) && allCustomers.length
           ? allCustomers.map((customer, idx) => {
               return (
@@ -91,7 +90,7 @@ const Customers = () => {
                   <Link
                     to={`/customers/${customer.id}`}
                     onClick={() => {
-                      handleCustomerSelect(customer, customer.id);
+                      handleCustomerSelect(customer);
                     }}
                   >
                     <div style={{ marginRight: "10px" }}>{customer.id}</div>

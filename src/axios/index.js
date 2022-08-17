@@ -168,7 +168,7 @@ export const updateCustomer = async (
   try {
     const { data } = await axios.patch(
       `
-    api/customers/${customerId}`,
+    /api/customers/${customerId}`,
       {
         companyName,
         companyRep,
@@ -255,7 +255,7 @@ export const getAllProjects = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log("axios - getAllProjects", data);
     return data;
   } catch (error) {
     throw error.response.data;

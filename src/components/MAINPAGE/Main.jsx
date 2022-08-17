@@ -23,6 +23,7 @@ const Main = () => {
       setContactsList(contacts);
     };
     getContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const indexOfLastUser = currentPage * listItemsPerPage;
@@ -49,7 +50,7 @@ const Main = () => {
         />
         <Route path="/Projects" element={<Projects />} />
         <Route path="/" element={<Home />} />
-        <Route path={`/Customers/:id`} element={<FullCustomerDescription />} />
+        <Route path={`customers/:id`} element={<FullCustomerDescription />} />
       </Routes>
     </div>
   );
