@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import useAuth from "../hooks/userAuth";
+import { Button } from "react-bootstrap";
+
 import useLogin from "../hooks/useLogin";
 
-import { getAllUsers } from "../../axios";
 import ContactCard from "./ContactCard";
 import UpdateContact from "./UpdateContact";
 import Pagination from "../Pagination";
@@ -15,6 +14,7 @@ const Directory = ({
   setCurrentPage,
   currentPage,
   setContactsList,
+  setListItemsPerPage,
 }) => {
   const { currentDirectoryContact, setCurrentDirectoryContact } = useLogin();
 
@@ -68,6 +68,7 @@ const Directory = ({
         totalUsers={totalUsers}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
+        setListItemsPerPage={setListItemsPerPage}
       />
     </div>
   );

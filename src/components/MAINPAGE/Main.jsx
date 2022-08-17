@@ -10,7 +10,7 @@ import Directory from "../DIRECTORY/Directory";
 import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
 
 const Main = () => {
-  const { user, allUsers, token } = useAuth();
+  const { token } = useAuth();
 
   const [contactsList, setContactsList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,12 +37,12 @@ const Main = () => {
           element={
             <Directory
               contactsList={currentUsers}
-              listItemsPerPage={listItemsPerPage}
               totalUsers={contactsList.length}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
               setContactsList={setContactsList}
               setListItemsPerPage={setListItemsPerPage}
+              listItemsPerPage={listItemsPerPage}
             />
           }
         />

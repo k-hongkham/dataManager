@@ -9,7 +9,7 @@ const Pagination = ({
 }) => {
   const pageNumbers = [];
 
-  const [pageNumberLimit, setPageNumberLimit] = useState(5);
+  const [pageNumberLimit] = useState(5);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
@@ -22,7 +22,7 @@ const Pagination = ({
     e.preventDefault();
     setCurrentPage(currentPage - 1);
 
-    if ((currentPage - 1) % pageNumberLimit == 0) {
+    if ((currentPage - 1) % pageNumberLimit === 0) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
@@ -119,7 +119,12 @@ const Pagination = ({
           </button>
         </li>
       </ul>
-      <button className="page-link" onClick={handleLoadMoreContacts}>
+      <button
+        className="page-link"
+        onClick={() => {
+          handleLoadMoreContacts();
+        }}
+      >
         Load More Contacts
       </button>
     </nav>
