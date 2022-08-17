@@ -15,7 +15,7 @@ const Sidebar = () => {
       <div className="position-sticky pt-3" style={{ height: "100vh" }}>
         <div className="d-flex flex-column p-3 bg-light">
           <ul>
-            <ul
+            {/* <ul
               className="dropdown-item d-flex gap-2 py-2 "
               style={{ borderBottom: "2px solid gray" }}
             >
@@ -27,14 +27,14 @@ const Sidebar = () => {
               style={{ borderBottom: "2px solid gray" }}
             >
               PRICE BOOK
-            </ul>
+            </ul> */}
 
-            <ul
+            {/* <ul
               className="dropdown-item d-flex gap-2 py-2 "
               style={{ borderBottom: "2px solid gray" }}
             >
               CALENDAR
-            </ul>
+            </ul> */}
 
             <ul
               className="dropdown-item d-flex gap-2 py-2 "
@@ -42,13 +42,13 @@ const Sidebar = () => {
             >
               NOTEBOOK
             </ul>
-
+            {/* 
             <ul
               className="dropdown-item d-flex gap-2 py-2 "
               style={{ borderBottom: "2px solid gray" }}
             >
               SETUP
-            </ul>
+            </ul> */}
 
             <ul
               className="dropdown-item d-flex  "
