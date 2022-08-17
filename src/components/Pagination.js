@@ -48,8 +48,8 @@ const Pagination = ({
     pageNumbers.push(i);
   }
   return (
-    <nav>
-      <ul className="pagination">
+    <nav className="container">
+      <ul className="pagination justify-content-center">
         <li className="page-item">
           <button
             className="page-link"
@@ -119,14 +119,16 @@ const Pagination = ({
           </button>
         </li>
       </ul>
-      <button
-        className="page-link"
-        onClick={() => {
-          handleLoadMoreContacts();
-        }}
-      >
-        Load More Contacts
-      </button>
+      <div className="justify-content-center">
+        <button
+          className="page-link"
+          onClick={() => {
+            handleLoadMoreContacts();
+          }}
+        >
+          Load More Contacts
+        </button>
+      </div>
     </nav>
   );
 };

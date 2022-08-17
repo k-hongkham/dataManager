@@ -71,9 +71,10 @@ const FullCustomerDescription = () => {
       prospectValue
     );
 
+    console.log("updatingCustomer: ", updatedCustomerInfo);
     setCustomer(updatedCustomerInfo);
     const updatedCustomerListing = await getAllCustomers(token);
-    console.log("getting all customers", updatedCustomerListing);
+
     setAllCustomers(updatedCustomerListing);
     navigate("/Customers");
   };
