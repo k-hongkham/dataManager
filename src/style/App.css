@@ -109,3 +109,7 @@ main {
   margin-bottom: 0 !important;
   border: 0 !important;
 } */
+
+#login-logout-link {
+  padding-left: 0;
+}
