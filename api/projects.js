@@ -12,7 +12,7 @@ projectsRouter.use("/", (req, res, next) => {
 projectsRouter.get("/all", requireUser, async (req, res, next) => {
   try {
     const allProjects = await getAllProjects();
-    console.log("attempting to get all Projects - API connection", allProjects);
+
     res.send(allProjects);
   } catch ({ name, message }) {
     next({ name, message });

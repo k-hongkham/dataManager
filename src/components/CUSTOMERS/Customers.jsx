@@ -40,10 +40,10 @@ const Customers = () => {
     navigate(`/${customer.id}`);
   };
 
-  const handleUpdateCustomerInfo = async (modalCustomer) => {
-    setEditCustomer(true);
-    setCurrentCustomer(modalCustomer);
-  };
+  // const handleUpdateCustomerInfo = async (modalCustomer) => {
+  //   setEditCustomer(true);
+  //   setCurrentCustomer(modalCustomer);
+  // };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -106,7 +106,7 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-                  <Button
+                  {/* <Button
                     variant="info"
                     // rowEvents={rowEvents}
                     onClick={() => {
@@ -130,7 +130,7 @@ const Customers = () => {
                         setEditCustomer={setEditCustomer}
                       />{" "}
                     </Modal>
-                  ) : null}
+                  ) : null} */}
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}

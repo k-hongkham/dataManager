@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import useAuth from "../hooks/userAuth";
 import useProject from "../hooks/useProject";
 import { getAllProjects } from "../../axios";
-import ProjectCard from "./ProjectCard";
+import ProjectRow from "./ProjectRow";
 
 const Projects = () => {
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const { allProjectsArray, setAllProjectsArray } = useProject();
 
   useEffect(() => {
@@ -26,26 +26,26 @@ const Projects = () => {
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0"> Projects</h6>
 
-        {Array.isArray(allProjectsArray) && allProjectsArray.length
-          ? allProjectsArray.map((project, idx) => {
-              return (
-                <div
-                  key={`ProjectsList: ${idx}`}
-                  className="d-flex text-muted pt-3 "
-                  style={{ border: "1px solid black" }}
-                >
-                  <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-                    <div className="d-flex justify-content-between">
-                      <strong className="d-block text-gray-dark">
-                        {project.projectTitle}
-                      </strong>
-                    </div>
-                  </div>
-                  <ProjectCard project={project} />
-                </div>
-              );
-            })
-          : null}
+        <table className="table table-striped">
+          <thead>
+            <th scope="col">Project Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Sales Rep</th>
+            <th scope="col">Description</th>
+          </thead>
+          <tbody>
+            {Array.isArray(allProjectsArray) && allProjectsArray.length
+              ? allProjectsArray.map((project) => {
+                  return (
+                    <tr key={`ProjectsList: ${project.id}`}>
+                      <ProjectRow project={project} />
+                    </tr>
+                  );
+                })
+              : null}
+          </tbody>
+        </table>
       </div>
     </div>
   );

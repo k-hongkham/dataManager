@@ -7,6 +7,7 @@ import LoginProvider from "./context/LoginContext";
 import CustomerProvider from "./context/CustomerContext";
 import ProjectProvider from "./context/ProjectContext";
 
+import Login from "./NAVBAR/Login";
 import Navbar from "./NAVBAR/Navbar";
 import Main from "./MAINPAGE/Main";
 import Sidebar from "./SIDEBAR/Sidebar";
