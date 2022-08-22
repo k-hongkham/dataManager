@@ -36,20 +36,14 @@ const Customers = () => {
     console.log("handling the open model", accessCustomers);
   };
 
-  const handleCustomerSelect = (id) => {
-    const getCustomer = async () => {
-      const fetchedCustomer = await getCustomerById(token, id);
-      setCustomer(fetchedCustomer);
-      setCurrentCustomer(fetchedCustomer);
-      navigate(`/customers/${id}`);
-    };
-    getCustomer();
+  const handleCustomerSelect = (customer) => {
+    navigate(`/${customer.id}`);
   };
 
-  const handleUpdateCustomerInfo = async (modalCustomer) => {
-    setEditCustomer(true);
-    setCurrentCustomer(modalCustomer);
-  };
+  // const handleUpdateCustomerInfo = async (modalCustomer) => {
+  //   setEditCustomer(true);
+  //   setCurrentCustomer(modalCustomer);
+  // };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -83,19 +77,20 @@ const Customers = () => {
         />
       </Modal>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 className="border-bottom pb-2 mb-0">Current Customers</h6>
+        <h6 className="border-bottom pb-2 mb-0">Customers</h6>
         {Array.isArray(allCustomers) && allCustomers.length
           ? allCustomers.map((customer, idx) => {
               return (
                 <div
                   className="d-flex text-muted pt-3 customerId"
                   key={`allCustomersList: ${idx}`}
+                  rowEvents={rowEvents}
                 >
                   {" "}
                   <Link
-                    to={`/Customers/${customer.id}`}
+                    to={`/customers/${customer.id}`}
                     onClick={() => {
-                      handleCustomerSelect(customer.id);
+                      handleCustomerSelect(customer);
                     }}
                   >
                     <div style={{ marginRight: "10px" }}>{customer.id}</div>
@@ -111,9 +106,9 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-                  <Button
+                  {/* <Button
                     variant="info"
-                    rowEvents={rowEvents}
+                    // rowEvents={rowEvents}
                     onClick={() => {
                       handleUpdateCustomerInfo(customer);
                     }}
@@ -135,7 +130,7 @@ const Customers = () => {
                         setEditCustomer={setEditCustomer}
                       />{" "}
                     </Modal>
-                  ) : null}
+                  ) : null} */}
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}

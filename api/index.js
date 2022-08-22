@@ -1,6 +1,7 @@
 const apiRouter = require("express").Router();
 const usersRouter = require("./users");
 const customersRouter = require("./customers");
+const projectsRouter = require("./projects");
 const { getUserByEmail } = require("../db/models/users");
 
 const jwt = require("jsonwebtoken");
@@ -22,7 +23,7 @@ apiRouter.use(async (req, res, next) => {
         let user = await getUserByEmail(email);
         delete user.password;
         req.user = user;
-        console.log("WHO'S THE USER IN API", user);
+
         next();
       } else {
         res.status(409);
@@ -54,6 +55,7 @@ apiRouter.get("/health", (req, res, next) => {
 
 apiRouter.use("/users", usersRouter);
 apiRouter.use("/customers", customersRouter);
+apiRouter.use("/projects", projectsRouter);
 
 apiRouter.use((error, req, res, next) => {
   console.log("SENDING ERROR: ", error);

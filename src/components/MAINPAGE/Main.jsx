@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
-import useCustomer from "../hooks/useCustomer";
+
 import { getAllUsers } from "../../axios";
 import Home from "./Home";
 import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
 import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
+import Projects from "../PROJECTS/Projects";
 
 const Main = () => {
   const { token } = useAuth();
@@ -22,6 +23,7 @@ const Main = () => {
       setContactsList(contacts);
     };
     getContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const indexOfLastUser = currentPage * listItemsPerPage;
@@ -46,8 +48,10 @@ const Main = () => {
             />
           }
         />
-        <Route path="/" element={<Home />} />
-        <Route path={`/customers/:id`} element={<FullCustomerDescription />} />
+        <Route path="/Projects" element={<Projects />} />
+
+        <Route path="/Home" element={<Home />} />
+        <Route path={`customers/:id`} element={<FullCustomerDescription />} />
       </Routes>
     </div>
   );

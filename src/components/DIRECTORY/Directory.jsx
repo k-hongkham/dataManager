@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
 import useLogin from "../hooks/useLogin";
@@ -25,8 +25,6 @@ const Directory = ({
     setUserEditModal(true);
     setCurrentDirectoryContact(modalContact);
   };
-
-  useEffect(() => {});
 
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">

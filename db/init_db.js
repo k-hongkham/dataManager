@@ -1,7 +1,8 @@
-const { client, User, Customer } = require("./");
+const { client, User, Customer, Project } = require("./");
 
 const { usersData } = require("./UserData.cjs");
 const { customerData } = require("./CustomerData.cjs");
+const { projectData } = require("./ProjectData.cjs");
 async function buildTables() {
   try {
     client.connect();
@@ -9,6 +10,7 @@ async function buildTables() {
 
     //drop tables in the correct order
     await client.query(`
+    DROP TABLE IF EXISTS projects;
     DROP TABLE IF EXISTS customers;
     DROP TABLE IF EXISTS users
     `);
@@ -17,6 +19,7 @@ async function buildTables() {
 
     //build tables in correct order
     await client.query(`
+    
     CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         email varchar(255) UNIQUE NOT NULL,
@@ -36,6 +39,13 @@ async function buildTables() {
       needs text NOT NULL,
       "prospectValue" varchar(255)
   );
+  CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    "projectTitle" varchar(255) NOT NULL,
+    "projectOwner" varchar(255) NOT NULL,
+    "projectSalesRep" varchar(255),
+    description text NOT NULL
+      );
   `);
     console.log("Finished creating tables");
   } catch (error) {
@@ -66,9 +76,19 @@ async function createInitialCustomers() {
     throw error;
   }
 }
+async function createInitialProjects() {
+  try {
+    console.log("Starting to create projects...");
+    const projects = await Promise.all(projectData.map(Project.createProject));
+    console.log("Finished Creating Projects!");
+  } catch (error) {
+    throw error;
+  }
+}
 
 buildTables()
   .then(createInitialUsers)
   .then(createInitialCustomers)
+  .then(createInitialProjects)
   .catch(console.error)
   .finally(() => client.end());

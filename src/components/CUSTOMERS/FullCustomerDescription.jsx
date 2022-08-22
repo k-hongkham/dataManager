@@ -9,7 +9,7 @@ import { getAllCustomers, getCustomerById, updateCustomer } from "../../axios";
 const FullCustomerDescription = () => {
   let params = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const {
     companyName,
     setCompanyName,
@@ -25,44 +25,17 @@ const FullCustomerDescription = () => {
     setProspectValue,
     setCustomer,
     setAllCustomers,
+    customer,
     currentCustomer,
   } = useCustomer();
-
-  // const handleUpdateCustomerInfo = async (e) => {
-  //   e.preventDefault();
-
-  //   const updatingCustomerInfo = await updateCustomer(
-  //     token,
-  //     currentCustomer.id,
-  //     companyName,
-  //     companyRep,
-  //     salesRep,
-  //     description,
-  //     needs,
-  //     prospectValue
-  //   );
-  //   console.log(
-  //     "updated customer function customer ID: ",
-  //     updatingCustomerInfo
-  //   );
-  //   setCustomer(updatingCustomerInfo);
-
-  //   const updatedCustomerListing = await getAllCustomers(token);
-  //   setAllCustomers(updatedCustomerListing);
-
-  //   console.log("handle update customer", updatedCustomerListing);
-  //   console.log("updated all customers", allCustomers);
-  //   navigate("/Customers");
-  // };
 
   const handleUpdateCustomerInfo = async (e) => {
     e.preventDefault();
 
-    console.log(" checking currentCustomer", currentCustomer);
     console.log("companyName UPDATE: ", companyName);
     const updatedCustomerInfo = await updateCustomer(
       token,
-      currentCustomer.id,
+      customer.id,
       companyName,
       companyRep,
       salesRep,
@@ -71,45 +44,41 @@ const FullCustomerDescription = () => {
       prospectValue
     );
 
+    console.log("updatingCustomer: ", updatedCustomerInfo);
     setCustomer(updatedCustomerInfo);
     const updatedCustomerListing = await getAllCustomers(token);
-    console.log("getting all customers", updatedCustomerListing);
+
     setAllCustomers(updatedCustomerListing);
-    navigate("/Customers");
+    navigate("/customers");
   };
 
   useEffect(() => {
-    setCompanyName(currentCustomer.companyName);
-    setCompanyRep(currentCustomer.companyRep);
-    setSalesRep(currentCustomer.salesRep);
-    setDescription(currentCustomer.description);
-    setNeeds(currentCustomer.needs);
-    setProspectValue(currentCustomer.prospectValue);
+    setCompanyName(customer.companyName);
+    setCompanyRep(customer.companyRep);
+    setSalesRep(customer.salesRep);
+    setDescription(customer.description);
+    setNeeds(customer.needs);
+    setProspectValue(customer.prospectValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCustomer]);
+  }, [customer]);
 
   useEffect(() => {
     const getCustomer = async () => {
       const fetchedCustomer = await getCustomerById(token, params.id);
+      console.log("fetching customer by id", fetchedCustomer);
       setCustomer(fetchedCustomer);
     };
     getCustomer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <header className="modal-header p-5 pb-4 border-bottom-0">
-        <h2 className="fw-bold mb-0">
-          {currentCustomer.companyName} Information
-        </h2>
+        <h2 className="fw-bold mb-0">{customer.companyName} Information</h2>
       </header>
 
-      <form
-        onSubmit={(e) => {
-          handleUpdateCustomerInfo(e);
-        }}
-      >
+      <form onSubmit={handleUpdateCustomerInfo}>
         <div className="form-floating mb-3">
           <input
             className="form-control rounded-4 "

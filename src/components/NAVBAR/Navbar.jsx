@@ -66,14 +66,14 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <LoginBtn setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
-            </li>
+            </li> */}
           </ul>
 
-          {loggedIn && (
+          {/* {loggedIn && (
             <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
-          )}
+          )} */}
         </div>
       </div>
     </nav>

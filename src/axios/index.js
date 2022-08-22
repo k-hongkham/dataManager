@@ -27,7 +27,7 @@ export const getMe = async (token) => {
 
 export const getCustomerById = async (token, customerId) => {
   try {
-    const { data } = await axios.get(`/api/customers/${customerId}`, {
+    const { data } = await axios.get(`/api/customers/byId/${customerId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -168,7 +168,7 @@ export const updateCustomer = async (
   try {
     const { data } = await axios.patch(
       `
-    api/customers/${customerId}`,
+    /api/customers/${customerId}`,
       {
         companyName,
         companyRep,
@@ -241,6 +241,21 @@ export const updateUserInfo = async (
     );
     console.log("**************axios -updateUser", data);
     console.log("**************axios -UserId", userId);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const getAllProjects = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/projects/all`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("axios - getAllProjects", data);
     return data;
   } catch (error) {
     throw error.response.data;
