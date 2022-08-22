@@ -43,7 +43,7 @@ async function getAllProjects() {
     FROM projects
     ORDER BY projects.id desc`
     );
-    console.log("get projects through db - getAllProjects", rows);
+
     return rows;
   } catch (error) {
     throw error;

@@ -5,7 +5,6 @@ import useAuth from "../hooks/userAuth";
 
 import { getAllUsers } from "../../axios";
 import Home from "./Home";
-import Login from "../NAVBAR/Login";
 import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
 import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
@@ -50,6 +49,7 @@ const Main = () => {
           }
         />
         <Route path="/Projects" element={<Projects />} />
+
         <Route path="/Home" element={<Home />} />
         <Route path={`customers/:id`} element={<FullCustomerDescription />} />
       </Routes>

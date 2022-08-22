@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useProject from "../hooks/useProject";
 import { getAllProjects } from "../../axios";
 import ProjectRow from "./ProjectRow";
 
 const Projects = () => {
+  const navigate = useNavigate();
   const { token } = useAuth();
   const { allProjectsArray, setAllProjectsArray } = useProject();
 
@@ -20,6 +22,12 @@ const Projects = () => {
     displayProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
+  const handleSelectRow = (row) => {
+    console.log(row);
+    console.log("row selection works");
+    navigate(`/${row.id}`);
+  };
 
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
@@ -38,7 +46,10 @@ const Projects = () => {
             {Array.isArray(allProjectsArray) && allProjectsArray.length
               ? allProjectsArray.map((project) => {
                   return (
-                    <tr key={`ProjectsList: ${project.id}`}>
+                    <tr
+                      key={`ProjectsList: ${project.id}`}
+                      onClick={(project) => handleSelectRow(project)}
+                    >
                       <ProjectRow project={project} />
                     </tr>
                   );
