@@ -26,7 +26,7 @@ const Projects = () => {
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0"> Projects</h6>
 
-        <table className="table table-striped">
+        <table className="table table-hover ">
           <thead>
             <th scope="col">Project Id</th>
             <th scope="col">Title</th>
