@@ -13,17 +13,18 @@ async function createProject({
   projectOwner,
   projectSalesRep,
   description,
+  status,
 }) {
   try {
     const {
       rows: [project],
     } = await client.query(
       `
-        INSERT INTO projects("projectTitle", "projectOwner", "projectSalesRep", description)
-        VALUES($1,$2,$3,$4) 
+        INSERT INTO projects("projectTitle", "projectOwner", "projectSalesRep", description, status)
+        VALUES($1,$2,$3,$4,$5) 
         RETURNING *;
         `,
-      [projectTitle, projectOwner, projectSalesRep, description]
+      [projectTitle, projectOwner, projectSalesRep, description, status]
     );
 
     return project;
