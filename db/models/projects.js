@@ -6,6 +6,7 @@ module.exports = {
   createProject,
   getAllProjects,
   getProjectById,
+  updateProject,
 };
 
 async function createProject({
@@ -66,6 +67,33 @@ async function getProjectById(id) {
       [id]
     );
     console.log("in DB for getProjectById", project);
+    return project;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateProject(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const {
+      rows: [project],
+    } = await client.query(
+      `
+    UPDATE projects
+    SET ${setString}
+    WHERE id =${fields.id}
+    RETURNING*;
+    `,
+      Object.values(fields)
+    );
+    console.log("DB- project - update project", project);
     return project;
   } catch (error) {
     throw error;

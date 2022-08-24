@@ -41,6 +41,7 @@ const Projects = () => {
             <th scope="col">Owner</th>
             <th scope="col">Sales Rep</th>
             <th scope="col">Description</th>
+            <th scope="col">Status</th>
           </thead>
           <tbody>
             {Array.isArray(allProjectsArray) && allProjectsArray.length
