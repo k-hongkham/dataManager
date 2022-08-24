@@ -275,3 +275,38 @@ export const getProjectById = async (token, projectId) => {
     throw error.response.data;
   }
 };
+
+export const createProject = async (
+  token,
+  projectTitle,
+  projectOwner,
+  projectSalesRep,
+  description,
+  status
+) => {
+  try {
+    const response = await axios.post(
+      `api/projects`,
+      {
+        projectTitle,
+        projectOwner,
+        projectSalesRep,
+        description,
+        status,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(
+      "is axios adding the new customer? -createProjects",
+      response.data
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};

@@ -8,14 +8,7 @@ const ProjectRow = ({ project }) => {
   };
   return (
     <>
-      <Link
-        to={`/projects/${project.id}`}
-        onClick={() => {
-          handleNewProject(project);
-        }}
-      >
-        <td>{project.id}</td>
-      </Link>
+      <td>{project.id}</td>
       <td>{project.projectTitle}</td>
       <td>{project.projectOwner} </td>
       <td>{project.projectSalesRep}</td>

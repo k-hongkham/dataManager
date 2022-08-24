@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useProject from "../hooks/useProject";
 import useAuth from "../hooks/userAuth";
-import { getProjectById } from "../../axios";
+import { getProjectById, createProject, getAllProjects } from "../../axios";
 
 const NewProjectHeader = () => {
   const {
@@ -17,12 +17,33 @@ const NewProjectHeader = () => {
     status,
     setStatus,
     setCurrentProject,
+    setAllProjectsArray,
   } = useProject();
   const { user, token } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
-  const handleCreateNewProject = async () => {
-    navigate(`/newProject`);
+  const handleCreateNewProject = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await createProject(
+        token,
+        projectTitle,
+        projectOwner,
+        projectSalesRep,
+        projectDescription,
+        status
+      );
+      console.log("is new customer added to db?", response);
+      const newProject = await getAllProjects(token);
+      setAllProjectsArray(newProject);
+
+      navigate(`/Projects`);
+
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -100,9 +121,7 @@ const NewProjectHeader = () => {
               required
             ></textarea>
 
-            <label htmlFor="updateCustomerDescription">
-              Company Description:
-            </label>
+            <label htmlFor="updateCustomerDescription">Description:</label>
           </div>
 
           <div className="form-group form-floating mb-3 ">
@@ -118,7 +137,7 @@ const NewProjectHeader = () => {
               }}
               required
             />
-            <label htmlFor="updateCustomerProspectValue">Prospect Value:</label>
+            <label htmlFor="updateCustomerProspectValue">Status:</label>
           </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
