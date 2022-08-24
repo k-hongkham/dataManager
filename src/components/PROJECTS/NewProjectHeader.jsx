@@ -126,9 +126,7 @@ const NewProjectHeader = () => {
             <label htmlFor="updateCustomerDescription">Description:</label>
           </div>
           <div className="form-group form-floating mb-3 ">
-            <label htmlFor="state" className="form-label">
-              Status...
-            </label>
+            <label htmlFor="state" className="form-label"></label>
             <select
               className="form-select"
               required=""
@@ -137,7 +135,7 @@ const NewProjectHeader = () => {
                 setStatus(e.target.value);
               }}
             >
-              <option value=""> </option>
+              <option value=""> Status...</option>
               {StatusTypes.map((type, idx) => {
                 return (
                   <option key={`TypeOfStatus: ${idx}`}>{type.name}</option>
