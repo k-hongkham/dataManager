@@ -5,6 +5,7 @@ const client = require("../client");
 module.exports = {
   createProject,
   getAllProjects,
+  getProjectById,
 };
 
 async function createProject({
@@ -45,6 +46,25 @@ async function getAllProjects() {
     );
 
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getProjectById(id) {
+  try {
+    const {
+      rows: [project],
+    } = await client.query(
+      `
+  SELECT *
+  FROM projects
+  WHERE projects.id =$1;
+  `,
+      [id]
+    );
+    console.log("in DB for getProjectById", project);
+    return project;
   } catch (error) {
     throw error;
   }
