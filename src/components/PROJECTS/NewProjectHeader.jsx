@@ -34,7 +34,7 @@ const NewProjectHeader = () => {
         projectDescription,
         status
       );
-      console.log("is new customer added to db?", response);
+
       const newProject = await getAllProjects(token);
       setAllProjectsArray(newProject);
 
@@ -49,7 +49,7 @@ const NewProjectHeader = () => {
   useEffect(() => {
     const getCustomer = async () => {
       const fetchedCustomer = await getProjectById(token, params.id);
-      console.log("fetching customer by id", fetchedCustomer);
+
       setCurrentProject(fetchedCustomer);
     };
     getCustomer();

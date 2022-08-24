@@ -16,8 +16,6 @@ const Projects = () => {
       if (localStorage.getItem("token")) {
         const data = await getAllProjects(token);
         setAllProjectsArray(data);
-
-        console.log("useEffect-allProjects: ", allProjectsArray);
       }
     };
     displayProjects();
@@ -25,7 +23,6 @@ const Projects = () => {
   }, [token]);
 
   const handleNewProject = () => {
-    console.log("starting new project");
     navigate(`/newProject`);
   };
 

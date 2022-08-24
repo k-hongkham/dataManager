@@ -255,7 +255,7 @@ export const getAllProjects = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("axios - getAllProjects", data);
+
     return data;
   } catch (error) {
     throw error.response.data;
@@ -301,10 +301,7 @@ export const createProject = async (
         },
       }
     );
-    console.log(
-      "is axios adding the new customer? -createProjects",
-      response.data
-    );
+
     return response.data;
   } catch (error) {
     throw error.response.data;

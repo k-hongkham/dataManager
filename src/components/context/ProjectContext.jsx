@@ -19,7 +19,6 @@ const ProjectProvider = ({ children }) => {
       const displayProjects = async () => {
         const data = await getAllProjects(token);
         setAllProjectsArray(data);
-        console.log("useEffect-projectAuth: ", data);
       };
       displayProjects();
     }
