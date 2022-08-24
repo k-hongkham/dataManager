@@ -1,5 +1,3 @@
-const { Form } = require("react-bootstrap");
-const projectsRouter = require("../../api/projects");
 const client = require("../client");
 
 module.exports = {
