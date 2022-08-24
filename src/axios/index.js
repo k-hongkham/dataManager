@@ -255,8 +255,54 @@ export const getAllProjects = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("axios - getAllProjects", data);
+
     return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const getProjectById = async (token, projectId) => {
+  try {
+    const { data } = await axios.get(`/api/projects/byId/${projectId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const createProject = async (
+  token,
+  projectTitle,
+  projectOwner,
+  projectSalesRep,
+  description,
+  status
+) => {
+  try {
+    const response = await axios.post(
+      `api/projects`,
+      {
+        projectTitle,
+        projectOwner,
+        projectSalesRep,
+        description,
+        status,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
   } catch (error) {
     throw error.response.data;
   }

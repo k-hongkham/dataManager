@@ -12,13 +12,13 @@ const ProjectProvider = ({ children }) => {
   const [projectOwner, setProjectOwner] = useState("");
   const [projectSalesRep, setProjectSalesRep] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     if (user) {
       const displayProjects = async () => {
         const data = await getAllProjects(token);
         setAllProjectsArray(data);
-        console.log("useEffect-projectAuth: ", data);
       };
       displayProjects();
     }
@@ -40,6 +40,8 @@ const ProjectProvider = ({ children }) => {
         setProjectSalesRep,
         projectDescription,
         setProjectDescription,
+        status,
+        setStatus,
       }}
     >
       {children}

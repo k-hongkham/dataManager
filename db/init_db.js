@@ -44,7 +44,8 @@ async function buildTables() {
     "projectTitle" varchar(255) NOT NULL,
     "projectOwner" varchar(255) NOT NULL,
     "projectSalesRep" varchar(255),
-    description text NOT NULL
+    description text NOT NULL,
+    status varchar(255)
       );
   `);
     console.log("Finished creating tables");

@@ -22,7 +22,6 @@ const CustomerProvider = ({ children }) => {
       const displayCustomers = async () => {
         const data = await getAllCustomers(token);
         setCustomer(data);
-        console.log("customerAuth - data: ", data);
 
         setAllCustomers(data);
       };

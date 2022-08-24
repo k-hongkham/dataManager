@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 
