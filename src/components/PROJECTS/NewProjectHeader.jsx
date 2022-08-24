@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useProject from "../hooks/useProject";
 import useAuth from "../hooks/userAuth";
 import { getProjectById, createProject, getAllProjects } from "../../axios";
+import { StatusTypes } from "./StatusTypes";
 
 const NewProjectHeader = () => {
   const {
@@ -37,6 +38,7 @@ const NewProjectHeader = () => {
 
       const newProject = await getAllProjects(token);
       setAllProjectsArray(newProject);
+      setStatus("In Process");
 
       navigate(`/Projects`);
 
@@ -123,22 +125,27 @@ const NewProjectHeader = () => {
 
             <label htmlFor="updateCustomerDescription">Description:</label>
           </div>
-
           <div className="form-group form-floating mb-3 ">
-            <input
-              className="form-control rounded-4"
-              type="text"
-              id="updateCustomerProspectValue"
-              name="updateCustomerProspectValue"
-              placeholder="Our Sale's Representative"
-              value={status}
+            <label htmlFor="state" className="form-label">
+              Status...
+            </label>
+            <select
+              className="form-select"
+              required=""
+              value={status || ""}
               onChange={(e) => {
                 setStatus(e.target.value);
               }}
-              required
-            />
-            <label htmlFor="updateCustomerProspectValue">Status:</label>
+            >
+              <option value=""> </option>
+              {StatusTypes.map((type, idx) => {
+                return (
+                  <option key={`TypeOfStatus: ${idx}`}>{type.name}</option>
+                );
+              })}
+            </select>
           </div>
+
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
             type="submit"
