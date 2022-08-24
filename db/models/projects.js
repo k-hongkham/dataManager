@@ -37,10 +37,11 @@ async function getAllProjects() {
     const { rows } = await client.query(
       `SELECT
     projects.id AS id,
-    projects."projectTitle" AS "ProjectTitle",
-    projects."projectOwner" AS "ProjectOwner",
-    projects."projectSalesRep" AS "ProjectSalesRep",
-    projects.description AS "Description"
+    projects."projectTitle" AS "projectTitle",
+    projects."projectOwner" AS "projectOwner",
+    projects."projectSalesRep" AS "projectSalesRep",
+    projects.description AS "description",
+    projects.status AS "status"
     FROM projects
     ORDER BY projects.id desc`
     );
