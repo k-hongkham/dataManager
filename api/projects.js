@@ -75,7 +75,7 @@ projectsRouter.patch("/:projectId", requireUser, async (req, res, next) => {
     status,
     creationDate,
   } = req.body;
-  console.log("api -customerId", projectId);
+  console.log("api -projectId", projectId);
   try {
     const editProject = await updateProject({
       id: +projectId,

@@ -23,12 +23,6 @@ const Projects = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const handleSelectRow = (row) => {
-    console.log(row);
-    console.log("row selection works");
-    navigate(`/${row.id}`);
-  };
-
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <div className="my-3 p-3 bg-body rounded shadow-sm">
@@ -47,10 +41,7 @@ const Projects = () => {
             {Array.isArray(allProjectsArray) && allProjectsArray.length
               ? allProjectsArray.map((project) => {
                   return (
-                    <tr
-                      key={`ProjectsList: ${project.id}`}
-                      onClick={(project) => handleSelectRow(project)}
-                    >
+                    <tr key={`ProjectsList: ${project.id}`}>
                       <ProjectRow project={project} />
                     </tr>
                   );

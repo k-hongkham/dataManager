@@ -1,9 +1,21 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProjectRow = ({ project }) => {
+  const navigate = useNavigate();
+  const handleNewProject = (project) => {
+    navigate(`/${project.id}`);
+  };
   return (
     <>
-      <td>{project.id}</td>
+      <Link
+        to={`/projects/${project.id}`}
+        onClick={() => {
+          handleNewProject(project);
+        }}
+      >
+        <td>{project.id}</td>
+      </Link>
       <td>{project.projectTitle}</td>
       <td>{project.projectOwner} </td>
       <td>{project.projectSalesRep}</td>

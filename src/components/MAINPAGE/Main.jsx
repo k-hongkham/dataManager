@@ -9,6 +9,7 @@ import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
 import FullCustomerDescription from "../CUSTOMERS/FullCustomerDescription";
 import Projects from "../PROJECTS/Projects";
+import NewProjectHeader from "../PROJECTS/NewProjectHeader";
 
 const Main = () => {
   const { token } = useAuth();
@@ -49,6 +50,7 @@ const Main = () => {
           }
         />
         <Route path="/Projects" element={<Projects />} />
+        <Route path="/Projects/:id" element={<NewProjectHeader />} />
 
         <Route path="/Home" element={<Home />} />
         <Route path={`customers/:id`} element={<FullCustomerDescription />} />

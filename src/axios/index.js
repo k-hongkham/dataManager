@@ -261,3 +261,17 @@ export const getAllProjects = async (token) => {
     throw error.response.data;
   }
 };
+
+export const getProjectById = async (token, projectId) => {
+  try {
+    const { data } = await axios.get(`/api/projects/byId/${projectId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};

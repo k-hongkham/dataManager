@@ -15,6 +15,8 @@ const useProject = () => {
     setProjectSalesRep,
     projectDescription,
     setProjectDescription,
+    status,
+    setStatus,
   } = useContext(ProjectContext);
 
   return {
@@ -30,6 +32,8 @@ const useProject = () => {
     setProjectSalesRep,
     projectDescription,
     setProjectDescription,
+    status,
+    setStatus,
   };
 };
 
