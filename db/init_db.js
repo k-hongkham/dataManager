@@ -41,18 +41,20 @@ async function buildTables() {
       needs text NOT NULL,
       "prospectValue" varchar(255)
   );
+  CREATE TABLE templates (
+    id SERIAL PRIMARY KEY,
+    types varchar(255)
+  );
   CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     "projectTitle" varchar(255) NOT NULL,
     "projectOwner" varchar(255) NOT NULL,
     "projectSalesRep" varchar(255),
     description text NOT NULL,
-    status varchar(255)
+    status varchar(255),
+    "templateId" INTEGER REFERENCES templates(id)
       );
-  CREATE TABLE templates (
-    id SERIAL PRIMARY KEY,
-    types varchar(255)
-  );
+ 
   `);
     console.log("Finished creating tables");
   } catch (error) {

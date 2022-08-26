@@ -13,17 +13,25 @@ async function createProject({
   projectSalesRep,
   description,
   status,
+  templateId,
 }) {
   try {
     const {
       rows: [project],
     } = await client.query(
       `
-        INSERT INTO projects("projectTitle", "projectOwner", "projectSalesRep", description, status)
-        VALUES($1,$2,$3,$4,$5) 
+        INSERT INTO projects("projectTitle", "projectOwner", "projectSalesRep", description, status,"templateId")
+        VALUES($1,$2,$3,$4,$5,$6) 
         RETURNING *;
         `,
-      [projectTitle, projectOwner, projectSalesRep, description, status]
+      [
+        projectTitle,
+        projectOwner,
+        projectSalesRep,
+        description,
+        status,
+        templateId,
+      ]
     );
 
     return project;
@@ -41,8 +49,11 @@ async function getAllProjects() {
     projects."projectOwner" AS "projectOwner",
     projects."projectSalesRep" AS "projectSalesRep",
     projects.description AS "description",
-    projects.status AS "status"
+    projects.status AS "status",
+    templates.id AS "templateId",
+    templates.types AS "templateTypes"
     FROM projects
+    LEFT JOIN templates ON projects."templateId" = templates.id
     ORDER BY projects.id desc`
     );
 

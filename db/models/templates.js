@@ -2,6 +2,7 @@ const client = require("../client");
 module.exports = {
   createTemplate,
   getAllTemplateTypes,
+  getTemplateByType,
 };
 
 async function createTemplate({ types }) {
@@ -31,6 +32,24 @@ async function getAllTemplateTypes() {
         ORDER BY templates.id desc
         `);
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getTemplateByType() {
+  try {
+    const {
+      rows: [template],
+    } = await client.query(
+      `
+  SELECT *
+  FROM templates
+  ORDER BY types.id
+  `,
+      []
+    );
+    return template;
   } catch (error) {
     throw error;
   }
