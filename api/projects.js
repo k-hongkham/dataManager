@@ -44,7 +44,7 @@ projectsRouter.post("/", requireUser, async (req, res, next) => {
     projectSalesRep,
     description,
     status,
-    creationDate,
+    templateId,
   } = req.body;
 
   const newProjectInfo = {
@@ -53,7 +53,7 @@ projectsRouter.post("/", requireUser, async (req, res, next) => {
     projectSalesRep,
     description,
     status,
-    creationDate,
+    templateId,
   };
 
   try {
@@ -73,7 +73,7 @@ projectsRouter.patch("/:projectId", requireUser, async (req, res, next) => {
     projectSalesRep,
     description,
     status,
-    creationDate,
+    templateId,
   } = req.body;
   console.log("api -projectId", projectId);
   try {
@@ -84,7 +84,7 @@ projectsRouter.patch("/:projectId", requireUser, async (req, res, next) => {
       projectSalesRep,
       description,
       status,
-      creationDate,
+      templateId,
     });
     console.log("api - customer patch - customerID", +projectId);
     res.send({ editProject });
