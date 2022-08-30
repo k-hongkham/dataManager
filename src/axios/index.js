@@ -307,3 +307,16 @@ export const createProject = async (
     throw error.response.data;
   }
 };
+
+export const getTemplateByType = async () => {
+  try {
+    const { data } = await axios.get(`/api/templates/types`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
