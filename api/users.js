@@ -26,7 +26,7 @@ usersRouter.post("/login", async (req, res, next) => {
       const token = jwt.sign(
         { id: user.id, email: email },
         process.env.JWT_SECRET,
-        { expiresIn: "1w" }
+        { expiresIn: "3w" }
       );
       res.send({
         message: `Welcome Back!`,
