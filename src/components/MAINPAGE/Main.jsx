@@ -29,6 +29,11 @@ const Main = () => {
 
   const indexOfLastUser = currentPage * listItemsPerPage;
   const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
+  console.log(
+    "indexOfFirstUser, indexOfLastUser :",
+    indexOfFirstUser,
+    indexOfLastUser
+  );
   const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
