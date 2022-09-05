@@ -15,36 +15,36 @@ usersRouter.use("/", (req, res, next) => {
   next();
 });
 
-usersRouter.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
-  try {
-    const user = await getUserByEmail(email);
-    console.log("getting USER by email api: ", user);
+// usersRouter.post("/login", async (req, res, next) => {
+//   const { email, password } = req.body;
+//   try {
+//     const user = await getUserByEmail(email);
+//     console.log("getting USER by email api: ", user);
 
-    if (user && bcrypt.compareSync(password, user.password)) {
-      console.log("LOGIN SUCCESS");
-      const token = jwt.sign(
-        { id: user.id, email: email },
-        process.env.JWT_SECRET,
-        { expiresIn: "3w" }
-      );
-      res.send({
-        message: `Welcome Back!`,
-        token: token,
-      });
-    } else {
-      console.log("LOGIN FAILED");
-      res.status(409);
-      next({
-        name: "Bad Login/Password",
-        message: "Login error: you must supply a valid login/password",
-      });
-    }
-  } catch ({ name, message }) {
-    res.status(404);
-    next({ name, message });
-  }
-});
+//     if (user && bcrypt.compareSync(password, user.password)) {
+//       console.log("LOGIN SUCCESS");
+//       const token = jwt.sign(
+//         { id: user.id, email: email },
+//         process.env.JWT_SECRET,
+//         { expiresIn: "3w" }
+//       );
+//       res.send({
+//         message: `Welcome Back!`,
+//         token: token,
+//       });
+//     } else {
+//       console.log("LOGIN FAILED");
+//       res.status(409);
+//       next({
+//         name: "Bad Login/Password",
+//         message: "Login error: you must supply a valid login/password",
+//       });
+//     }
+//   } catch ({ name, message }) {
+//     res.status(404);
+//     next({ name, message });
+//   }
+// });
 
 usersRouter.get("/me", requireUser, (req, res, next) => {
   res.send(req.user);
