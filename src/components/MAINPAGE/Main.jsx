@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth";
 
-import { getAllUsers } from "../../axios";
+// import { getAllUsers } from "../../axios";
 import Home from "./Home";
 import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
@@ -14,24 +14,24 @@ import NewProjectHeader from "../PROJECTS/NewProjectHeader";
 const Main = () => {
   const { token } = useAuth();
 
-  const [contactsList, setContactsList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [listItemsPerPage, setListItemsPerPage] = useState(15);
+  // const [contactsList, setContactsList] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [listItemsPerPage, setListItemsPerPage] = useState(15);
 
-  useEffect(() => {
-    const getContacts = async () => {
-      const contacts = await getAllUsers(token);
-      setContactsList(contacts);
-    };
-    getContacts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const getContacts = async () => {
+  //     const contacts = await getAllUsers(token);
+  //     setContactsList(contacts);
+  //   };
+  //   getContacts();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const indexOfLastUser = currentPage * listItemsPerPage;
-  const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
-  console.log("contactsList: ", contactsList);
-  const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
-  console.log("currentUsers: ", currentUsers);
+  // const indexOfLastUser = currentPage * listItemsPerPage;
+  // const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
+  // console.log("contactsList: ", contactsList);
+  // const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
+  // console.log("currentUsers: ", currentUsers);
 
   return (
     <div className="main">
