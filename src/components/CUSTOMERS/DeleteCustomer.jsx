@@ -9,7 +9,7 @@ const DeleteCustomer = ({ customer, setAllCustomers }) => {
 
   const handleDeleteCustomer = async (e) => {
     e.preventDefault();
-    console.log("deletingcustomer", customer.id);
+
     try {
       const response = await deleteCustomer(token, customer.id);
       const customerList = await getAllCustomers(token);

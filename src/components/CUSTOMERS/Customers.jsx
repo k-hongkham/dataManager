@@ -4,24 +4,28 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth.js";
 
-import useCustomer from "../hooks/useCustomer.js";
-
-import { getAllCustomers, updateCustomer, getCustomerById } from "../../axios";
+import { getAllCustomers } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
-import UpdateCustomer from "./UpdateCustomer.jsx";
 import DeleteCustomer from "./DeleteCustomer.jsx";
+import CustomerPagination from "../CustomerPagination.js";
 
-const Customers = () => {
+const Customers = ({
+  totalCustomers,
+  allCustomers,
+  setAllCustomers,
+  customersPerPage,
+  setCustomersPerPage,
+  currentCustomerPage,
+  setCurrentCustomerPage,
+}) => {
   const navigate = useNavigate();
 
   const { token } = useAuth();
-  const { allCustomers, setAllCustomers, setCurrentCustomer, setCustomer } =
-    useCustomer();
-  const [editCustomer, setEditCustomer] = useState(false);
-  const [accessCustomers, setAccessCustomers] = useState(false);
 
+  const [accessCustomers, setAccessCustomers] = useState(false);
   const [modalInfo, setModalInfo] = useState([]);
+
   const rowEvents = {
     onClick: (row) => {
       console.log(row);
@@ -39,11 +43,6 @@ const Customers = () => {
   const handleCustomerSelect = (customer) => {
     navigate(`/${customer.id}`);
   };
-
-  // const handleUpdateCustomerInfo = async (modalCustomer) => {
-  //   setEditCustomer(true);
-  //   setCurrentCustomer(modalCustomer);
-  // };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -106,31 +105,6 @@ const Customers = () => {
                   <p style={{ marginRight: "10px" }}>
                     {customer.ProspectValue}
                   </p>
-                  {/* <Button
-                    variant="info"
-                    // rowEvents={rowEvents}
-                    onClick={() => {
-                      handleUpdateCustomerInfo(customer);
-                    }}
-                  >
-                    Update Customer {customer.id}
-                  </Button>
-                  {editCustomer ? (
-                    <Modal
-                      show={editCustomer}
-                      onHide={() => {
-                        setEditCustomer(false);
-                      }}
-                      size="lg"
-                      aria-labelledby="contained-modal-title-vcenter"
-                      centered
-                    >
-                      <UpdateCustomer
-                        editCustomer={editCustomer}
-                        setEditCustomer={setEditCustomer}
-                      />{" "}
-                    </Modal>
-                  ) : null} */}
                   <DeleteCustomer
                     customer={customer}
                     setAllCustomers={setAllCustomers}
@@ -140,6 +114,15 @@ const Customers = () => {
             })
           : null}
       </div>
+      {allCustomers.length ? (
+        <CustomerPagination
+          currentCustomerPage={currentCustomerPage}
+          setCurrentCustomerPage={setCurrentCustomerPage}
+          customersPerPage={customersPerPage}
+          setCustomersPerPage={setCustomersPerPage}
+          totalCustomers={totalCustomers}
+        />
+      ) : null}
     </div>
   );
 };

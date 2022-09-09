@@ -26,7 +26,6 @@ const FullCustomerDescription = () => {
     setCustomer,
     setAllCustomers,
     customer,
-    currentCustomer,
   } = useCustomer();
 
   const handleUpdateCustomerInfo = async (e) => {
