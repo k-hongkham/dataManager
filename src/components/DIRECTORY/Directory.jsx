@@ -64,13 +64,15 @@ const Directory = ({
           })}
         </div>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        listItemsPerPage={listItemsPerPage}
-        setListItemsPerPage={setListItemsPerPage}
-        totalUsers={totalUsers}
-      />
+      {contactsList.length ? (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          listItemsPerPage={listItemsPerPage}
+          setListItemsPerPage={setListItemsPerPage}
+          totalUsers={totalUsers}
+        />
+      ) : null}
     </div>
   );
 };

@@ -114,13 +114,15 @@ const Customers = ({
             })
           : null}
       </div>
-      <CustomerPagination
-        currentCustomerPage={currentCustomerPage}
-        setCurrentCustomerPage={setCurrentCustomerPage}
-        customersPerPage={customersPerPage}
-        setCustomersPerPage={setCustomersPerPage}
-        totalCustomers={totalCustomers}
-      />
+      {allCustomers.length ? (
+        <CustomerPagination
+          currentCustomerPage={currentCustomerPage}
+          setCurrentCustomerPage={setCurrentCustomerPage}
+          customersPerPage={customersPerPage}
+          setCustomersPerPage={setCustomersPerPage}
+          totalCustomers={totalCustomers}
+        />
+      ) : null}
     </div>
   );
 };
