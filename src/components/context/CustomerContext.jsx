@@ -17,6 +17,14 @@ const CustomerProvider = ({ children }) => {
   const [allCustomers, setAllCustomers] = useState([]);
   const [currentCustomer, setCurrentCustomer] = useState({});
 
+  const [currentCustomerPage, setCurrentCustomerPage] = useState(1);
+  const [customersPerPage, setCustomersPerPage] = useState(15);
+  const indexOfLastCustomer = currentCustomerPage * customersPerPage;
+  const indexOfFirstCustomer = indexOfLastCustomer - customersPerPage;
+  const currentCustomers = allCustomers.slice(
+    indexOfFirstCustomer,
+    indexOfLastCustomer
+  );
   useEffect(() => {
     if (user) {
       const displayCustomers = async () => {
@@ -51,6 +59,11 @@ const CustomerProvider = ({ children }) => {
         setCurrentCustomer,
         customer,
         setCustomer,
+        currentCustomers,
+        customersPerPage,
+        setCustomersPerPage,
+        currentCustomerPage,
+        setCurrentCustomerPage,
       }}
     >
       {children}

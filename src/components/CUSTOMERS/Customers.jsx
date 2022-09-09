@@ -4,23 +4,28 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/userAuth.js";
 
-import useCustomer from "../hooks/useCustomer.js";
-
 import { getAllCustomers } from "../../axios";
 
 import CreateCustomer from "./CreateCustomer.jsx";
-
 import DeleteCustomer from "./DeleteCustomer.jsx";
+import CustomerPagination from "../CustomerPagination.js";
 
-const Customers = () => {
+const Customers = ({
+  totalCustomers,
+  allCustomers,
+  setAllCustomers,
+  customersPerPage,
+  setCustomersPerPage,
+  currentCustomerPage,
+  setCurrentCustomerPage,
+}) => {
   const navigate = useNavigate();
 
   const { token } = useAuth();
-  const { allCustomers, setAllCustomers } = useCustomer();
 
   const [accessCustomers, setAccessCustomers] = useState(false);
-
   const [modalInfo, setModalInfo] = useState([]);
+
   const rowEvents = {
     onClick: (row) => {
       console.log(row);
@@ -109,6 +114,13 @@ const Customers = () => {
             })
           : null}
       </div>
+      <CustomerPagination
+        currentCustomerPage={currentCustomerPage}
+        setCurrentCustomerPage={setCurrentCustomerPage}
+        customersPerPage={customersPerPage}
+        setCustomersPerPage={setCustomersPerPage}
+        totalCustomers={totalCustomers}
+      />
     </div>
   );
 };
