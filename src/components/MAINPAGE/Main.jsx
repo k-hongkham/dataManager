@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import useAuth from "../hooks/userAuth";
-
-// import { getAllUsers } from "../../axios";
+import usePages from "../hooks/usePages";
 import Home from "./Home";
 import Customers from "../CUSTOMERS/Customers";
 import Directory from "../DIRECTORY/Directory";
@@ -12,26 +10,15 @@ import Projects from "../PROJECTS/Projects";
 import NewProjectHeader from "../PROJECTS/NewProjectHeader";
 
 const Main = () => {
-  const { token } = useAuth();
-
-  // const [contactsList, setContactsList] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [listItemsPerPage, setListItemsPerPage] = useState(15);
-
-  // useEffect(() => {
-  //   const getContacts = async () => {
-  //     const contacts = await getAllUsers(token);
-  //     setContactsList(contacts);
-  //   };
-  //   getContacts();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // const indexOfLastUser = currentPage * listItemsPerPage;
-  // const indexOfFirstUser = indexOfLastUser - listItemsPerPage;
-  // console.log("contactsList: ", contactsList);
-  // const currentUsers = contactsList.slice(indexOfFirstUser, indexOfLastUser);
-  // console.log("currentUsers: ", currentUsers);
+  const {
+    contactsList,
+    setContactsList,
+    currentPage,
+    setCurrentPage,
+    listItemsPerPage,
+    setListItemsPerPage,
+    currentUsers,
+  } = usePages();
 
   return (
     <div className="main">
