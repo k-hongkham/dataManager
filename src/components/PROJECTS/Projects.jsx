@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useProject from "../hooks/useProject";
@@ -10,6 +10,7 @@ const Projects = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
   const { allProjectsArray, setAllProjectsArray } = useProject();
+  const [order, setOrder] = useState("ASC");
 
   useEffect(() => {
     const displayProjects = async () => {
@@ -26,6 +27,40 @@ const Projects = () => {
     navigate(`/newProject`);
   };
 
+  const sortInteger = (col) => {
+    if (order === "ASC") {
+      const sort = [...allProjectsArray].sort((a, b) =>
+        a[col] > b[col] ? 1 : -1
+      );
+      setAllProjectsArray(sort);
+      setOrder("ASC");
+    }
+    if (order === "DSC") {
+      const sort = [...allProjectsArray].reverse((a, b) =>
+        a[col] > b[col] ? 1 : -1
+      );
+      setAllProjectsArray(sort);
+      setOrder("DSC");
+    }
+  };
+
+  const sortString = (col) => {
+    if (order === "ASC") {
+      const sort = [...allProjectsArray].sort((a, b) =>
+        a[col].toUpperCase() > b[col].toUpperCase() ? 1 : -1
+      );
+      setAllProjectsArray(sort);
+      setOrder("ASC");
+    }
+    if (order === "DSC") {
+      const sort = [...allProjectsArray].reverse((a, b) =>
+        a[col].toUpperCase() > b[col].toUpperCase() ? 1 : -1
+      );
+      setAllProjectsArray(sort);
+      setOrder("DSC");
+    }
+  };
+
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <Link to={`/newProject`} onClick={handleNewProject}>
@@ -36,12 +71,22 @@ const Projects = () => {
 
         <table className="table table-hover ">
           <thead>
-            <th scope="col">Project Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Owner</th>
-            <th scope="col">Sales Rep</th>
+            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+              Project Id
+            </th>
+            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+              Title
+            </th>
+            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+              Owner
+            </th>
+            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+              Sales Rep
+            </th>
             <th scope="col">Description</th>
-            <th scope="col">Status</th>
+            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+              Status
+            </th>
           </thead>
           <tbody>
             {Array.isArray(allProjectsArray) && allProjectsArray.length
