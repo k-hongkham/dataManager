@@ -1,4 +1,5 @@
 import React from "react";
+import Charts from "../Charts/Charts";
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
         <h2 className="display-5 mb-3 fw-semibold lh-sm">
           This section will eventually hold sales data. Work in Progress
         </h2>
-        <p className="lead fw-normal">
+        {/* <p className="lead fw-normal">
           The idea is to take sales numbers and have something like chart.js
           automatically update the chart with new total values as they're
           entered into the db.
@@ -18,7 +19,8 @@ const Home = () => {
         <p className="d-flex justify-content-md-start justify-content-md-center lead fw-normal">
           There will also be a link here to show individual data points and more
           detailed information
-        </p>
+        </p> */}
+        <Charts chartData={}/>
       </div>
       <div className="d-md-flex flex-md-equal w-100 my-md-3  justify-content-around w-100 pt-1 p-3  ">
         <div
