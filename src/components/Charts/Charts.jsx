@@ -5,7 +5,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 
 const Charts = () => {
   const [data, setdata] = useState({
-    labels: revenueData.map((data) => data.Year),
+    labels: revenueData.map((data) => data.Month),
     datasets: [
       {
         label: "Profits",
