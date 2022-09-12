@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import revenueData from "./revenueData.js";
-import { Chart as ChartJS } from "chart.js/auto";
+import Chart from "chart.js/auto";
 
-const Charts = () => {
-  const [data, setdata] = useState({
+const Charts = ({ bar, line, bubble }) => {
+  const [data] = useState({
     labels: revenueData.map((data) => data.Month),
     datasets: [
       {
@@ -20,8 +20,9 @@ const Charts = () => {
     ],
   });
   return (
-    <div className="App">
-      <Bar data={data} />
+    <div className="App form-floating mb-3">
+      {bar ? <Bar data={data} /> : null}
+      {line ? <Line data={data} /> : null}
     </div>
   );
 };

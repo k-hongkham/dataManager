@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Charts from "../Charts/Charts";
 
 const Home = () => {
+  const [graph, setGraph] = useState("Bar");
+  const [bar, setBar] = useState("true");
+  const [line, setLine] = useState("true");
+
+  useEffect(() => {
+    if (graph === "Bar") {
+      setBar(true);
+      setLine(false);
+    } else if (graph === "Line") {
+      setBar(false);
+      setLine(true);
+      setGraph("Line");
+    }
+  }, [graph]);
   return (
     <div className="container-xxl bd-gutter masthead-followup">
       <div
         className="col-lg-12 mx-auto pb-3 mb-3 mb-md-5 text-md-center mt-4"
         style={{ border: "3px solid black" }}
       >
-        <h2 className="display-5 mb-3 fw-semibold lh-sm">
-          This section will eventually hold sales data. Work in Progress
-        </h2>
+        <span>
+          <h1 className="display-5 mb-3 fw-semibold lh-sm">
+            This section will eventually hold sales data.
+          </h1>
+        </span>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            setGraph(e.target.value);
+          }}
+        >
+          <option value="Bar">Bar</option>
+          <option value="Line">Line</option>
+        </select>
+
         {/* <p className="lead fw-normal">
           The idea is to take sales numbers and have something like chart.js
           automatically update the chart with new total values as they're
@@ -20,7 +47,7 @@ const Home = () => {
           There will also be a link here to show individual data points and more
           detailed information
         </p> */}
-        <Charts />
+        <Charts bar={bar} line={line} />
       </div>
       <div className="d-md-flex flex-md-equal w-100 my-md-3  justify-content-around w-100 pt-1 p-3  ">
         <div

@@ -28,7 +28,7 @@ const UpdateContact = ({
     setPosition,
     setOfficeNumber,
   } = useLogin();
-  const { token, allUsers, setAllUsers } = useAuth();
+  const { token, setAllUsers } = useAuth();
 
   const handleUpdateUserInfo = (e) => {
     e.preventDefault();
@@ -61,6 +61,7 @@ const UpdateContact = ({
     setDepartment(currentDirectoryContact.department);
     setOfficeNumber(currentDirectoryContact.officeNumber);
     setPosition(currentDirectoryContact.position);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDirectoryContact]);
 
   return (
