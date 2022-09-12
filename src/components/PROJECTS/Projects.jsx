@@ -19,6 +19,7 @@ const Projects = () => {
         setAllProjectsArray(data);
       }
     };
+
     displayProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -27,37 +28,24 @@ const Projects = () => {
     navigate(`/newProject`);
   };
 
-  const sortInteger = (col) => {
-    if (order === "ASC") {
-      const sort = [...allProjectsArray].sort((a, b) =>
-        a[col] > b[col] ? 1 : -1
-      );
-      setAllProjectsArray(sort);
-      setOrder("ASC");
-    }
-    if (order === "DSC") {
-      const sort = [...allProjectsArray].reverse((a, b) =>
-        a[col] > b[col] ? 1 : -1
-      );
-      setAllProjectsArray(sort);
-      setOrder("DSC");
-    }
-  };
+  const sort = (col) => {
+    for (let i = 0; i <= allProjectsArray.length; i++) {
+      if (order === "ASC") {
+        const sort = [...allProjectsArray].sort((a, b) =>
+          a[col] > b[col] ? 1 : -1
+        );
 
-  const sortString = (col) => {
-    if (order === "ASC") {
-      const sort = [...allProjectsArray].sort((a, b) =>
-        a[col].toUpperCase() > b[col].toUpperCase() ? 1 : -1
-      );
-      setAllProjectsArray(sort);
-      setOrder("ASC");
-    }
-    if (order === "DSC") {
-      const sort = [...allProjectsArray].reverse((a, b) =>
-        a[col].toUpperCase() > b[col].toUpperCase() ? 1 : -1
-      );
-      setAllProjectsArray(sort);
-      setOrder("DSC");
+        setAllProjectsArray(sort);
+        setOrder("ASC");
+      }
+
+      if (order === "DSC") {
+        const sort = [...allProjectsArray].reverse((a, b) =>
+          a[col] < b[col] ? 1 : -1
+        );
+        setAllProjectsArray(sort);
+        setOrder("DSC");
+      }
     }
   };
 
@@ -71,20 +59,19 @@ const Projects = () => {
 
         <table className="table table-hover ">
           <thead>
-            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+            <th
+              scope="col"
+              onClick={() => sort(allProjectsArray[0].projectTitle)}
+            >
               Project Id
             </th>
-            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+            <th scope="col" onClick={() => sort(allProjectsArray.projectTitle)}>
               Title
             </th>
-            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
-              Owner
-            </th>
-            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
-              Sales Rep
-            </th>
+            <th scope="col">Owner</th>
+            <th scope="col">Sales Rep</th>
             <th scope="col">Description</th>
-            <th scope="col" onClick={() => sortInteger(allProjectsArray)}>
+            <th scope="col" onClick={() => sort(allProjectsArray.id)}>
               Status
             </th>
           </thead>
