@@ -8,8 +8,14 @@ const Charts = () => {
     labels: revenueData.map((data) => data.Year),
     datasets: [
       {
-        label: "Revenue",
+        label: "Profits",
         data: revenueData.map((data) => data.Profits),
+        backgroundColor: ["green"],
+      },
+      {
+        label: "Losses",
+        data: revenueData.map((data) => data.Losses),
+        backgroundColor: ["red"],
       },
     ],
   });
