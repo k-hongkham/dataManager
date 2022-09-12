@@ -20,7 +20,7 @@ const Home = () => {
           There will also be a link here to show individual data points and more
           detailed information
         </p> */}
-        <Charts chartData={}/>
+        <Charts />
       </div>
       <div className="d-md-flex flex-md-equal w-100 my-md-3  justify-content-around w-100 pt-1 p-3  ">
         <div
