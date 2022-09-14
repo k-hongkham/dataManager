@@ -3,4 +3,5 @@ module.exports = {
   Customer: require("./customers"),
   Project: require("./projects"),
   Template: require("./templates"),
+  Section: require("./sections"),
 };
