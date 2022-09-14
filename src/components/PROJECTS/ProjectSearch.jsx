@@ -21,7 +21,7 @@ const ProjectSearch = () => {
         className="needs-validation mr-sm-2"
         style={{ flexGrow: "1", padding: ".25rem" }}
         type="text"
-        placeholder="Search"
+        placeholder="Search Project Description"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);

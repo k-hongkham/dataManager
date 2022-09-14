@@ -5,6 +5,7 @@ import useProject from "../hooks/useProject";
 import { getAllProjects } from "../../axios";
 import ProjectRow from "./ProjectRow";
 import { Button } from "react-bootstrap";
+import ProjectSearch from "./ProjectSearch";
 
 const Projects = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Projects = () => {
       </Link>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0"> Projects</h6>
+        <ProjectSearch />
 
         <table className="table table-hover ">
           <thead>
