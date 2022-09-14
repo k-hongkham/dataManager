@@ -5,8 +5,8 @@ import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
 
 import { useNavigate } from "react-router-dom";
-
 import { createCustomer, getAllCustomers } from "../../axios";
+import { toast } from "react-toastify";
 
 const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
   const navigate = useNavigate();
@@ -24,11 +24,12 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
     setNeeds,
     prospectValue,
     setProspectValue,
+    setCustomerError,
   } = useCustomer();
 
   const handleAddingNewCustomer = async (e) => {
     e.preventDefault();
-    console.log("adding new customer information - salesRep", salesRep);
+
     try {
       const response = await createCustomer(
         token,
@@ -42,11 +43,14 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
       console.log("is new customer added to db?", response);
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
+      setCustomerError(false);
       navigate("/Customers");
       setAccessCustomers(false);
-
+      successToast();
       return response;
     } catch (error) {
+      setCustomerError(true);
+      failureToast(error.message);
       console.error(error);
     }
   };
@@ -60,6 +64,13 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
     setProspectValue("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const successToast = (e) => {
+    toast.success("New Customer Created!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
+  };
 
   return (
     <div>

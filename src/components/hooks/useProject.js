@@ -17,6 +17,10 @@ const useProject = () => {
     setProjectDescription,
     status,
     setStatus,
+    projectError,
+    setProjectError,
+    projectErrorMessage,
+    setProjectErrorMessage,
   } = useContext(ProjectContext);
 
   return {
@@ -34,6 +38,10 @@ const useProject = () => {
     setProjectDescription,
     status,
     setStatus,
+    projectError,
+    setProjectError,
+    projectErrorMessage,
+    setProjectErrorMessage,
   };
 };
 

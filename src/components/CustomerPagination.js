@@ -39,13 +39,11 @@ const CustomerPagination = ({
 
   const handleLoadMoreContacts = () => {
     const increasedItemsPerPage = customersPerPage + 3;
-    console.log("listItems#: ", increasedItemsPerPage);
+
     setCustomersPerPage(increasedItemsPerPage);
   };
 
   for (let i = 1; i <= Math.ceil(totalCustomers / customersPerPage); i++) {
-    console.log("totalCustomers:", totalCustomers);
-    console.log("customersPerPage:", customersPerPage);
     pageNumbers.push(i);
   }
   return (

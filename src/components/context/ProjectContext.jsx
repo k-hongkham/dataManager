@@ -13,6 +13,8 @@ const ProjectProvider = ({ children }) => {
   const [projectSalesRep, setProjectSalesRep] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [status, setStatus] = useState("");
+  const [projectError, setProjectError] = useState(false);
+  const [projectErrorMessage, setProjectErrorMessage] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -21,6 +23,7 @@ const ProjectProvider = ({ children }) => {
         setAllProjectsArray(data);
       };
       displayProjects();
+      setProjectError(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -42,6 +45,10 @@ const ProjectProvider = ({ children }) => {
         setProjectDescription,
         status,
         setStatus,
+        projectError,
+        setProjectError,
+        projectErrorMessage,
+        setProjectErrorMessage,
       }}
     >
       {children}

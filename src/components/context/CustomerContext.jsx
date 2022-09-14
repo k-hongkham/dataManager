@@ -16,6 +16,8 @@ const CustomerProvider = ({ children }) => {
   const [prospectValue, setProspectValue] = useState("$0");
   const [allCustomers, setAllCustomers] = useState([]);
   const [currentCustomer, setCurrentCustomer] = useState({});
+  const [customerError, setCustomerError] = useState(false);
+  const [customerErrorMessage, setCustomerErrorMessage] = useState("");
 
   const [currentCustomerPage, setCurrentCustomerPage] = useState(1);
   const [customersPerPage, setCustomersPerPage] = useState(15);
@@ -30,7 +32,7 @@ const CustomerProvider = ({ children }) => {
       const displayCustomers = async () => {
         const data = await getAllCustomers(token);
         setCustomer(data);
-
+        setCustomerError(false);
         setAllCustomers(data);
       };
       displayCustomers();
@@ -64,6 +66,10 @@ const CustomerProvider = ({ children }) => {
         setCustomersPerPage,
         currentCustomerPage,
         setCurrentCustomerPage,
+        customerError,
+        setCustomerError,
+        customerErrorMessage,
+        setCustomerErrorMessage,
       }}
     >
       {children}
