@@ -39,18 +39,16 @@ const CustomerPagination = ({
 
   const handleLoadMoreContacts = () => {
     const increasedItemsPerPage = customersPerPage + 3;
-    console.log("listItems#: ", increasedItemsPerPage);
+
     setCustomersPerPage(increasedItemsPerPage);
   };
 
   for (let i = 1; i <= Math.ceil(totalCustomers / customersPerPage); i++) {
-    console.log("totalCustomers:", totalCustomers);
-    console.log("customersPerPage:", customersPerPage);
     pageNumbers.push(i);
   }
   return (
-    <nav className="container">
-      <ul className="pagination justify-content-center">
+    <div className="container">
+      <ul className="pagination ">
         <li className="page-item">
           <button
             className="page-link"
@@ -132,7 +130,7 @@ const CustomerPagination = ({
           Load More Contacts
         </button>
       </div>
-    </nav>
+    </div>
   );
 };
 

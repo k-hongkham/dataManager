@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import useCustomer from "../hooks/useCustomer";
-
+import { toast } from "react-toastify";
 import { getAllCustomers, getCustomerById, updateCustomer } from "../../axios";
 
 const FullCustomerDescription = () => {
@@ -48,6 +48,7 @@ const FullCustomerDescription = () => {
     const updatedCustomerListing = await getAllCustomers(token);
 
     setAllCustomers(updatedCustomerListing);
+    successToast();
     navigate("/customers");
   };
 
@@ -71,6 +72,13 @@ const FullCustomerDescription = () => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  const successToast = (e) => {
+    toast.success("Customer Information Updated!", { theme: "colored" });
+  };
+
+  // const failureToast = (error) => {
+  //   toast.error(error, { theme: "colored" });
+  // };
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <header className="modal-header p-5 pb-4 border-bottom-0">

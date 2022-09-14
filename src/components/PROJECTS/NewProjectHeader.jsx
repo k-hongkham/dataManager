@@ -4,6 +4,7 @@ import useProject from "../hooks/useProject";
 import useAuth from "../hooks/userAuth";
 import { getProjectById, createProject, getAllProjects } from "../../axios";
 import { StatusTypes } from "./StatusTypes";
+import { toast } from "react-toastify";
 
 const NewProjectHeader = () => {
   const {
@@ -19,6 +20,8 @@ const NewProjectHeader = () => {
     setStatus,
     setCurrentProject,
     setAllProjectsArray,
+
+    setProjectError,
   } = useProject();
   const { user, token } = useAuth();
   const navigate = useNavigate();
@@ -39,13 +42,23 @@ const NewProjectHeader = () => {
       const newProject = await getAllProjects(token);
       setAllProjectsArray(newProject);
       setStatus("In Process");
-
+      successToast();
+      setProjectError(false);
       navigate(`/Projects`);
 
       return response;
     } catch (error) {
       console.error(error);
+      setProjectError(true);
+      failureToast(error.message);
     }
+  };
+
+  const successToast = (e) => {
+    toast.success("New Project Created!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
   };
 
   useEffect(() => {

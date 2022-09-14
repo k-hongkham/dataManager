@@ -28,7 +28,6 @@ const Directory = ({
 
   return (
     <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
-      <Button variant="primary">New Contact +</Button>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0"> Company Directory</h6>
 

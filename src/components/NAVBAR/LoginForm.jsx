@@ -2,6 +2,7 @@ import React from "react";
 import { loginUser } from "../../axios";
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ setRegistered }) => {
   const { setToken } = useAuth();
@@ -24,10 +25,19 @@ const LoginForm = ({ setRegistered }) => {
       localStorage.setItem("token", response.token);
       setToken(response.token);
       setLoggedIn(false);
+      successToast();
     } catch (error) {
       setError(true);
       setErrorMessage(error.message);
+      failureToast(error.message);
     }
+  };
+
+  const successToast = (e) => {
+    toast.success("Log In Successful!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
   };
   return (
     <div>

@@ -26,6 +26,10 @@ const useCustomer = () => {
     setCustomersPerPage,
     currentCustomerPage,
     setCurrentCustomerPage,
+    customerError,
+    setCustomerError,
+    customerErrorMessage,
+    setCustomerErrorMessage,
   } = useContext(CustomerContext);
 
   return {
@@ -52,6 +56,10 @@ const useCustomer = () => {
     setCustomersPerPage,
     currentCustomerPage,
     setCurrentCustomerPage,
+    customerError,
+    setCustomerError,
+    customerErrorMessage,
+    setCustomerErrorMessage,
   };
 };
 

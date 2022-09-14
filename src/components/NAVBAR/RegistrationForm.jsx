@@ -3,6 +3,7 @@ import useLogin from "../hooks/useLogin";
 import userAuth from "../hooks/userAuth";
 import { registerUser } from "../../axios";
 import { departments } from "../lists/departments";
+import { toast } from "react-toastify";
 
 const RegistrationForm = ({
   loggedIn,
@@ -31,9 +32,8 @@ const RegistrationForm = ({
   const { setToken } = userAuth();
 
   const handleRegistration = async (e) => {
-    console.log("whats happening?");
     e.preventDefault();
-    console.log("registering handled");
+
     try {
       if (password === confirmPassword && password.length > 0) {
         const response = await registerUser(
@@ -47,16 +47,25 @@ const RegistrationForm = ({
         localStorage.setItem("token", response.token);
         setToken(response.token);
         setLoggedIn(false);
-        console.log("is the user registered?", response);
+        successToast();
       } else {
         setError(true);
-        setErrorMessage(true);
+        setErrorMessage("Password does not match.");
+        failureToast("Password does not match.");
       }
     } catch (error) {
       console.error(error);
       setError(true);
       setErrorMessage(error.message);
+      failureToast(error.message);
     }
+  };
+
+  const successToast = (e) => {
+    toast.success("Registration Success!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
   };
   return (
     <div>

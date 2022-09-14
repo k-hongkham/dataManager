@@ -6,6 +6,7 @@ import RegistrationForm from "./RegistrationForm";
 
 const Login = ({ loggedIn, setLoggedIn }) => {
   const { registered, setRegistered } = useLogin();
+
   return (
     <Modal
       show={loggedIn}
