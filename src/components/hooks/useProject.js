@@ -21,6 +21,14 @@ const useProject = () => {
     setProjectError,
     projectErrorMessage,
     setProjectErrorMessage,
+    searchParams,
+    setSearchParams,
+    searchTerm,
+    setSearchTerm,
+    searchObj,
+    setSearchObj,
+    filterProjects,
+    setFilterProjects,
   } = useContext(ProjectContext);
 
   return {
@@ -42,6 +50,14 @@ const useProject = () => {
     setProjectError,
     projectErrorMessage,
     setProjectErrorMessage,
+    searchParams,
+    setSearchParams,
+    searchTerm,
+    setSearchTerm,
+    searchObj,
+    setSearchObj,
+    filterProjects,
+    setFilterProjects,
   };
 };
 

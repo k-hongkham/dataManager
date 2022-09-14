@@ -5,11 +5,12 @@ import useProject from "../hooks/useProject";
 import { getAllProjects } from "../../axios";
 import ProjectRow from "./ProjectRow";
 import { Button } from "react-bootstrap";
+import ProjectSearch from "./ProjectSearch";
 
 const Projects = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
-  const { allProjectsArray, setAllProjectsArray } = useProject();
+  const { setAllProjectsArray, filterProjects } = useProject();
 
   useEffect(() => {
     const displayProjects = async () => {
@@ -33,6 +34,7 @@ const Projects = () => {
       </Link>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h6 className="border-bottom pb-2 mb-0"> Projects</h6>
+        <ProjectSearch />
 
         <table className="table table-hover ">
           <thead>
@@ -44,8 +46,8 @@ const Projects = () => {
             <th scope="col">Status</th>
           </thead>
           <tbody>
-            {Array.isArray(allProjectsArray) && allProjectsArray.length
-              ? allProjectsArray.map((project) => {
+            {Array.isArray(filterProjects) && filterProjects.length
+              ? filterProjects.map((project) => {
                   return (
                     <tr key={`ProjectsList: ${project.id}`}>
                       <ProjectRow project={project} />
