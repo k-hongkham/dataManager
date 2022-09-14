@@ -56,7 +56,7 @@ const Customers = ({
   }, [token]);
 
   return (
-    <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4">
+    <div className="container mx-auto pb-3 mb-3 mb-md-5 mt-4 justify-content-center">
       <Button variant="primary" onClick={handleModalOpening}>
         New Customer +
       </Button>

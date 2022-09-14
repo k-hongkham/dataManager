@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 
 import useAuth from "../hooks/userAuth";
 import useLogin from "../hooks/useLogin.js";
-
+import { toast } from "react-toastify";
 import { getAllUsers, updateUserInfo } from "../../axios";
 
 const UpdateContact = ({
@@ -49,6 +49,7 @@ const UpdateContact = ({
       setAllUsers(updatedUserListing);
       setContactsList(updatedUserListing);
       console.log("checking updated listing.", updatedUserListing);
+      successToast();
       setUserEditModal(false);
     };
     updatedUserInfo();
@@ -63,6 +64,13 @@ const UpdateContact = ({
     setPosition(currentDirectoryContact.position);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDirectoryContact]);
+
+  const successToast = (e) => {
+    toast.success("User Contact Updated!", { theme: "colored" });
+  };
+  // const failureToast = (error) => {
+  //   toast.error(error, { theme: "colored" });
+  // };
 
   return (
     <Modal

@@ -76,6 +76,9 @@ const FullCustomerDescription = () => {
     toast.success("Customer Information Updated!", { theme: "colored" });
   };
 
+  // const failureToast = (error) => {
+  //   toast.error(error, { theme: "colored" });
+  // };
   return (
     <div className="form-group container mx-auto pb-3 mb-3 mb-md-5 mt-4">
       <header className="modal-header p-5 pb-4 border-bottom-0">

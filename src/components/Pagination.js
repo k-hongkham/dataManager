@@ -48,7 +48,7 @@ const Pagination = ({
     pageNumbers.push(i);
   }
   return (
-    <nav className="container">
+    <div className="container">
       <ul className="pagination justify-content-center">
         <li className="page-item">
           <button
@@ -129,7 +129,7 @@ const Pagination = ({
           Load More Contacts
         </button>
       </div>
-    </nav>
+    </div>
   );
 };
 

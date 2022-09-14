@@ -47,8 +47,8 @@ const CustomerPagination = ({
     pageNumbers.push(i);
   }
   return (
-    <nav className="container">
-      <ul className="pagination justify-content-center">
+    <div className="container">
+      <ul className="pagination ">
         <li className="page-item">
           <button
             className="page-link"
@@ -130,7 +130,7 @@ const CustomerPagination = ({
           Load More Contacts
         </button>
       </div>
-    </nav>
+    </div>
   );
 };
 
