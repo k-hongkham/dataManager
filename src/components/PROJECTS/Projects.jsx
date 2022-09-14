@@ -9,7 +9,7 @@ import { Button } from "react-bootstrap";
 const Projects = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
-  const { allProjectsArray, setAllProjectsArray } = useProject();
+  const { setAllProjectsArray, filterProjects } = useProject();
 
   useEffect(() => {
     const displayProjects = async () => {
@@ -44,8 +44,8 @@ const Projects = () => {
             <th scope="col">Status</th>
           </thead>
           <tbody>
-            {Array.isArray(allProjectsArray) && allProjectsArray.length
-              ? allProjectsArray.map((project) => {
+            {Array.isArray(filterProjects) && filterProjects.length
+              ? filterProjects.map((project) => {
                   return (
                     <tr key={`ProjectsList: ${project.id}`}>
                       <ProjectRow project={project} />

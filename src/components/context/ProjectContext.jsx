@@ -47,15 +47,13 @@ const ProjectProvider = ({ children }) => {
 
   useEffect(() => {
     setFilterProjects(allProjectsArray);
-
+    console.log("filtered projects: ", filterProjects);
     const searchFilter = [];
     if (allProjectsArray.length) {
       // lowercase the query
       const searchQuery = searchObj.query.toLowerCase();
       // lowercase function
       function tLC(objProp) {
-        console.log("tlc", objProp);
-        console.log("allProjectsArray", allProjectsArray);
         return objProp.toLowerCase();
       }
 
@@ -90,6 +88,14 @@ const ProjectProvider = ({ children }) => {
         setProjectError,
         projectErrorMessage,
         setProjectErrorMessage,
+        searchParams,
+        setSearchParams,
+        searchTerm,
+        setSearchTerm,
+        searchObj,
+        setSearchObj,
+        filterProjects,
+        setFilterProjects,
       }}
     >
       {children}
