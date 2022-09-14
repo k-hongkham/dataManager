@@ -4,4 +4,5 @@ module.exports = {
   Project: require("./projects"),
   Template: require("./templates"),
   Section: require("./sections"),
+  TemplateSection: require("./template_sections"),
 };

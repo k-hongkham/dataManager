@@ -1,4 +1,12 @@
-const { client, User, Customer, Project, Template, Section } = require("./");
+const {
+  client,
+  User,
+  Customer,
+  Project,
+  Template,
+  Section,
+  TemplateSection,
+} = require("./");
 
 const { usersData } = require("./UserData.cjs");
 const { customerData } = require("./CustomerData.cjs");
@@ -12,6 +20,7 @@ async function buildTables() {
 
     //drop tables in the correct order
     await client.query(`
+    DROP TABLE IF EXISTS template_sections;
     DROP TABLE IF EXISTS sections;
     DROP TABLE IF EXISTS projects;
     DROP TABLE IF EXISTS templates;
@@ -56,14 +65,19 @@ async function buildTables() {
     status varchar(255),
     "templateId" INTEGER REFERENCES templates(id)
       );
-      CREATE TABLE sections (
+  CREATE TABLE sections (
+    id SERIAL PRIMARY KEY,
+    "sectionTitle" varchar(255) NOT NULL,
+    "sectionTextField" text,
+    "sectionDropdowns" text,
+    "sectionSelects" text,
+    "isSectionContingentOnValue" BOOLEAN DEFAULT false,
+    "sectionContingentsOnTitle" varchar(255)
+  );    
+  CREATE TABLE template_sections (
         id SERIAL PRIMARY KEY,
-        "sectionTitle" varchar(255) NOT NULL,
-        "sectionTextField" text,
-        "sectionDropdowns" text,
-        "sectionSelects" text,
-        "isSectionContingentOnValue" BOOLEAN DEFAULT false,
-        "sectionContingentsOnTitle" varchar(255)       
+        "templateId" INTEGER REFERENCES templates(id) ON DELETE CASCADE,
+        "sectionId" INTEGER REFERENCES sections(id) ON DELETE CASCADE  
           );
  
   `);
@@ -126,11 +140,33 @@ async function createInitialSections() {
   }
 }
 
+async function addInitialSectionsToTemplates() {
+  try {
+    console.log("Starting to add initial sections to templates");
+
+    const sectionsToAdd = [
+      { templateId: 1, sectionId: 1 },
+      { templateId: 2, sectionId: 1 },
+      { templateId: 3, sectionId: 1 },
+      { templateId: 5, sectionId: 1 },
+    ];
+
+    const templateSections = await Promise.all(
+      sectionsToAdd.map(TemplateSection.addSectionToTemplate)
+    );
+
+    console.log("Finished adding sections to templates");
+  } catch (error) {
+    throw error;
+  }
+}
+
 buildTables()
   .then(createInitialUsers)
   .then(createInitialCustomers)
   .then(createInitialProjects)
   .then(createInitialTemplates)
   .then(createInitialSections)
+  .then(addInitialSectionsToTemplates)
   .catch(console.error)
   .finally(() => client.end());
