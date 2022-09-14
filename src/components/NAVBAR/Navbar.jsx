@@ -39,16 +39,7 @@ const Navbar = () => {
                 Projects
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/Users"
-                style={{ textDecoration: "none" }}
-                className="nav-link"
-                aria-expanded="false"
-              >
-                Company Directory
-              </Link>
-            </li>
+
             <li className="nav-item">
               <Link
                 to="/Customers"
@@ -59,15 +50,17 @@ const Navbar = () => {
                 Customers
               </Link>
             </li>
-
-            {/* <li className="nav-item">
-              <LoginBtn setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
-            </li> */}
+            <li className="nav-item">
+              <Link
+                to="/Users"
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+                aria-expanded="false"
+              >
+                Company Directory
+              </Link>
+            </li>
           </ul>
-
-          {/* {loggedIn && (
-            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
-          )} */}
         </div>
       </div>
     </nav>
