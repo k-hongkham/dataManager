@@ -40,7 +40,7 @@ const CreateCustomer = ({ setAllCustomers, setAccessCustomers }) => {
         needs,
         prospectValue
       );
-      console.log("is new customer added to db?", response);
+
       const newCustomer = await getAllCustomers(token);
       setAllCustomers(newCustomer);
       setCustomerError(false);
