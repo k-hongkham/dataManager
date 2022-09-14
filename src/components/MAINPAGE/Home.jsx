@@ -24,7 +24,7 @@ const Home = () => {
       >
         <span>
           <h1 className="display-5 mb-3 fw-semibold lh-sm">
-            This section will eventually hold sales data.
+            2022 Revenue Report
           </h1>
         </span>
         <select

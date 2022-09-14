@@ -8,7 +8,7 @@ import LoginProvider from "./context/LoginContext";
 import CustomerProvider from "./context/CustomerContext";
 import ProjectProvider from "./context/ProjectContext";
 import PageProvider from "./context/pageContext";
-
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./NAVBAR/Navbar";
 import Main from "./MAINPAGE/Main";
 import Sidebar from "./SIDEBAR/Sidebar";
@@ -29,7 +29,7 @@ const App = () => {
                       autoClose={3000}
                       hideProgressBar={false}
                       newestOnTop={false}
-                      closeOnClick
+                      closeOnClickgit
                       rtl={false}
                       theme={"colored"}
                       pauseOnFocusLoss

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import useAuth from "../hooks/userAuth";
 export const LoginContext = React.createContext();
@@ -19,6 +19,11 @@ const LoginProvider = ({ children }) => {
   const [officeNumber, setOfficeNumber] = useState("");
   const [currentDirectoryContact, setCurrentDirectoryContact] = useState({});
   const [allUsers, setAllUsers] = useState([]);
+
+  useEffect(() => {
+    setError(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <LoginContext.Provider
