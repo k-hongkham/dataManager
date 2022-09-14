@@ -319,7 +319,7 @@ const projectData = [
     projectSalesRep: "Alissa Feyer",
     description:
       "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
-    status: "Completed",
+    status: "Complete",
     // creationDate: "5/26/2022",
   },
   {
@@ -328,7 +328,7 @@ const projectData = [
     projectSalesRep: "Ruperta Dear",
     description:
       "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
-    status: "Completed",
+    status: "Complete",
     // creationDate: "6/1/2022",
   },
   {

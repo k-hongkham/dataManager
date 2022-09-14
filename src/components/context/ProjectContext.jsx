@@ -58,7 +58,13 @@ const ProjectProvider = ({ children }) => {
       }
 
       allProjectsArray.forEach((project) => {
-        if (tLC(project.description).includes(searchQuery)) {
+        if (
+          tLC(project.projectTitle).includes(searchQuery) ||
+          tLC(project.projectOwner).includes(searchQuery) ||
+          tLC(project.projectSalesRep).includes(searchQuery) ||
+          tLC(project.status).includes(searchQuery) ||
+          tLC(project.description).includes(searchQuery)
+        ) {
           searchFilter.push(project);
         }
       });
