@@ -40,7 +40,7 @@ const Sidebar = () => {
               className="dropdown-item d-flex gap-2 py-2 "
               style={{ borderBottom: "2px solid gray" }}
             >
-              NOTEBOOK
+              CONTACT
             </ul>
             {/* 
             <ul
